@@ -1,0 +1,5 @@
+[2025-11-27 16:55:13.982 +01:00 INF] Services.HeartbeatListenerService: HeartbeatListenerService starting with 60s timeout
+[2025-11-27 16:55:15.001 +01:00 INF] Services.ApplicationsService: Finding servers by condition: _ => True
+[2025-11-27 16:55:15.107 +01:00 INF] Services.WatchtowerBootstrapService: WatchtowerBootstrapService is starting.
+[2025-11-27 16:55:15.123 +01:00 INF] Services.ApplicationConfigurationSyncService: Starting server synchronization from flat configuration
+[2025-11-27 16:55:15.169 +01:00 INF] Services.JsonFileReader: Reading file from //D12.tes.local/AFS/MCS/DEV/env/config/environment-flat.json

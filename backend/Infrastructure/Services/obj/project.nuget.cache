@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "dgSpecHash": "Vela4TNR0Z0=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\BS6655\\source\\Frontalys\\API\\Watchtower-WebApi\\Infrastructure\\Services\\Services.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\BS6655\\.nuget\\packages\\fluentvalidation\\12.0.0\\fluentvalidation.12.0.0.nupkg.sha512",
+    "C:\\Users\\BS6655\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\12.0.0\\fluentvalidation.dependencyinjectionextensions.12.0.0.nupkg.sha512",
+    "C:\\Users\\BS6655\\.nuget\\packages\\mapster\\7.4.0\\mapster.7.4.0.nupkg.sha512",
+    "C:\\Users\\BS6655\\.nuget\\packages\\mapster.core\\1.2.1\\mapster.core.1.2.1.nupkg.sha512",
+    "C:\\Users\\BS6655\\.nuget\\packages\\mcs.watchtower.webapi.datatransferobjects\\1.2.0.3416\\mcs.watchtower.webapi.datatransferobjects.1.2.0.3416.nupkg.sha512",
+    "C:\\Users\\BS6655\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\9.0.8\\microsoft.extensions.configuration.abstractions.9.0.8.nupkg.sha512",
+    "C:\\Users\\BS6655\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.8\\microsoft.extensions.dependencyinjection.abstractions.9.0.8.nupkg.sha512",
+    "C:\\Users\\BS6655\\.nuget\\packages\\microsoft.extensions.diagnostics.abstractions\\9.0.8\\microsoft.extensions.diagnostics.abstractions.9.0.8.nupkg.sha512",
+    "C:\\Users\\BS6655\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\9.0.8\\microsoft.extensions.fileproviders.abstractions.9.0.8.nupkg.sha512",
+    "C:\\Users\\BS6655\\.nuget\\packages\\microsoft.extensions.hosting.abstractions\\9.0.8\\microsoft.extensions.hosting.abstractions.9.0.8.nupkg.sha512",
+    "C:\\Users\\BS6655\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\9.0.8\\microsoft.extensions.logging.abstractions.9.0.8.nupkg.sha512",
+    "C:\\Users\\BS6655\\.nuget\\packages\\microsoft.extensions.options\\9.0.8\\microsoft.extensions.options.9.0.8.nupkg.sha512",
+    "C:\\Users\\BS6655\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.8\\microsoft.extensions.primitives.9.0.8.nupkg.sha512"
+  ],
+  "logs": []
+}

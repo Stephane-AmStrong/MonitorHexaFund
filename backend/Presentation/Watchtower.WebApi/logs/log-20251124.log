@@ -1,0 +1,56 @@
+[2025-11-24 14:19:01.423 +01:00 INF] Services.HeartbeatListenerService: HeartbeatListenerService starting with 60s timeout
+[2025-11-24 14:19:02.602 +01:00 INF] Services.ApplicationsService: Finding servers by condition: _ => True
+[2025-11-24 14:19:02.729 +01:00 INF] Services.WatchtowerBootstrapService: WatchtowerBootstrapService is starting.
+[2025-11-24 14:19:02.753 +01:00 INF] Services.ApplicationConfigurationSyncService: Starting server synchronization from flat configuration
+[2025-11-24 14:19:02.877 +01:00 INF] Services.JsonFileReader: Reading file from //D12.tes.local/AFS/MCS/DEV/env/config/environment-flat.json
+[2025-11-24 14:19:03.617 +01:00 INF] Services.HostConfigurationSyncService: Starting host synchronization from flat configuration
+[2025-11-24 14:19:03.622 +01:00 INF] Services.JsonFileReader: Reading file from //D12.tes.local/AFS/MCS/DEV/env/config/environment-flat.json
+[2025-11-24 14:19:04.149 +01:00 WRN] Microsoft.AspNetCore.Application.Kestrel: Overriding address(es) 'https://localhost:9443, http://localhost:9090'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+[2025-11-24 14:19:04.190 +01:00 INF] Services.HostConfigurationSyncService: Hosts to update: 15, hosts to insert: 0
+[2025-11-24 14:19:04.212 +01:00 INF] Services.ApplicationConfigurationSyncService: Applications to update: 21, servers to insert: 0
+[2025-11-24 14:19:04.298 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: http://localhost:9090
+[2025-11-24 14:19:04.317 +01:00 INF] Services.ApplicationsService: Found 21 servers by condition (21 with serverStatus, 0 without serverStatus)
+[2025-11-24 14:19:04.321 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: https://localhost:9443
+[2025-11-24 14:19:04.328 +01:00 INF] Services.HeartbeatListenerService: Initializing heartbeat monitoring for 21 servers
+[2025-11-24 14:19:04.343 +01:00 INF] Microsoft.Hosting.Lifetime: Application started. Press Ctrl+C to shut down.
+[2025-11-24 14:19:04.351 +01:00 INF] Microsoft.Hosting.Lifetime: Hosting environment: Development
+[2025-11-24 14:19:04.353 +01:00 INF] Services.HeartbeatListenerService: Started monitoring server AppServices;base at "2025-11-24T13:19:04.3489767+00:00" - timeout at "2025-11-24T13:20:04.3489767+00:00"
+[2025-11-24 14:19:04.360 +01:00 INF] Microsoft.Hosting.Lifetime: Content root path: C:\Users\BS6655\source\Frontalys\API\Watchtower-WebApi\Presentation\Watchtower.WebApi
+[2025-11-24 14:19:04.368 +01:00 INF] Services.HeartbeatListenerService: Started monitoring server DTCODEVAHAW;TrayportMarketDataEgm at "2025-11-24T13:19:04.3688474+00:00" - timeout at "2025-11-24T13:20:04.3688474+00:00"
+[2025-11-24 14:19:04.381 +01:00 INF] Services.HeartbeatListenerService: Started monitoring server DTCODEVMCSAMGW;TradingTechnologiesEgm at "2025-11-24T13:19:04.3813781+00:00" - timeout at "2025-11-24T13:20:04.3813781+00:00"
+[2025-11-24 14:19:04.386 +01:00 INF] Services.HeartbeatListenerService: Started monitoring server DTCODEVMCSAZAW;scr at "2025-11-24T13:19:04.3867846+00:00" - timeout at "2025-11-24T13:20:04.3867846+00:00"
+[2025-11-24 14:19:04.392 +01:00 INF] Services.HeartbeatListenerService: Started monitoring server DTCODEVMCSAZAW;scr-prodlike at "2025-11-24T13:19:04.3921556+00:00" - timeout at "2025-11-24T13:20:04.3921556+00:00"
+[2025-11-24 14:19:04.397 +01:00 INF] Services.HeartbeatListenerService: Started monitoring server DTCODEVMCSHGNW;TradeReceptionComparer at "2025-11-24T13:19:04.3970426+00:00" - timeout at "2025-11-24T13:20:04.3970426+00:00"
+[2025-11-24 14:19:04.402 +01:00 INF] Services.HeartbeatListenerService: Started monitoring server DTCODEVMCSHGNW;TrayportEgmMarketData at "2025-11-24T13:19:04.4020775+00:00" - timeout at "2025-11-24T13:20:04.4020775+00:00"
+[2025-11-24 14:19:04.407 +01:00 INF] Services.HeartbeatListenerService: Started monitoring server DTCODEVMCSHGNW;TrayportEgmOrderPassing at "2025-11-24T13:19:04.4070915+00:00" - timeout at "2025-11-24T13:20:04.4070915+00:00"
+[2025-11-24 14:19:04.413 +01:00 INF] Services.HeartbeatListenerService: Started monitoring server DTCODEVMCSHGNW;TrayportEgmRecorder at "2025-11-24T13:19:04.4135354+00:00" - timeout at "2025-11-24T13:20:04.4135354+00:00"
+[2025-11-24 14:19:04.418 +01:00 INF] Services.HeartbeatListenerService: Started monitoring server DTCODEVMCSMELW;TrayportMarketDataEgm at "2025-11-24T13:19:04.4181745+00:00" - timeout at "2025-11-24T13:20:04.4181745+00:00"
+[2025-11-24 14:19:04.423 +01:00 INF] Services.HeartbeatListenerService: Started monitoring server DTCODEVMCSMON1W;WatchtowerAPI at "2025-11-24T13:19:04.4234063+00:00" - timeout at "2025-11-24T13:20:04.4234063+00:00"
+[2025-11-24 14:19:04.428 +01:00 INF] Services.HeartbeatListenerService: Started monitoring server DTCODEVMCSMON1W;WatchtowerWebApi at "2025-11-24T13:19:04.4285274+00:00" - timeout at "2025-11-24T13:20:04.4285274+00:00"
+[2025-11-24 14:19:04.434 +01:00 INF] Services.HeartbeatListenerService: Started monitoring server DTCODEVMCSNB1W;Feedchecker-nightly at "2025-11-24T13:19:04.4346795+00:00" - timeout at "2025-11-24T13:20:04.4346795+00:00"
+[2025-11-24 14:19:04.440 +01:00 INF] Services.HeartbeatListenerService: Started monitoring server DTCODEVMCSNB1W;TrayportMarketDataEgm at "2025-11-24T13:19:04.4399966+00:00" - timeout at "2025-11-24T13:20:04.4399966+00:00"
+[2025-11-24 14:19:04.444 +01:00 INF] Services.HeartbeatListenerService: Started monitoring server DTCODEVMCSNB2W;TrayportRecorderEgm at "2025-11-24T13:19:04.4447346+00:00" - timeout at "2025-11-24T13:20:04.4447346+00:00"
+[2025-11-24 14:19:04.450 +01:00 INF] Services.HeartbeatListenerService: Started monitoring server DTCODEVMCSNB3W;TrayportOrderPassingEgm at "2025-11-24T13:19:04.4500017+00:00" - timeout at "2025-11-24T13:20:04.4500017+00:00"
+[2025-11-24 14:19:04.477 +01:00 INF] Services.HeartbeatListenerService: Started monitoring server mcs-authorization-dev;authorization at "2025-11-24T13:19:04.4777069+00:00" - timeout at "2025-11-24T13:20:04.4777069+00:00"
+[2025-11-24 14:19:04.485 +01:00 INF] Services.HeartbeatListenerService: Started monitoring server mcs-historization-dev;historization at "2025-11-24T13:19:04.4855552+00:00" - timeout at "2025-11-24T13:20:04.4855552+00:00"
+[2025-11-24 14:19:04.493 +01:00 INF] Services.HeartbeatListenerService: Started monitoring server mcs-marketdata-dev;marketdata at "2025-11-24T13:19:04.4933888+00:00" - timeout at "2025-11-24T13:20:04.4933888+00:00"
+[2025-11-24 14:19:04.498 +01:00 INF] Services.HeartbeatListenerService: Started monitoring server mcs-pluto-dev;pluto at "2025-11-24T13:19:04.4983604+00:00" - timeout at "2025-11-24T13:20:04.4983604+00:00"
+[2025-11-24 14:19:04.505 +01:00 INF] Services.HeartbeatListenerService: Started monitoring server mcs-profiles-dev;profiles at "2025-11-24T13:19:04.5053049+00:00" - timeout at "2025-11-24T13:20:04.5053049+00:00"
+[2025-11-24 14:19:04.519 +01:00 INF] Services.ApplicationConfigurationSyncService: Successfully updated 21 existing servers
+[2025-11-24 14:19:04.519 +01:00 INF] Services.HostConfigurationSyncService: Successfully updated 15 existing hosts
+[2025-11-24 14:19:04.530 +01:00 INF] Services.ApplicationConfigurationSyncService: Application synchronization completed: 21 updated, 0 inserted, 21 total processed
+[2025-11-24 14:19:04.530 +01:00 INF] Services.HostConfigurationSyncService: Host synchronization completed: 15 updated, 0 inserted, 15 total processed
+[2025-11-24 14:19:04.552 +01:00 INF] Services.WatchtowerBootstrapService: Initial environment sync completed: 21 server(s) updated, 0 server(s) inserted, 15 host(s) updated, 0 host(s) inserted. Total changes: 36
+[2025-11-24 14:19:04.559 +01:00 INF] Services.WatchtowerBootstrapService: WatchtowerBootstrapService completed successfully.
+[2025-11-24 14:19:09.490 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /WatchtowerWebApi/openapi/v1.json => HTTP: GET /WatchtowerWebApi/openapi/v1.json
+[2025-11-24 14:19:32.822 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/servers/DTCODEVMCSNB1W;Feedchecker-nightly => HTTP: GET /api/servers/{id} => GetApplicationById
+[2025-11-24 14:19:32.852 +01:00 INF] Services.ApplicationsService: Retrieving detailed server information for ID: DTCODEVMCSNB1W;Feedchecker-nightly
+[2025-11-24 14:19:32.994 +01:00 INF] Services.ApplicationsService: Successfully retrieved detailed server DTCODEVMCSNB1W;Feedchecker-nightly with 0 connections and 10 recent serverStatuses
+[2025-11-24 14:19:33.481 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/serverStatuses => HTTP: POST /api/serverStatuses/ => CreateApplicationStatus
+[2025-11-24 14:19:33.892 +01:00 INF] Services.HeartbeatListenerService: Started monitoring server DTCODEVMCSNB1W;Feedchecker-nightly at "2025-11-24T13:19:33.8926806+00:00" - timeout at "2025-11-24T13:20:33.8926806+00:00"
+[2025-11-24 14:19:34.393 +01:00 INF] Services.HeartbeatListenerService: Reset timeout for server DTCODEVMCSNB1W;Feedchecker-nightly - old end: "2025-11-24T13:20:04.4346814+00:00", new end: "2025-11-24T13:20:33.8921215+00:00"
+[2025-11-24 14:19:34.401 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/alerts => HTTP: POST /api/alerts/ => CreateOrIncrementAlert
+[2025-11-24 14:19:34.481 +01:00 INF] Services.AlertsService: Processing alert creation for ApplicationId=DTCODEVMCSNB1W;Feedchecker-nightly and Type="PriceDiff"
+[2025-11-24 14:19:34.490 +01:00 INF] Services.AlertsService: Checking for existing alert with ApplicationId=DTCODEVMCSNB1W;Feedchecker-nightly and Type="PriceDiff"
+[2025-11-24 14:19:34.547 +01:00 INF] Services.AlertsService: Existing alert found with Id=69206ecbc046be9cdd380845, current occurrence count: 6
+[2025-11-24 14:19:34.695 +01:00 INF] Services.AlertsService: Incremented occurrence count for alert 69206ecbc046be9cdd380845 to 7
