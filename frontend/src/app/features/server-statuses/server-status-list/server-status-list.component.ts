@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, model } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, model } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -8,10 +8,11 @@ import { ToolbarComponent } from '../../../shared/components/toolbar/toolbar.com
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
-import { ServerStatusQueryParameters } from '../../../core/models/query-parameters/server-status-query-parameters';
-import { ServerStatusResponse } from '../../../core/models/responses/server-status-response';
-import { ServerStatusService } from '../services/server-status.service';
+import { ServerStatusQueryParameters } from '../models/server-status-query-parameters';
+import { ServerStatusResponse } from '../models/server-status-response';
+import { ServerStatusStore } from '../services/server-status.store';
 import { ServerStatusTableComponent } from '../server-status-table/server-status-table.component';
+import { ServerStatus } from '../models/server-status-enum';
 
 @Component({
   selector: 'server-status-list',
@@ -23,24 +24,29 @@ import { ServerStatusTableComponent } from '../server-status-table/server-status
 export class ServerStatusListComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
-  private readonly serverstatusesService = inject(ServerStatusService);
-  
+  private readonly serverStatusStore = inject(ServerStatusStore);
+
   private dialog = inject(MatDialog);
 
-  private readonly queryParams = computed<ServerStatusQueryParameters>(() => ({
-    withName: this.route.snapshot.params['withName'],
-    withAppName: this.route.snapshot.params['withAppName'],
-    withVersion: this.route.snapshot.params['withVersion'],
-    searchTerm: this.route.snapshot.queryParams['searchTerm'],
-    orderBy: this.route.snapshot.queryParams['orderBy'],
-    page: +this.route.snapshot.queryParams['page'] || 1,
-    pageSize: +this.route.snapshot.queryParams['pageSize'] || 10,
+  constructor() {
+    effect(() => this.serverStatusStore.queryParameters.set(this.queryParams()));
+  }
+
+  private readonly routeResource = toSignal(this.route.queryParams);
+
+  readonly queryParams = computed<ServerStatusQueryParameters>(() => ({
+    withServerId: this.routeResource()?.['withServerId'],
+    ofStatus: this.routeResource()?.['ofStatus'] as ServerStatus | undefined,
+    recordedBefore: this.routeResource()?.['recordedBefore'],
+    recordedAfter: this.routeResource()?.['recordedAfter'],
+    searchTerm: this.routeResource()?.['searchTerm'],
+    orderBy: this.routeResource()?.['orderBy'],
+    page: +this.routeResource()?.['page'] || 1,
+    pageSize: +this.routeResource()?.['pageSize'] || 10,
   }));
 
-  readonly serverStatuses = toSignal<ServerStatusResponse[], ServerStatusResponse[]>(
-    this.serverstatusesService.getPagedListByQueryAsync(this.queryParams()),
-    { initialValue: [] }
-  );
+  readonly serverStatuses = this.serverStatusStore.pagedList;
+  readonly isLoading = this.serverStatusStore.isLoading;
 
   readonly serverStatusColumns: readonly string[] = ['hostName', 'appName', 'version', 'port', 'type', 'cronStartTime', 'cronStopTime'] as const;
 

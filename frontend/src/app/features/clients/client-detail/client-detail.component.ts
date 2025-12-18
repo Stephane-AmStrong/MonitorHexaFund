@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -8,13 +8,11 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatListModule } from '@angular/material/list';
 import { ToolbarComponent } from "../../../shared/components/toolbar/toolbar.component";
-import { ClientDetailedResponse } from '../../../core/models/responses/client-detailed-response';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ClientService } from '../../clients/services/client.service';
+import { ActivatedRoute } from '@angular/router';
+import { ClientStore } from '../services/client.store';
 import { ConnectionTableComponent } from '../../connections/connection-table/connection-table.component';
-import { ConnectionService } from '../../connections/services/connection.service';
-import { ConnectionResponse } from '../../../core/models/responses/connection-response';
+import { ConnectionResponse } from '../../connections/models/connection-response';
 import { DetailCardComponent } from "../../../shared/components/detail-card/detail-card.component";
 
 @Component({
@@ -38,15 +36,18 @@ import { DetailCardComponent } from "../../../shared/components/detail-card/deta
 })
 export class ClientDetailComponent {
   private readonly route = inject(ActivatedRoute);
-  private readonly connectionService = inject(ConnectionService);
-  private readonly clientService = inject(ClientService);
+    private readonly clientStore = inject(ClientStore);
 
-  readonly id = computed<string>(() => this.route.snapshot.params['id']);
+  constructor() {
+    effect(() => this.clientStore.selectedLogin.set(this.selectedLogin()));
+  }
 
-  readonly clientDetail = toSignal<ClientDetailedResponse>(
-    this.clientService.getById(this.id()),
-    { initialValue: null }
-  );
+  private readonly routeResource = toSignal(this.route.params);
+
+  private readonly selectedLogin = computed<string>(() => (this.routeResource()?.['login']));
+
+  readonly isLoading = this.clientStore.isLoading;
+  readonly clientDetail = this.clientStore.selected;
 
   readonly connections = computed<ConnectionResponse[]>(() => this.clientDetail()?.connections || []);
 }

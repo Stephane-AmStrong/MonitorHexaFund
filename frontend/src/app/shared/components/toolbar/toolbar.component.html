@@ -5,19 +5,20 @@
     </button>
     }
 
-    <div [style.display]="'flex'" [style.align-items]="'center'" [style.gap]="'1rem'" [style.flex]="'1'">
-        <span>WatchTower.WebApp</span>
-        <breadcrumb />
-    </div>
-
-    <span [style.flex]="'1 1 auto'"></span>
+    <span>WatchTower.WebApp</span>
+    <breadcrumb />
 
     <span class="toolbar-spacer"></span>
-    <mat-form-field>
-        <mat-label>Search term</mat-label>
-        <input matInput type="search">
-        <button matSuffix matIconButton aria-label="Search">
-            <mat-icon>search</mat-icon>
-        </button>
-    </mat-form-field>
+
+    @if (searchConfig().showSearch) {
+    <form class="toolbar-search" (ngSubmit)="onSearch()">
+        <mat-form-field appearance="outline" subscriptSizing="dynamic">
+            <input [(ngModel)]="searchConfig().searchTerm" name="searchTerm" matInput type="search">
+            <button matSuffix matIconButton aria-label="Search" type="submit">
+                <mat-icon>search</mat-icon>
+            </button>
+        </mat-form-field>
+    </form>
+    }
+
 </mat-toolbar>

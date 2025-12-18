@@ -8,6 +8,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { BaseApiService } from '../../../core/services/base-api.service';
 import { ClientService } from '../services/client.service';
+import { of } from 'rxjs';
 
 describe('ClientDetailComponent', () => {
   let component: ClientDetailComponent;
@@ -29,6 +30,8 @@ describe('ClientDetailComponent', () => {
               params: {},
               queryParams: {},
             },
+            params: of({}),
+            queryParams: of({}),
           },
         },
       ],

@@ -1,6 +1,5 @@
 export const environment = {
-  // apiUrl: 'https://mcs-dev.gems.myengie.com/dev/WatchtowerWebApi/api',
-  apiUrl: 'https://mcs-prd.gems.myengie.com/WatchtowerWebApi/api',
+  apiUrl: 'https://localhost:9443/api',
 
   enableLogging: true,
   logLevel: 'debug',

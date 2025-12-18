@@ -7,6 +7,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { BaseApiService } from '../../../core/services/base-api.service';
 import { ClientService } from '../services/client.service';
 import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('ClientListComponent', () => {
   let component: ClientListComponent;
@@ -37,6 +38,12 @@ describe('ClientListComponent', () => {
                 pageSize: 10,
               },
             },
+            queryParams: of({
+              searchTerm: '',
+              orderBy: 'name',
+              page: 1,
+              pageSize: 10,
+            }),
           },
         },
       ],

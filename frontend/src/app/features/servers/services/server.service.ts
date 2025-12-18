@@ -1,11 +1,11 @@
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, startWith, switchMap, tap } from 'rxjs';
-import { ServerResponse } from '../../../core/models/responses/server-response';
+import { ServerResponse } from '../models/server-response';
 import { BaseApiService } from '../../../core/services/base-api.service';
-import { ServerCreateRequest } from '../../../core/models/requests/server-create-request';
+import { ServerCreateRequest } from '../models/server-create-request';
 import { API_ENDPOINTS } from '../../../core/constants/api-endpoints';
-import { ServerQueryParameters } from '../../../core/models/query-parameters/server-query-parameters';
-import { ServerDetailedResponse } from '../../../core/models/responses/server-detailed-response';
+import { ServerQueryParameters } from '../models/server-query-parameters';
+import { ServerDetailedResponse } from '../models/server-detailed-response';
 
 @Injectable({
   providedIn: 'root',

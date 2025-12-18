@@ -1,6 +1,6 @@
 import { Component, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
-import { ConnectionResponse } from '../../../core/models/responses/connection-response';
+import { ConnectionResponse } from '../models/connection-response';
 import { MatTableModule } from '@angular/material/table';
 import { PrefixPictogramComponent } from "../../../shared/components/prefix-pictogram/prefix-pictogram.component";
 import { HashColorPipe } from "../../../shared/pipes/hash-color.pipe";

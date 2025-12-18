@@ -1,5 +1,5 @@
-import { HostResponse } from "../../../core/models/responses/host-response";
-import { ServerResponse } from "../../../core/models/responses/server-response";
+import { HostResponse } from "../models/host-response";
+import { ServerResponse } from "../../servers/models/server-response";
 
 export interface HostServerRow {
   host: HostResponse;

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatCardModule } from "@angular/material/card";
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { ServerResponse } from '../../../core/models/responses/server-response';
+import { ServerResponse } from '../models/server-response';
 import { MatIcon } from '@angular/material/icon';
 import { MatListModule } from "@angular/material/list";
 import { MatExpansionModule } from '@angular/material/expansion';

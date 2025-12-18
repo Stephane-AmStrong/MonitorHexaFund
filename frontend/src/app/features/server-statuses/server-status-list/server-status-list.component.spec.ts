@@ -7,6 +7,7 @@ import { BaseApiService } from '../../../core/services/base-api.service';
 import { ServerStatusListComponent } from './server-status-list.component';
 import { ServerStatusService } from '../services/server-status.service';
 import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('ServerStatusListComponent', () => {
   let component: ServerStatusListComponent;
@@ -37,6 +38,12 @@ describe('ServerStatusListComponent', () => {
                 pageSize: 10,
               },
             },
+            queryParams: of({
+              searchTerm: '',
+              orderBy: 'name',
+              page: 1,
+              pageSize: 10,
+            }),
           },
         },
       ],

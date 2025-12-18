@@ -6,6 +6,7 @@ import { MOCK_SERVERS } from '../MOCK_SERVERS';
 import { ActivatedRoute } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { of } from 'rxjs';
 
 describe('ServerDetailComponent', () => {
   let component: ServerDetailComponent;
@@ -25,6 +26,8 @@ describe('ServerDetailComponent', () => {
               params: {},
               queryParams: {},
             },
+            params: of({}),
+            queryParams: of({}),
           },
         },
       ],

@@ -1,4 +1,4 @@
-@if (!serverDetail()) {
+@if (isLoading()) {
 <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
 } @else if (serverDetail(); as server) {
 <toolbar />
@@ -141,7 +141,7 @@
                                 <span>Recent Statuses</span>
                             </span>
                         </ng-template>
-                        <server-status-table [serverStatuses]="statuses()" />
+                        <server-status-table [serverStatuses]="statuses()" [serverStatusColumns]="serverStatusColumns" />
                     </mat-tab>
                 </mat-tab-group>
             </detail-card>

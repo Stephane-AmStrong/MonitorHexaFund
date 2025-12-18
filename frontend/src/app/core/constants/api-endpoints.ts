@@ -10,6 +10,7 @@ export const API_ENDPOINTS = {
   CLIENTS: {
     ROOT: 'clients',
     BY_ID: (id: string) => `${API_ENDPOINTS.CLIENTS.ROOT}/${id}`,
+    BY_LOGIN: (login: string) => `${API_ENDPOINTS.CLIENTS.ROOT}/login/${login}`,
     LIVE: () => `${API_ENDPOINTS.CLIENTS.ROOT}/live`
   },
   CONNECTIONS: {

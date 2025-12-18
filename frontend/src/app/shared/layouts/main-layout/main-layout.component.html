@@ -11,9 +11,14 @@
         <mat-icon matListItemIcon>domain</mat-icon>
         <span matListItemTitle>Hosts</span>
       </a>
-      <a mat-list-item routerLink="/servers" [queryParams]="serverQueryParams" routerLinkActive="mdc-list-item--activated">
+      <a mat-list-item routerLink="/servers" [queryParams]="serverQueryParams"
+        routerLinkActive="mdc-list-item--activated">
         <mat-icon matListItemIcon>dns</mat-icon>
         <span matListItemTitle>Applications</span>
+      </a>
+      <a mat-list-item routerLink="/server-statuses" routerLinkActive="mdc-list-item--activated">
+        <mat-icon matListItemIcon>monitor_heart</mat-icon>
+        <span matListItemTitle>App Status</span>
       </a>
       <a mat-list-item routerLink="/clients" routerLinkActive="mdc-list-item--activated">
         <mat-icon matListItemIcon>computer</mat-icon>

@@ -1,11 +1,11 @@
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, startWith, switchMap, tap } from 'rxjs';
-import { ConnectionResponse } from '../../../core/models/responses/connection-response';
+import { ConnectionResponse } from '../models/connection-response';
 import { BaseApiService } from '../../../core/services/base-api.service';
 import { API_ENDPOINTS } from '../../../core/constants/api-endpoints';
-import { ConnectionQueryParameters } from '../../../core/models/query-parameters/connection-query-parameters';
-import { ConnectionDetailedResponse } from '../../../core/models/responses/connection-detailed-response';
-import { ConnectionEstablishRequest } from '../../../core/models/requests/connection-establish-request';
+import { ConnectionQueryParameters } from '../models/connection-query-parameters';
+import { ConnectionDetailedResponse } from '../models/connection-detailed-response';
+import { ConnectionEstablishRequest } from '../models/connection-establish-request';
 import { MOCK_CONNECTIONS } from '../MOCK_CONNECTIONS';
 
 @Injectable({

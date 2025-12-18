@@ -1,5 +1,5 @@
 import { Component, inject, input } from '@angular/core';
-import { ClientResponse } from '../../../core/models/responses/client-response';
+import { ClientResponse } from '../models/client-response';
 import { Router } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 
@@ -16,9 +16,9 @@ export class ClientTableComponent {
   readonly clientColumns: readonly string[] = ['gaia', 'login'] as const;
 
   onClientClicked(client: ClientResponse) {
-    const clientId = client.id;
-    if (clientId) {
-      this.router.navigate(['/clients', clientId]);
+    const clientLogin = client.login;
+    if (clientLogin) {
+      this.router.navigate(['/clients', 'login', clientLogin]);
     }
   }
 

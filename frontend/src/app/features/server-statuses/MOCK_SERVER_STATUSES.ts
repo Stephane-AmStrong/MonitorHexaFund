@@ -1,5 +1,5 @@
-import { ConnectionResponse } from '../../core/models/responses/connection-response';
-import { ServerStatusDetailedResponse } from '../../core/models/responses/server-status-detailed-response';
+import { ConnectionResponse } from '../connections/models/connection-response';
+import { ServerStatusDetailedResponse } from './models/server-status-detailed-response';
 
 export const MOCK_SERVER_STATUSES: ServerStatusDetailedResponse[] = [
   {

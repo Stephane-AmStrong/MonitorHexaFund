@@ -1,5 +1,5 @@
-import { ConnectionResponse } from '../../core/models/responses/connection-response';
-import { ConnectionDetailedResponse } from '../../core/models/responses/connection-detailed-response';
+import { ConnectionResponse } from './models/connection-response';
+import { ConnectionDetailedResponse } from './models/connection-detailed-response';
 
 export const MOCK_CONNECTIONS: ConnectionDetailedResponse[] = [
  {

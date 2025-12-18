@@ -7,6 +7,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { BaseApiService } from '../../../core/services/base-api.service';
 import { ServerService } from '../services/server.service';
 import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('ServerListComponent', () => {
   let component: ServerListComponent;
@@ -28,6 +29,7 @@ describe('ServerListComponent', () => {
               params: {},
               queryParams: {},
             },
+            queryParams: of({}),
           },
         },
       ],

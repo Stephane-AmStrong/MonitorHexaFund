@@ -1,5 +1,5 @@
-import { HostDetailedResponse } from '../../core/models/responses/host-detailed-response';
-import { ServerResponse } from '../../core/models/responses/server-response';
+import { HostDetailedResponse } from './models/host-detailed-response';
+import { ServerResponse } from '../servers/models/server-response';
 
 export const MOCK_HOSTS: HostDetailedResponse[] = [
   {

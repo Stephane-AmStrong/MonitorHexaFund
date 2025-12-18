@@ -7,6 +7,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { BaseApiService } from '../../../core/services/base-api.service';
 import { AlertService } from '../services/alert.service';
 import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('AlertListComponent', () => {
   let component: AlertListComponent;
@@ -28,6 +29,7 @@ describe('AlertListComponent', () => {
               params: {},
               queryParams: {},
             },
+            queryParams: of({}),
           },
         },
       ],

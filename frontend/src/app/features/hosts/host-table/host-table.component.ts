@@ -1,6 +1,6 @@
 import { Component, computed, inject, input } from '@angular/core';
 import { Router } from '@angular/router';
-import { HostDetailedResponse } from '../../../core/models/responses/host-detailed-response';
+import { HostDetailedResponse } from '../models/host-detailed-response';
 import { MatTableModule } from '@angular/material/table';
 import { ServerStatusIndicatorComponent } from '../../servers/server-status-indicator/server-status-indicator.component';
 import { PrefixPictogramComponent } from "../../../shared/components/prefix-pictogram/prefix-pictogram.component";

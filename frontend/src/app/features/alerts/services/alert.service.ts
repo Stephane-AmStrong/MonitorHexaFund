@@ -1,11 +1,11 @@
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, startWith, switchMap, tap } from 'rxjs';
-import { AlertResponse } from '../../../core/models/responses/alert-response';
+import { AlertResponse } from '../models/alert-response';
 import { BaseApiService } from '../../../core/services/base-api.service';
-import { AlertCreateOrIncrementRequest } from '../../../core/models/requests/alert-create-or-increment-request';
+import { AlertCreateOrIncrementRequest } from '../models/alert-create-or-increment-request';
 import { API_ENDPOINTS } from '../../../core/constants/api-endpoints';
-import { AlertQueryParameters } from '../../../core/models/query-parameters/alert-query-parameters';
-import { AlertDetailedResponse } from '../../../core/models/responses/alert-detailed-response';
+import { AlertQueryParameters } from '../models/alert-query-parameters';
+import { AlertDetailedResponse } from '../models/alert-detailed-response';
 
 @Injectable({
   providedIn: 'root',

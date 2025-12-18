@@ -1,6 +1,6 @@
-import { ConnectionResponse } from '../../core/models/responses/connection-response';
-import { ServerDetailedResponse } from '../../core/models/responses/server-detailed-response';
-import { ServerStatusResponse } from '../../core/models/responses/server-status-response';
+import { ConnectionResponse } from '../connections/models/connection-response';
+import { ServerDetailedResponse } from './models/server-detailed-response';
+import { ServerStatusResponse } from '../server-statuses/models/server-status-response';
 
 export const MOCK_SERVERS: ServerDetailedResponse[] = [
   {

@@ -41,5 +41,5 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="connectionColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: connectionColumns;" (click)="onConnectionClicked(row)"></tr>
+    <tr mat-row *matRowDef="let row; columns: connectionColumns;"></tr>
 </table>

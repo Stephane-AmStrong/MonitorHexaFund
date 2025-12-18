@@ -7,6 +7,7 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { BaseApiService } from '../../../core/services/base-api.service';
 import { HostService } from '../services/host.service';
 import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('HostDetailComponent', () => {
   let component: HostDetailComponent;
@@ -28,6 +29,8 @@ describe('HostDetailComponent', () => {
               params: {},
               queryParams: {},
             },
+            params: of({}),
+            queryParams: of({}),
           },
         },
       ],

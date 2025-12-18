@@ -1,12 +1,12 @@
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, startWith, switchMap, tap } from 'rxjs';
-import { HostResponse } from '../../../core/models/responses/host-response';
+import { HostResponse } from '../models/host-response';
 import { BaseApiService } from '../../../core/services/base-api.service';
-import { HostCreateRequest } from '../../../core/models/requests/host-create-request';
+import { HostCreateRequest } from '../models/host-create-request';
 import { API_ENDPOINTS } from '../../../core/constants/api-endpoints';
-import { HostDetailedResponse } from '../../../core/models/responses/host-detailed-response';
-import { HostQueryParameters } from '../../../core/models/query-parameters/HostQueryParameters';
-import { ServerDetailedResponse } from '../../../core/models/responses/server-detailed-response';
+import { HostDetailedResponse } from '../models/host-detailed-response';
+import { HostQueryParameters } from '../models/host-query-parameters';
+import { ServerDetailedResponse } from '../../servers/models/server-detailed-response';
 
 @Injectable({
   providedIn: 'root',

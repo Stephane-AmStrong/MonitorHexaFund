@@ -7,7 +7,7 @@ export const APP_ROUTES = {
   CLIENTS: {
     ROOT: 'clients',
     LIST: '',
-    DETAIL: ':id',
+    DETAIL: 'login/:login',
   },
   CONNECTIONS: {
     ROOT: 'connections',

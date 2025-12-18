@@ -7,6 +7,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { BaseApiService } from '../../../core/services/base-api.service';
 import { ConnectionService } from '../services/connection.service';
 import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('ConnectionListComponent', () => {
   let component: ConnectionListComponent;
@@ -28,6 +29,7 @@ describe('ConnectionListComponent', () => {
               params: {},
               queryParams: {},
             },
+            queryParams: of({}),
           },
         },
       ],

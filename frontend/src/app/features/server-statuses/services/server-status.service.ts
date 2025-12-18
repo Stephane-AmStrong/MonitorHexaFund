@@ -2,10 +2,10 @@ import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, startWith, switchMap, tap } from 'rxjs';
 import { BaseApiService } from '../../../core/services/base-api.service';
 import { API_ENDPOINTS } from '../../../core/constants/api-endpoints';
-import { ServerStatusQueryParameters } from '../../../core/models/query-parameters/server-status-query-parameters';
-import { ServerStatusCreateRequest } from '../../../core/models/requests/server-status-create-request';
-import { ServerStatusDetailedResponse } from '../../../core/models/responses/server-status-detailed-response';
-import { ServerStatusResponse } from '../../../core/models/responses/server-status-response';
+import { ServerStatusQueryParameters } from '../models/server-status-query-parameters';
+import { ServerStatusCreateRequest } from '../models/server-status-create-request';
+import { ServerStatusDetailedResponse } from '../models/server-status-detailed-response';
+import { ServerStatusResponse } from '../models/server-status-response';
 
 @Injectable({
   providedIn: 'root',

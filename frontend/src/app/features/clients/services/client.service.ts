@@ -1,11 +1,11 @@
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, of, startWith, switchMap, tap } from 'rxjs';
-import { ClientResponse } from '../../../core/models/responses/client-response';
+import { ClientResponse } from '../models/client-response';
 import { BaseApiService } from '../../../core/services/base-api.service';
-import { ClientCreateRequest } from '../../../core/models/requests/client-create-request';
+import { ClientCreateRequest } from '../models/client-create-request';
 import { API_ENDPOINTS } from '../../../core/constants/api-endpoints';
-import { ClientQueryParameters } from '../../../core/models/query-parameters/client-query-parameters';
-import { ClientDetailedResponse } from '../../../core/models/responses/client-detailed-response';
+import { ClientQueryParameters } from '../models/client-query-parameters';
+import { ClientDetailedResponse } from '../models/client-detailed-response';
 import { MOCK_CLIENTS } from '../MOCK_CLIENTS';
 
 @Injectable({
@@ -24,12 +24,12 @@ export class ClientService {
     );
   }
 
-  getById(id: string): Observable<ClientDetailedResponse> {
+  getByLogin(login: string): Observable<ClientDetailedResponse> {
     return this.refreshTrigger.pipe(
       startWith(undefined),
       switchMap(() =>
         this.http.handleRequest<ClientDetailedResponse>(
-          'GET', API_ENDPOINTS.CLIENTS.BY_ID(id)
+          'GET', API_ENDPOINTS.CLIENTS.BY_LOGIN(login)
         )
       )
     );

@@ -7,6 +7,7 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { BaseApiService } from '../../../core/services/base-api.service';
 import { HostService } from '../services/host.service';
 import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
 
 describe('HostListComponent', () => {
   let component: HostListComponent;
@@ -28,6 +29,7 @@ describe('HostListComponent', () => {
               params: {},
               queryParams: {},
             },
+            queryParams: of({}),
           },
         },
       ],

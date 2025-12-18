@@ -1,5 +1,5 @@
 import { Component, inject, input } from '@angular/core';
-import { AlertResponse } from '../../../core/models/responses/alert-response';
+import { AlertResponse } from '../models/alert-response';
 import { Router } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 

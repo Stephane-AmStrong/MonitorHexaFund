@@ -1,15 +1,14 @@
-import { ChangeDetectionStrategy, Component, computed, inject, model } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToolbarComponent } from '../../../shared/components/toolbar/toolbar.component';
 
-import { HostDetailedResponse } from '../../../core/models/responses/host-detailed-response';
-import { ServerResponse } from '../../../core/models/responses/server-response';
+import { ServerResponse } from '../../servers/models/server-response';
 import { MatTableModule } from '@angular/material/table';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { HostService } from '../services/host.service';
+import { HostStore } from '../services/host.store';
 import { MatCardModule } from '@angular/material/card';
 import { MatIcon } from '@angular/material/icon';
 import { ServerTableComponent } from "../../servers/server-table/server-table.component";
@@ -24,14 +23,18 @@ import { ServerTableComponent } from "../../servers/server-table/server-table.co
 export class HostDetailComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
-  private readonly hostsService = inject(HostService);
+  private readonly hostStore = inject(HostStore);
 
-  readonly hostName = computed<string>(() => this.route.snapshot.params['hostName']);
+  constructor() {
+    effect(() => this.hostStore.selectedName.set(this.selectedName()));
+  }
 
-  readonly hostDetail = toSignal<HostDetailedResponse>(
-    this.hostsService.getByName(this.hostName()),
-    { initialValue: null }
-  );
+  private readonly routeResource = toSignal(this.route.params);
+
+  private readonly selectedName = computed<string>(() => (this.routeResource()?.['hostName']));
+
+  readonly isLoading = this.hostStore.isLoading;
+  readonly hostDetail = this.hostStore.selected;
 
   readonly servers = computed<ServerResponse[]>(() => this.hostDetail()?.servers || []);
 

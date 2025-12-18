@@ -44,6 +44,11 @@ export const routes: Routes = [
       import('./features/servers/server.routes').then((r) => r.serverRoutes),
   },
   {
+    path: APP_ROUTES.SERVERS_STATUS.ROOT,
+    loadChildren: () =>
+      import('./features/server-statuses/server-status.routes').then((r) => r.serverStatusRoutes),
+  },
+  {
     path: APP_ROUTES.NOT_FOUND,
     component: PageNotFoundComponent,
   },

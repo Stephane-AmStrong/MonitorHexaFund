@@ -1,7 +1,7 @@
-import { AlertDetailedResponse } from '../../core/models/responses/alert-detailed-response';
-import { AlertType } from '../../core/models/enums/alert-type';
-import { AlertSeverity } from '../../core/models/enums/alert-severity';
-import { AlertStatus } from '../../core/models/enums/alert-status';
+import { AlertDetailedResponse } from './models/alert-detailed-response';
+import { AlertType } from './models/alert-type-enum';
+import { AlertSeverity } from './models/alert-severity-enum';
+import { AlertStatus } from './models/alert-status-enum';
 
 export const MOCK_ALERTS: AlertDetailedResponse[] = [
   {

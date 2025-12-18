@@ -1,4 +1,4 @@
-import { ClientDetailedResponse } from '../../core/models/responses/client-detailed-response';
+import { ClientDetailedResponse } from './models/client-detailed-response';
 
 export const MOCK_CLIENTS: ClientDetailedResponse[] = [
   {

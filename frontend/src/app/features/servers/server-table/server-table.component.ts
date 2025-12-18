@@ -1,5 +1,5 @@
 import { Component, inject, input } from '@angular/core';
-import { ServerResponse } from '../../../core/models/responses/server-response';
+import { ServerResponse } from '../models/server-response';
 import { Router } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { PrefixPictogramComponent } from '../../../shared/components/prefix-pictogram/prefix-pictogram.component';
