@@ -1,0 +1,12 @@
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.WebApi.DataTransferObjects\bin\Debug\net6.0\MCS.WatchTower.WebApi.DataTransferObjects.deps.json
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.WebApi.DataTransferObjects\bin\Debug\net6.0\MCS.WatchTower.WebApi.DataTransferObjects.dll
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.WebApi.DataTransferObjects\bin\Debug\net6.0\MCS.WatchTower.WebApi.DataTransferObjects.pdb
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.WebApi.DataTransferObjects\obj\Debug\net6.0\MCS.WatchTower.WebApi.DataTransferObjects.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.WebApi.DataTransferObjects\obj\Debug\net6.0\MCS.WatchTower.WebApi.DataTransferObjects.AssemblyInfoInputs.cache
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.WebApi.DataTransferObjects\obj\Debug\net6.0\MCS.WatchTower.WebApi.DataTransferObjects.AssemblyInfo.cs
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.WebApi.DataTransferObjects\obj\Debug\net6.0\MCS.WatchTower.WebApi.DataTransferObjects.csproj.CoreCompileInputs.cache
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.WebApi.DataTransferObjects\obj\Debug\net6.0\MCS.WatchTower.WebApi.DataTransferObjects.sourcelink.json
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.WebApi.DataTransferObjects\obj\Debug\net6.0\MCS.WatchTower.WebApi.DataTransferObjects.dll
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.WebApi.DataTransferObjects\obj\Debug\net6.0\refint\MCS.WatchTower.WebApi.DataTransferObjects.dll
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.WebApi.DataTransferObjects\obj\Debug\net6.0\MCS.WatchTower.WebApi.DataTransferObjects.pdb
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.WebApi.DataTransferObjects\obj\Debug\net6.0\ref\MCS.WatchTower.WebApi.DataTransferObjects.dll

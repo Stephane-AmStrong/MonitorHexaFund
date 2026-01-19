@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "MCS.WatchTower.WebApi.DataTransferObjects/1.0.0": {
+        "runtime": {
+          "MCS.WatchTower.WebApi.DataTransferObjects.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "MCS.WatchTower.WebApi.DataTransferObjects/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -1,0 +1,12 @@
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.DataTransferObjects\bin\Debug\net8.0\MCS.WatchTower.REST.DataTransferObjects.deps.json
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.DataTransferObjects\bin\Debug\net8.0\MCS.WatchTower.REST.DataTransferObjects.dll
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.DataTransferObjects\bin\Debug\net8.0\MCS.WatchTower.REST.DataTransferObjects.pdb
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.DataTransferObjects\obj\Debug\net8.0\MCS.WatchTower.REST.DataTransferObjects.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.DataTransferObjects\obj\Debug\net8.0\MCS.WatchTower.REST.DataTransferObjects.AssemblyInfoInputs.cache
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.DataTransferObjects\obj\Debug\net8.0\MCS.WatchTower.REST.DataTransferObjects.AssemblyInfo.cs
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.DataTransferObjects\obj\Debug\net8.0\MCS.WatchTower.REST.DataTransferObjects.csproj.CoreCompileInputs.cache
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.DataTransferObjects\obj\Debug\net8.0\MCS.WatchTower.REST.DataTransferObjects.sourcelink.json
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.DataTransferObjects\obj\Debug\net8.0\MCS.WatchTower.REST.DataTransferObjects.dll
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.DataTransferObjects\obj\Debug\net8.0\refint\MCS.WatchTower.REST.DataTransferObjects.dll
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.DataTransferObjects\obj\Debug\net8.0\MCS.WatchTower.REST.DataTransferObjects.pdb
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.DataTransferObjects\obj\Debug\net8.0\ref\MCS.WatchTower.REST.DataTransferObjects.dll

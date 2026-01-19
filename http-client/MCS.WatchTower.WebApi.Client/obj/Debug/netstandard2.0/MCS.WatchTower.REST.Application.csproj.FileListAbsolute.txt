@@ -1,0 +1,6 @@
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.Application\obj\Debug\netstandard2.0\MCS.WatchTower.REST.Application.csproj.AssemblyReference.cache
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.Application\obj\Debug\netstandard2.0\MCS.WatchTower.REST.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.Application\obj\Debug\netstandard2.0\MCS.WatchTower.REST.Application.AssemblyInfoInputs.cache
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.Application\obj\Debug\netstandard2.0\MCS.WatchTower.REST.Application.AssemblyInfo.cs
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.Application\obj\Debug\netstandard2.0\MCS.WatchTower.REST.Application.csproj.CoreCompileInputs.cache
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.Application\obj\Debug\netstandard2.0\MCS.WatchTower.REST.Application.sourcelink.json

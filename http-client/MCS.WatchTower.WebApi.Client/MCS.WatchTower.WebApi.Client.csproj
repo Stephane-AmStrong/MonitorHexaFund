@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFrameworks>net6.0;net8.0</TargetFrameworks>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" />
+      <PackageReference Include="Microsoft.Extensions.Http" />
+      <PackageReference Include="Microsoft.Extensions.Hosting"/>
+      <PackageReference Include="Microsoft.Extensions.Logging.Abstractions"/>
+      <PackageReference Include="Microsoft.Extensions.Primitives" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\MCS.WatchTower.WebApi.DataTransferObjects\MCS.WatchTower.WebApi.DataTransferObjects.csproj" />
+    </ItemGroup>
+
+</Project>

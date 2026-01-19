@@ -1,0 +1,16 @@
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.Client\bin\Debug\net8.0\MCS.WatchTower.REST.Client.deps.json
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.Client\bin\Debug\net8.0\MCS.WatchTower.REST.Client.dll
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.Client\bin\Debug\net8.0\MCS.WatchTower.REST.Client.pdb
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.Client\bin\Debug\net8.0\MCS.WatchTower.REST.DataTransferObjects.dll
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.Client\bin\Debug\net8.0\MCS.WatchTower.REST.DataTransferObjects.pdb
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.Client\obj\Debug\net8.0\MCS.WatchTower.REST.Client.csproj.AssemblyReference.cache
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.Client\obj\Debug\net8.0\MCS.WatchTower.REST.Client.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.Client\obj\Debug\net8.0\MCS.WatchTower.REST.Client.AssemblyInfoInputs.cache
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.Client\obj\Debug\net8.0\MCS.WatchTower.REST.Client.AssemblyInfo.cs
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.Client\obj\Debug\net8.0\MCS.WatchTower.REST.Client.csproj.CoreCompileInputs.cache
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.Client\obj\Debug\net8.0\MCS.WatchTower.REST.Client.sourcelink.json
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.Client\obj\Debug\net8.0\MCS.Watc.A321385D.Up2Date
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.Client\obj\Debug\net8.0\MCS.WatchTower.REST.Client.dll
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.Client\obj\Debug\net8.0\refint\MCS.WatchTower.REST.Client.dll
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.Client\obj\Debug\net8.0\MCS.WatchTower.REST.Client.pdb
+C:\Users\BS6655\source\MCS.Common\MCS.WatchTower-WebApi\MCS.WatchTower.REST.Client\obj\Debug\net8.0\ref\MCS.WatchTower.REST.Client.dll
