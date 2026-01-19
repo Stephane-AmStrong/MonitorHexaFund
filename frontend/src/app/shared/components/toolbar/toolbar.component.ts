@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { SidenavService } from '../../layouts/main-layout/sidenav.service';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
+import { environment } from '../../../../environments/environment.development';
 
 @Component({
   selector: 'toolbar',
@@ -26,6 +27,7 @@ import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 export class ToolbarComponent {
   protected sidenavService = inject(SidenavService);
   private readonly router = inject(Router);
+  readonly environmentSuffix = environment.environmentSuffix;
 
   searchConfig = model<SearchConfig>({ showSearch: false });
 

@@ -1,14 +1,14 @@
 <toolbar [searchConfig]="{ showSearch: false }" />
 
 <main class="dashboard-container">
-    <h1 class="mat-h1">{{hostDetail()?.name}}</h1>
+    <h1>{{hostDetail()?.name}}</h1>
     <article>
         <section>
-            <h2>Hosted services ({{hostDetail()?.servers?.length}})</h2>
-            @if (servers().length) {
+            <h2>Hosted services ({{hostDetail()?.apps?.length}})</h2>
+            @if (apps().length) {
             <mat-card class="grid-container mat-elevation-z8" appearance="outlined">
                 <mat-card-content>
-                    <server-table [servers]="servers()" [serverColumns]="serverColumns" />
+                    <app-table [apps]="apps()" [appColumns]="appColumns" />
                 </mat-card-content>
             </mat-card>
             }@else {

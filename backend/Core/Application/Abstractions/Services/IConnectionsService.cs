@@ -11,5 +11,5 @@ public interface IConnectionsService
     Task<PagedList<ConnectionResponse>> GetPagedListByQueryAsync(ConnectionQuery query, CancellationToken cancellationToken);
     Task<ConnectionDetailedResponse?> GetByIdAsync(string id, CancellationToken cancellationToken);
     Task<ConnectionResponse> EstablishAsync(ConnectionEstablishRequest connectionRequest, CancellationToken cancellationToken);
-    Task TerminateAsync(string id, CancellationToken cancellationToken);
+    Task TerminateAsync(string id, ConnectionTerminateRequest connectionRequest, CancellationToken cancellationToken);
 }

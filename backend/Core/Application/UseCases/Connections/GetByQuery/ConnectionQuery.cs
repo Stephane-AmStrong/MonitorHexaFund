@@ -9,13 +9,12 @@ public record class ConnectionQuery : BaseQuery<Connection>
 {
     public ConnectionQuery(ConnectionQueryParameters queryParameters) : base(queryParameters.SearchTerm, queryParameters.OrderBy, queryParameters.Page, queryParameters.PageSize)
     {
-        if (!string.IsNullOrWhiteSpace(queryParameters.WithClientId) || !string.IsNullOrWhiteSpace(queryParameters.WithServerId) || !string.IsNullOrWhiteSpace(queryParameters.WithApplication))
+        if (!string.IsNullOrWhiteSpace(queryParameters.WithClientGaia) || !string.IsNullOrWhiteSpace(queryParameters.WithAppId))
         {
             SetFilterExpression
             (
-                connection => (string.IsNullOrWhiteSpace(queryParameters.WithClientId) || connection.ClientId == queryParameters.WithClientId) &&
-                              (string.IsNullOrWhiteSpace(queryParameters.WithServerId) || connection.ServerId == queryParameters.WithServerId) &&
-                              (string.IsNullOrWhiteSpace(queryParameters.WithApplication) || connection.Application == queryParameters.WithApplication)
+                connection => (string.IsNullOrWhiteSpace(queryParameters.WithClientGaia) || connection.ClientGaia == queryParameters.WithClientGaia) &&
+                              (string.IsNullOrWhiteSpace(queryParameters.WithAppId) || connection.AppId == queryParameters.WithAppId)
             );
         }
     }

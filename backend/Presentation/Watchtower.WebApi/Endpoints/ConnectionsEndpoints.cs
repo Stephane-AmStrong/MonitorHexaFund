@@ -31,7 +31,7 @@ public static class ConnectionsEndpoints
             .Produces<ApiErrorResponse>(StatusCodes.Status400BadRequest)
             .Produces<ConnectionDetailedResponse>(StatusCodes.Status201Created);
 
-        group.MapDelete("/{id}", TerminateConnection)
+        group.MapPut("/{id}", TerminateConnection)
             .Produces(StatusCodes.Status204NoContent)
             .Produces(StatusCodes.Status404NotFound);
 
@@ -72,9 +72,9 @@ public static class ConnectionsEndpoints
     }
 
     // DELETE /api/connections/{id}
-    private static async Task<IResult> TerminateConnection(ICommandHandler<TerminateConnectionCommand> handler, string id, CancellationToken cancellationToken)
+    private static async Task<IResult> TerminateConnection(ICommandHandler<TerminateConnectionCommand> handler, string id, ConnectionTerminateRequest connectionRequest, CancellationToken cancellationToken)
     {
-        await handler.HandleAsync(new TerminateConnectionCommand(id), cancellationToken);
+        await handler.HandleAsync(new TerminateConnectionCommand(id, connectionRequest), cancellationToken);
         return Results.NoContent();
     }
 }

@@ -1,21 +1,15 @@
 <table mat-table [dataSource]="connections()">
 
-    <!-- ClientId Column -->
-    <ng-container matColumnDef="clientId">
-        <th mat-header-cell *matHeaderCellDef>ClientId</th>
-        <td mat-cell *matCellDef="let connection">{{connection.clientId}}</td>
+    <!-- ClientGaia Column -->
+    <ng-container matColumnDef="clientGaia">
+        <th mat-header-cell *matHeaderCellDef>Client Gaia</th>
+        <td mat-cell *matCellDef="let connection">{{connection.clientGaia}}</td>
     </ng-container>
 
-    <!-- Application Column -->
-    <ng-container matColumnDef="application">
-        <th mat-header-cell *matHeaderCellDef>Application</th>
-        <td mat-cell *matCellDef="let connection">{{connection.application}}</td>
-    </ng-container>
-
-    <!-- ServerId Column -->
-    <ng-container matColumnDef="serverId">
+    <!-- AppId Column -->
+    <ng-container matColumnDef="appId">
         <th mat-header-cell *matHeaderCellDef>Application Id</th>
-        <td mat-cell *matCellDef="let connection">{{connection.serverId}}</td>
+        <td mat-cell *matCellDef="let connection">{{connection.appId}}</td>
     </ng-container>
 
     <!-- ApiVersion Column -->

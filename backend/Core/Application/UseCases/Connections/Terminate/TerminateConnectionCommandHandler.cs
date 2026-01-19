@@ -7,6 +7,6 @@ public class TerminateConnectionCommandHandler(IConnectionsService connectionsSe
 {
     public Task HandleAsync(TerminateConnectionCommand command, CancellationToken cancellationToken)
     {
-        return connectionsService.TerminateAsync(command.Id, cancellationToken);
+        return connectionsService.TerminateAsync(command.Id, command.Payload, cancellationToken);
     }
 }

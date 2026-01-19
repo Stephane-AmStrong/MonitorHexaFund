@@ -1,0 +1,11 @@
+<toolbar [searchConfig]="{ showSearch: true, searchTerm: queryParams().searchTerm }" />
+
+<main class="dashboard-container">
+  <h1>Applications</h1>
+
+  <mat-card class="grid-container mat-elevation-z8" appearance="outlined">
+    <mat-card-content>
+      <app-table [apps]="apps()"/>
+    </mat-card-content>
+  </mat-card>
+</main>

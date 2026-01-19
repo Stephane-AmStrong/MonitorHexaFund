@@ -4,8 +4,7 @@ namespace Domain.Entities;
 
 public record Alert : BaseEntity
 {
-    public required string ServerId { get; set; }
-    public required string Type { get; set; }
+    public required string AppId { get; set; }
     public required string Message { get; set; }
     public required string Severity { get; set; }
     public DateTime OccurredAt { get; set; }

@@ -4,8 +4,8 @@ import { ConnectionListComponent } from './connection-list.component';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { BaseApiService } from '../../../core/services/base-api.service';
-import { ConnectionService } from '../services/connection.service';
+import { BaseApiService } from '../../../core/services/rest-api/base-api.service';
+import { ConnectionHttpService } from '../services/connection-http.service';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
@@ -17,7 +17,7 @@ describe('ConnectionListComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ConnectionListComponent],
       providers: [
-        ConnectionService,
+        ConnectionHttpService,
         BaseApiService,
         provideHttpClient(),
         provideHttpClientTesting(),

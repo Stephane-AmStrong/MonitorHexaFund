@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Text.Json;
 using Application.Abstractions.Services;
 using Application.Models;
@@ -8,6 +9,8 @@ namespace Watchtower.WebApi.Utilities;
 
 public class SseStreamer(SseStreamingOptions options, ILogger<SseStreamer> logger)
 {
+    private static readonly ConcurrentDictionary<string, HttpContext> _clients = new();
+
     public async Task StreamEventsAsync<TDto>(
         HttpContext httpContext,
         IEventStreamingService<TDto> service,
@@ -15,6 +18,8 @@ public class SseStreamer(SseStreamingOptions options, ILogger<SseStreamer> logge
     {
         var clientId = httpContext.Connection.Id;
         logger.LogInformation("Starting SSE stream for client {ClientId}", clientId);
+
+        _clients.TryAdd(clientId, httpContext);
 
         SetResponseHeaders(httpContext);
 
@@ -24,21 +29,32 @@ public class SseStreamer(SseStreamingOptions options, ILogger<SseStreamer> logge
             {
                 var broadcastMessage = await service.Events.ReadAsync(cancellationToken);
 
-                logger.LogDebug("Broadcasting event {EventType} to client {ClientId}", broadcastMessage.MessageType, clientId);
+                logger.LogDebug("Broadcasting event {EventType} to all clients", broadcastMessage.MessageType);
 
                 var eventData = new
                 {
-                    type = broadcastMessage.MessageType,
-                    data = broadcastMessage.Record,
+                    @event = broadcastMessage.MessageType,
+                    content = broadcastMessage.Record,
                     timestamp = DateTimeOffset.UtcNow
                 };
 
                 var jsonEventData = JsonSerializer.Serialize(eventData, options.JsonOptions);
 
-                await httpContext.Response.WriteAsync(jsonEventData, cancellationToken);
-                await httpContext.Response.Body.FlushAsync(cancellationToken);
-
-                logger.LogTrace("Event {EventType} successfully sent to client {ClientId}", broadcastMessage.MessageType, clientId);
+                foreach (var kvp in _clients)
+                {
+                    var context = kvp.Value;
+                    try
+                    {
+                        await context.Response.WriteAsync($"data: {jsonEventData}\n\n", cancellationToken);
+                        await context.Response.Body.FlushAsync(cancellationToken);
+                        logger.LogTrace("Event {EventType} sent to client {ClientId}", broadcastMessage.MessageType, kvp.Key);
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.LogWarning(ex, "Failed to send event to client {ClientId}, removing from list", kvp.Key);
+                        _clients.TryRemove(kvp.Key, out _);
+                    }
+                }
             }
 
             logger.LogInformation("SSE stream completed for client {ClientId}", clientId);
@@ -54,6 +70,7 @@ public class SseStreamer(SseStreamingOptions options, ILogger<SseStreamer> logge
         finally
         {
             logger.LogDebug("Completing SSE response for client {ClientId}", clientId);
+            _clients.TryRemove(clientId, out _);
             await httpContext.Response.CompleteAsync();
         }
     }

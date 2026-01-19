@@ -2,12 +2,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ClientDetailComponent } from './client-detail.component';
 import { provideZonelessChangeDetection } from '@angular/core';
-import { MOCK_CLIENTS } from '../MOCK_CLIENTS';
 import { ActivatedRoute } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { BaseApiService } from '../../../core/services/base-api.service';
-import { ClientService } from '../services/client.service';
+import { BaseApiService } from '../../../core/services/rest-api/base-api.service';
+import { ClientHttpService } from '../services/client-http.service';
 import { of } from 'rxjs';
 
 describe('ClientDetailComponent', () => {
@@ -19,7 +18,7 @@ describe('ClientDetailComponent', () => {
       imports: [ClientDetailComponent],
       providers: [
         BaseApiService,
-        ClientService,
+        ClientHttpService,
         provideHttpClient(),
         provideHttpClientTesting(),
         provideZonelessChangeDetection(),

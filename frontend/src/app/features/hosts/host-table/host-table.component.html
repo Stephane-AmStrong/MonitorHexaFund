@@ -3,8 +3,8 @@
     <!-- HostName Column -->
     <ng-container matColumnDef="hostName">
         <th mat-header-cell *matHeaderCellDef>Host Name</th>
-        <th mat-header-cell *matCellDef="let element" [attr.rowspan]="element.isFirstServer ? element.hostRowSpan : null"
-            [style.display]="element.isFirstServer ? 'table-cell' : 'none'" class="host-cell"
+        <th mat-header-cell *matCellDef="let element" [attr.rowspan]="element.isFirstApp ? element.hostRowSpan : null"
+            [style.display]="element.isFirstApp ? 'table-cell' : 'none'" class="host-cell"
             (click)="onHostClicked(element, $event)">
             {{element.host.name}}
         </th>
@@ -14,9 +14,9 @@
     <ng-container matColumnDef="appName">
         <th mat-header-cell *matHeaderCellDef>App Name</th>
         <td mat-cell *matCellDef="let element">
-            <server-status-indicator [status]="element.server.latestStatus?.status">
-                <span slot="suffix">{{ element.server.appName }}</span>
-            </server-status-indicator>
+            <app-status-indicator [status]="element.app.latestStatus?.status">
+                <span slot="suffix">{{ element.app.appName }}</span>
+            </app-status-indicator>
         </td>
     </ng-container>
 
@@ -24,8 +24,8 @@
     <ng-container matColumnDef="version">
         <th mat-header-cell *matHeaderCellDef>Version</th>
         <td mat-cell *matCellDef="let element">
-            @if (element.server.version) {
-                <prefix-pictogram [icon]="'tag'" [iconColor]="element.server.version | hashColor" [label]="element.server.version"/>
+            @if (element.app.version) {
+                <prefix-pictogram [icon]="'tag'" [iconColor]="element.app.version | hashColor" [label]="element.app.version"/>
             }
         </td>
     </ng-container>
@@ -33,33 +33,33 @@
     <!-- Port Column -->
     <ng-container matColumnDef="port">
         <th mat-header-cell *matHeaderCellDef>Port</th>
-        <td mat-cell *matCellDef="let element">{{element.server.port}}</td>
+        <td mat-cell *matCellDef="let element">{{element.app.port}}</td>
     </ng-container>
 
     <!-- Type Column -->
     <ng-container matColumnDef="type">
         <th mat-header-cell *matHeaderCellDef>Type</th>
-        <td mat-cell *matCellDef="let element">{{element.server.type}}</td>
+        <td mat-cell *matCellDef="let element">{{element.app.type}}</td>
     </ng-container>
 
     <!-- CronStartTime Column -->
     <ng-container matColumnDef="cronStartTime">
         <th mat-header-cell *matHeaderCellDef>Cron Start Time</th>
-        <td mat-cell *matCellDef="let element">{{element.server.cronStartTime | cronDescription}}</td>
+        <td mat-cell *matCellDef="let element">{{element.app.cronStartTime | cronDescription}}</td>
     </ng-container>
 
     <!-- CronStopTime Column -->
     <ng-container matColumnDef="cronStopTime">
         <th mat-header-cell *matHeaderCellDef>Cron Stop Time</th>
-        <td mat-cell *matCellDef="let element">{{element.server.cronStopTime | cronDescription}}</td>
+        <td mat-cell *matCellDef="let element">{{element.app.cronStopTime | cronDescription}}</td>
     </ng-container>
 
     <!-- Status Column -->
     <ng-container matColumnDef="status">
         <th mat-header-cell *matHeaderCellDef>Status</th>
-        <td mat-cell *matCellDef="let element">{{element.server.latestStatus?.status}}</td>
+        <td mat-cell *matCellDef="let element">{{element.app.latestStatus?.status}}</td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="serverColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: serverColumns;" (click)="onServerClicked(row)"></tr>
+    <tr mat-header-row *matHeaderRowDef="appColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: appColumns;" (click)="onAppClicked(row)"></tr>
 </table>

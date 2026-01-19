@@ -2,14 +2,12 @@ import { ChangeDetectionStrategy, Component, computed, effect, inject, model } f
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { ConnectionResponse } from '../models/connection-response';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToolbarComponent } from '../../../shared/components/toolbar/toolbar.component';
 
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ConnectionQueryParameters } from '../models/connection-query-parameters';
 import { MatCardModule } from '@angular/material/card';
-import { ConnectionService } from '../services/connection.service';
 import { MatTableModule } from '@angular/material/table';
 import { ConnectionTableComponent } from '../connection-table/connection-table.component';
 import { ConnectionStore } from '../services/connection.store';
@@ -32,7 +30,7 @@ export class ConnectionListComponent {
   }
 
   private readonly routeResource = toSignal(this.route.queryParams);
-  
+
   readonly queryParams = computed<ConnectionQueryParameters>(() => ({
     withName: this.routeResource()?.['withName'],
     withAppName: this.routeResource()?.['withAppName'],

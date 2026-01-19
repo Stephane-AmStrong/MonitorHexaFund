@@ -7,11 +7,12 @@ namespace Services;
 
 public class EventStreamingService<TDto> : IEventStreamingService<TDto> where TDto : IBaseDto
 {
-    private readonly Channel<BroadcastMessage<TDto>> _channel = Channel.CreateUnbounded<BroadcastMessage<TDto>>(new UnboundedChannelOptions
+    private readonly Channel<BroadcastMessage<TDto>> _channel = Channel.CreateBounded<BroadcastMessage<TDto>>(new BoundedChannelOptions(1)
     {
         SingleReader = false,
         SingleWriter = true,
-        AllowSynchronousContinuations = true
+        AllowSynchronousContinuations = true,
+        FullMode = BoundedChannelFullMode.DropOldest
     });
 
     public ValueTask BroadcastAsync(BroadcastMessage<TDto> domainEvent, CancellationToken cancellationToken)

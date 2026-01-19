@@ -4,8 +4,8 @@ import { ClientListComponent } from './client-list.component';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { BaseApiService } from '../../../core/services/base-api.service';
-import { ClientService } from '../services/client.service';
+import { BaseApiService } from '../../../core/services/rest-api/base-api.service';
+import { ClientHttpService } from '../services/client-http.service';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
@@ -17,7 +17,7 @@ describe('ClientListComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ClientListComponent],
       providers: [
-        ClientService,
+        ClientHttpService,
         BaseApiService,
         provideHttpClient(),
         provideHttpClientTesting(),

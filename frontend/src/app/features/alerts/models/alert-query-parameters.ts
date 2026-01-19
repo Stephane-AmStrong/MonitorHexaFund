@@ -1,11 +1,8 @@
 import { AlertSeverity } from "./alert-severity-enum";
-import { AlertType } from "./alert-type-enum";
-import { QueryParameters } from "../../../core/models/paging/query-parameters";
-
+import { QueryParameters } from "../../../core/services/rest-api/paging/query-parameters";
 
 export interface AlertQueryParameters extends QueryParameters {
-  withServerId?: string;
-  ofType?: AlertType;
+  withAppId?: string;
   ofSeverity?: AlertSeverity;
   occurredBefore?: string;
   occurredAfter?: string;

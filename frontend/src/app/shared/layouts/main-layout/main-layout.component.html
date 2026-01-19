@@ -5,32 +5,32 @@
     <mat-nav-list>
       <a mat-list-item routerLink="/dashboard" routerLinkActive="mdc-list-item--activated">
         <mat-icon matListItemIcon>dashboard</mat-icon>
-        <span matListItemTitle>Dashboard</span>
+        <p matListItemTitle>Dashboard</p>
       </a>
       <a mat-list-item routerLink="/hosts" [queryParams]="hostQueryParams" routerLinkActive="mdc-list-item--activated">
         <mat-icon matListItemIcon>domain</mat-icon>
-        <span matListItemTitle>Hosts</span>
+        <p matListItemTitle>Hosts</p>
       </a>
-      <a mat-list-item routerLink="/servers" [queryParams]="serverQueryParams"
+      <a mat-list-item routerLink="/apps" [queryParams]="appQueryParams"
         routerLinkActive="mdc-list-item--activated">
         <mat-icon matListItemIcon>dns</mat-icon>
-        <span matListItemTitle>Applications</span>
+        <p matListItemTitle>Apps</p>
       </a>
-      <a mat-list-item routerLink="/server-statuses" routerLinkActive="mdc-list-item--activated">
+      <a mat-list-item routerLink="/app-statuses" routerLinkActive="mdc-list-item--activated">
         <mat-icon matListItemIcon>monitor_heart</mat-icon>
-        <span matListItemTitle>App Status</span>
+        <p matListItemTitle>App Status</p>
       </a>
       <a mat-list-item routerLink="/clients" routerLinkActive="mdc-list-item--activated">
         <mat-icon matListItemIcon>computer</mat-icon>
-        <span matListItemTitle>Clients</span>
+        <p matListItemTitle>Clients</p>
       </a>
       <a mat-list-item routerLink="/connections" routerLinkActive="mdc-list-item--activated">
         <mat-icon matListItemIcon>link</mat-icon>
-        <span matListItemTitle>Connections</span>
+        <p matListItemTitle>Connections</p>
       </a>
       <a mat-list-item routerLink="/alerts" routerLinkActive="mdc-list-item--activated">
         <mat-icon matListItemIcon>warning</mat-icon>
-        <span matListItemTitle>Alerts</span>
+        <p matListItemTitle>Alerts</p>
       </a>
     </mat-nav-list>
   </mat-sidenav>

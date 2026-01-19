@@ -1,7 +1,6 @@
-import { QueryParameters } from "../../../core/models/paging/query-parameters";
+import { QueryParameters } from "../../../core/services/rest-api/paging/query-parameters";
 
 export interface ConnectionQueryParameters extends QueryParameters {
-  withClientId?: string;
-  withServerId?: string;
-  withApplication?: string;
+  withClientGaia?: string;
+  withAppId?: string;
 }

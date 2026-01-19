@@ -6,8 +6,8 @@ using Application.UseCases.Hosts.Delete;
 using Application.UseCases.Hosts.GetById;
 using Application.UseCases.Hosts.GetByName;
 using Application.UseCases.Hosts.GetByQuery;
-using Application.UseCases.Hosts.GetServerOfHost;
-using Application.UseCases.Hosts.GetWithServersByQuery;
+using Application.UseCases.Hosts.GetAppOfHost;
+using Application.UseCases.Hosts.GetWithAppsByQuery;
 using Application.UseCases.Hosts.Update;
 using Domain.Shared.Common;
 using MCS.WatchTower.WebApi.DataTransferObjects.QueryParameters;
@@ -28,10 +28,10 @@ public static class HostsEndpoints
         group.MapGet("/", GetByQuery)
             .Produces<IList<HostResponse>>(StatusCodes.Status200OK);
 
-        group.MapGet("/with-servers", GetWithServersByQuery)
+        group.MapGet("/with-apps", GetWithAppsByQuery)
             .Produces<IList<HostResponse>>(StatusCodes.Status200OK);
 
-        group.MapGet("/by-id/{id}", GetHostById)
+        group.MapGet("/id/{id}", GetHostById)
             .Produces<HostDetailedResponse>(StatusCodes.Status200OK)
             .WithName(nameof(GetHostById));
 
@@ -39,10 +39,10 @@ public static class HostsEndpoints
             .Produces<HostDetailedResponse>(StatusCodes.Status200OK)
             .WithName(nameof(GetHostByName));
 
-        group.MapGet("/{hostName}/servers/{appName}", GetServerOfHostQuery)
-            .Produces<ServerResponse>(StatusCodes.Status200OK)
+        group.MapGet("/{hostName}/apps/{appName}", GetAppOfHostQuery)
+            .Produces<AppResponse>(StatusCodes.Status200OK)
             .Produces(StatusCodes.Status404NotFound)
-            .WithName(nameof(GetServerOfHostQuery));
+            .WithName(nameof(GetAppOfHostQuery));
 
         group.MapPost("/", CreateHost)
             .Produces<ApiErrorResponse>(StatusCodes.Status400BadRequest)
@@ -80,10 +80,10 @@ public static class HostsEndpoints
         return Results.Ok(hostsResponse);
     }
 
-    // GET /api/hosts/with-servers
-    private static  async Task<IResult> GetWithServersByQuery(IQueryHandler<GetHostWithServersQuery, PagedList<HostDetailedResponse>> handler, [AsParameters] HostQueryParameters queryParameters, HttpResponse response, CancellationToken cancellationToken)
+    // GET /api/hosts/with-apps
+    private static  async Task<IResult> GetWithAppsByQuery(IQueryHandler<GetHostWithAppsQuery, PagedList<HostDetailedResponse>> handler, [AsParameters] HostQueryParameters queryParameters, HttpResponse response, CancellationToken cancellationToken)
     {
-        var hostsResponse = await handler.HandleAsync(new GetHostWithServersQuery(queryParameters), cancellationToken);
+        var hostsResponse = await handler.HandleAsync(new GetHostWithAppsQuery(queryParameters), cancellationToken);
 
         response.Headers.Append("X-Pagination", JsonSerializer.Serialize(hostsResponse.MetaData));
 
@@ -104,10 +104,10 @@ public static class HostsEndpoints
         return Results.Ok(hostResponse);
     }
 
-    // GET /api/hosts/{name}/servers/{appName}
-    private static async Task<IResult> GetServerOfHostQuery([FromServices] IQueryHandler<GetServerOfHostQuery, ServerDetailedResponse?> handler, [FromRoute] string hostName, [FromRoute] string appName, CancellationToken cancellationToken)
+    // GET /api/hosts/{name}/apps/{appName}
+    private static async Task<IResult> GetAppOfHostQuery([FromServices] IQueryHandler<GetAppOfHostQuery, AppDetailedResponse?> handler, [FromRoute] string hostName, [FromRoute] string appName, CancellationToken cancellationToken)
     {
-        var response = await handler.HandleAsync(new GetServerOfHostQuery(hostName, appName), cancellationToken);
+        var response = await handler.HandleAsync(new GetAppOfHostQuery(hostName, appName), cancellationToken);
         return response is not null ? Results.Ok(response) : Results.NotFound();
     }
 

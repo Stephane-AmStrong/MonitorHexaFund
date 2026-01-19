@@ -6,28 +6,23 @@ namespace Application.UseCases.Alerts.CreateOrIncrement;
 
 public class CreateOrIncrementAlertValidator : AbstractValidator<CreateOrIncrementAlertCommand>
 {
-    public CreateOrIncrementAlertValidator(IServersRepository serversRepository)
+    public CreateOrIncrementAlertValidator(IAppsRepository appsRepository)
     {
-        RuleFor(command => command.Payload.Type)
-            .NotNull()
-            .WithMessage(Validation.Messages.FieldRequired)
-            .OverridePropertyName(nameof(CreateOrIncrementAlertCommand.Payload.Type));
-
         RuleFor(command => command.Payload.Severity)
             .NotNull()
             .WithMessage(Validation.Messages.FieldRequired)
             .OverridePropertyName(nameof(CreateOrIncrementAlertCommand.Payload.Severity));
 
-        RuleFor(command => command.Payload.ServerId)
+        RuleFor(command => command.Payload.AppId)
             .Cascade(CascadeMode.Stop)
             .NotEmpty()
             .WithMessage(Validation.Messages.FieldRequired)
-            .OverridePropertyName(nameof(CreateOrIncrementAlertCommand.Payload.ServerId))
-            .MustAsync(async (serverId, cancellationToken) =>
+            .OverridePropertyName(nameof(CreateOrIncrementAlertCommand.Payload.AppId))
+            .MustAsync(async (appId, cancellationToken) =>
             {
-                var server = await serversRepository.GetByIdAsync(serverId, cancellationToken);
-                return server is not null;
+                var app = await appsRepository.GetByIdAsync(appId, cancellationToken);
+                return app is not null;
             })
-            .WithMessage(string.Format(Validation.Messages.EntityNotFound, Validation.Entities.Server));
+            .WithMessage(string.Format(Validation.Messages.EntityNotFound, Validation.Entities.App));
     }
 }

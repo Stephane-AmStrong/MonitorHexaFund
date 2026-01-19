@@ -4,7 +4,6 @@
         "DatabaseName": "mas_dev"
     },
     "SharedFilePaths": {
-        "McsTeamConfig": "//D12.tes.local/AFS/MCS/DEV/env/config/mcs.json",
         "McsConfigFlat": "//D12.tes.local/AFS/MCS/DEV/env/config/environment-flat.json"
     }
 }

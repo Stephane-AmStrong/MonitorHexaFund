@@ -1,11 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HostTableComponent } from './host-table.component';
-import { provideHttpClient } from '@angular/common/http';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideZonelessChangeDetection } from '@angular/core';
-import { BaseApiService } from '../../../core/services/base-api.service';
-import { HostService } from '../services/host.service';
 
 describe('HostTableComponent', () => {
   let component: HostTableComponent;

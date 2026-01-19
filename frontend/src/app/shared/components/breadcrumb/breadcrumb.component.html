@@ -8,21 +8,21 @@
       @if (isLast) {
 
           <mat-list-item [style.width]="'auto'">
-          <span matListItemTitle
+          <p matListItemTitle
                   [style.color]="'var(--mat-sys-primary)'"
                   [style.font-weight]="'500'">
               {{ breadcrumb.label }}
-          </span>
+          </p>
           </mat-list-item>
       } @else {
 
           <mat-list-item [routerLink]="breadcrumb.url"
                           [style.width]="'auto'"
                           [style.cursor]="'pointer'">
-          <span matListItemTitle
+          <p matListItemTitle
                   [style.color]="'var(--mat-sys-on-surface-variant)'">
               {{ breadcrumb.label }}
-          </span>
+          </p>
           </mat-list-item>
 
           <mat-icon [style.color]="'var(--mat-sys-outline)'"

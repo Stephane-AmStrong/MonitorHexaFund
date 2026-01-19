@@ -39,14 +39,14 @@ export const routes: Routes = [
       import('./features/hosts/host.routes').then((r) => r.hostRoutes),
   },
   {
-    path: APP_ROUTES.SERVERS.ROOT,
+    path: APP_ROUTES.APPS.ROOT,
     loadChildren: () =>
-      import('./features/servers/server.routes').then((r) => r.serverRoutes),
+      import('./features/apps/app.routes').then((r) => r.appRoutes),
   },
   {
-    path: APP_ROUTES.SERVERS_STATUS.ROOT,
+    path: APP_ROUTES.APPS_STATUS.ROOT,
     loadChildren: () =>
-      import('./features/server-statuses/server-status.routes').then((r) => r.serverStatusRoutes),
+      import('./features/app-statuses/app-status.routes').then((r) => r.appStatusRoutes),
   },
   {
     path: APP_ROUTES.NOT_FOUND,

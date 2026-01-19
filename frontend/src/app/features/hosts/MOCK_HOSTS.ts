@@ -1,17 +1,17 @@
 import { HostDetailedResponse } from './models/host-detailed-response';
-import { ServerResponse } from '../servers/models/server-response';
+import { AppResponse } from '../apps/models/app-response';
 
 export const MOCK_HOSTS: HostDetailedResponse[] = [
   {
     id: '690844f36504096e8c0abe47',
     name: 'DTCODEVMCSDX04W',
-    servers: [
+    apps: [
       {
         id: 'DTCODEVMCSDX04W;DgxEgm',
         hostName: 'DTCODEVMCSDX04W',
         appName: 'DgxEgm',
         port: '31000',
-        type: 'mas-server',
+        type: 'mas-app',
         runMode: 'servicing',
         cronStartTime: '30 07 * * 1',
         cronStopTime: '00 22 * * 1',
@@ -19,7 +19,7 @@ export const MOCK_HOSTS: HostDetailedResponse[] = [
         tags: ['md-trayport-egm-uat.mcs.gem.myengie.com:31000'],
         latestStatus: {
           id: 'STATUS-1',
-          serverId: 'SERVER-1',
+          appId: 'APP-1',
           status: 'Up',
           recordedAt: '2025-08-20T11:58:00.000Z',
           createdAt: '2025-08-20T11:58:00.000Z',
@@ -27,20 +27,20 @@ export const MOCK_HOSTS: HostDetailedResponse[] = [
         },
         createdAt: '2025-01-15T08:00:00.000Z',
         updatedAt: '2025-08-20T11:58:00.000Z',
-      } as ServerResponse,
+      } as AppResponse,
     ],
   },
 
   {
     id: '690844f36504096e8c0abe48',
     name: 'DTCODEVMCSGT01W',
-    servers: [
+    apps: [
       {
         id: 'DTCODEVMCSGT01W;Gateway',
         hostName: 'DTCODEVMCSGT01W',
         appName: 'Gateway',
         port: '5432',
-        type: 'database-server',
+        type: 'database-app',
         runMode: 'production',
         cronStartTime: '00 06 * * *',
         cronStopTime: '00 23 * * *',
@@ -48,7 +48,7 @@ export const MOCK_HOSTS: HostDetailedResponse[] = [
         tags: ['postgresql-prod.db.myengie.com:5432', 'primary'],
         latestStatus: {
           id: 'STATUS-2A',
-          serverId: 'SERVER-2A',
+          appId: 'APP-2A',
           status: 'Up',
           recordedAt: '2025-08-20T11:59:30.000Z',
           createdAt: '2025-08-20T11:59:30.000Z',
@@ -56,13 +56,13 @@ export const MOCK_HOSTS: HostDetailedResponse[] = [
         },
         createdAt: '2025-01-10T06:00:00.000Z',
         updatedAt: '2025-08-20T11:59:30.000Z',
-      } as ServerResponse,
+      } as AppResponse,
       {
         id: 'DTCODEVMCSHP01W;Horsepower-Alerts',
         hostName: 'DTCODEVMCSHP01W',
         appName: 'Horsepower-Alerts',
         port: '5432',
-        type: 'database-server',
+        type: 'database-app',
         runMode: 'production',
         cronStartTime: '00 06 * * *',
         cronStopTime: '00 23 * * *',
@@ -70,7 +70,7 @@ export const MOCK_HOSTS: HostDetailedResponse[] = [
         tags: ['postgresql-prod.db.myengie.com:5432', 'replica'],
         latestStatus: {
           id: 'STATUS-2B',
-          serverId: 'SERVER-2B',
+          appId: 'APP-2B',
           status: 'Up',
           recordedAt: '2025-08-20T11:59:30.000Z',
           createdAt: '2025-08-20T11:59:30.000Z',
@@ -78,13 +78,13 @@ export const MOCK_HOSTS: HostDetailedResponse[] = [
         },
         createdAt: '2025-01-10T06:00:00.000Z',
         updatedAt: '2025-08-20T11:59:30.000Z',
-      } as ServerResponse,
+      } as AppResponse,
     ],
   },
   {
     id: '690844f36504096e8c0abe49',
     name: 'DTCODEVMCSHP01W',
-    servers: [
+    apps: [
       {
         id: 'DTCODEVMCSHP01W;Horsepower-Orders',
         hostName: 'DTCODEVMCSHP01W',
@@ -98,7 +98,7 @@ export const MOCK_HOSTS: HostDetailedResponse[] = [
         tags: ['api-gateway.myengie.com:80', 'api-gateway.myengie.com:443'],
         latestStatus: {
           id: 'STATUS-3',
-          serverId: 'SERVER-3',
+          appId: 'APP-3',
           status: 'Down',
           recordedAt: '2025-08-20T10:15:00.000Z',
           createdAt: '2025-08-20T10:15:00.000Z',
@@ -106,20 +106,20 @@ export const MOCK_HOSTS: HostDetailedResponse[] = [
         },
         createdAt: '2025-02-01T00:00:00.000Z',
         updatedAt: '2025-08-20T10:15:00.000Z',
-      } as ServerResponse,
+      } as AppResponse,
     ],
   },
 
   {
     id: 'HOST-4',
     name: 'Redis Cache Cluster',
-    servers: [
+    apps: [
       {
         id: 'DTCODEVMCSHP01W;Horsepower-Trades',
         hostName: 'DTCODEVMCSHP01W',
         appName: 'Horsepower-Trades',
         port: '6379',
-        type: 'cache-server',
+        type: 'cache-app',
         runMode: 'caching',
         cronStartTime: '00 00 * * *',
         cronStopTime: '23 59 * * *',
@@ -127,7 +127,7 @@ export const MOCK_HOSTS: HostDetailedResponse[] = [
         tags: ['redis-cache.myengie.com:6379', 'node-1'],
         latestStatus: {
           id: 'STATUS-4A',
-          serverId: 'SERVER-4A',
+          appId: 'APP-4A',
           status: 'Up',
           recordedAt: '2025-08-20T11:59:45.000Z',
           createdAt: '2025-08-20T11:59:45.000Z',
@@ -135,13 +135,13 @@ export const MOCK_HOSTS: HostDetailedResponse[] = [
         },
         createdAt: '2025-01-20T00:00:00.000Z',
         updatedAt: '2025-08-20T11:59:45.000Z',
-      } as ServerResponse,
+      } as AppResponse,
       {
         id: 'DTCODEVMCSHP01W;Orchestrator-backup',
         hostName: 'DTCODEVMCSHP01W',
         appName: 'Orchestrator-backup',
         port: '6379',
-        type: 'cache-server',
+        type: 'cache-app',
         runMode: 'caching',
         cronStartTime: '00 00 * * *',
         cronStopTime: '23 59 * * *',
@@ -149,7 +149,7 @@ export const MOCK_HOSTS: HostDetailedResponse[] = [
         tags: ['redis-cache.myengie.com:6379', 'node-2'],
         latestStatus: {
           id: 'STATUS-4B',
-          serverId: 'SERVER-4B',
+          appId: 'APP-4B',
           status: 'Up',
           recordedAt: '2025-08-20T11:59:45.000Z',
           createdAt: '2025-08-20T11:59:45.000Z',
@@ -157,13 +157,13 @@ export const MOCK_HOSTS: HostDetailedResponse[] = [
         },
         createdAt: '2025-01-20T00:00:00.000Z',
         updatedAt: '2025-08-20T11:59:45.000Z',
-      } as ServerResponse,
+      } as AppResponse,
       {
         id: 'DTCODEVMCSHP01W;Orchestrator-main',
         hostName: 'DTCODEVMCSHP01W',
         appName: 'Orchestrator-main',
         port: '6379',
-        type: 'cache-server',
+        type: 'cache-app',
         runMode: 'caching',
         cronStartTime: '00 00 * * *',
         cronStopTime: '23 59 * * *',
@@ -171,7 +171,7 @@ export const MOCK_HOSTS: HostDetailedResponse[] = [
         tags: ['redis-cache.myengie.com:6379', 'node-3'],
         latestStatus: {
           id: 'STATUS-4C',
-          serverId: 'SERVER-4C',
+          appId: 'APP-4C',
           status: 'Up',
           recordedAt: '2025-08-20T11:59:45.000Z',
           createdAt: '2025-08-20T11:59:45.000Z',
@@ -179,14 +179,14 @@ export const MOCK_HOSTS: HostDetailedResponse[] = [
         },
         createdAt: '2025-01-20T00:00:00.000Z',
         updatedAt: '2025-08-20T11:59:45.000Z',
-      } as ServerResponse,
+      } as AppResponse,
     ],
   },
 
   {
     id: '690844f36504096e8c0abe4a',
     name: 'DTCODEVMCSMELW',
-    servers: [
+    apps: [
       {
         id: 'DTCODEVMCSMELW;Feedchecker-TGE',
         hostName: 'DTCODEVMCSMELW',
@@ -200,7 +200,7 @@ export const MOCK_HOSTS: HostDetailedResponse[] = [
         tags: ['rabbitmq.myengie.com:5672', 'rabbitmq-mgmt.myengie.com:15672'],
         latestStatus: {
           id: 'STATUS-5',
-          serverId: 'SERVER-5',
+          appId: 'APP-5',
           status: 'Up',
           recordedAt: '2025-08-20T11:57:00.000Z',
           createdAt: '2025-08-20T11:57:00.000Z',
@@ -208,13 +208,13 @@ export const MOCK_HOSTS: HostDetailedResponse[] = [
         },
         createdAt: '2025-01-25T05:00:00.000Z',
         updatedAt: '2025-08-20T11:57:00.000Z',
-      } as ServerResponse,
+      } as AppResponse,
     ],
   },
   {
     id: '690844f36504096e8c0abe4b',
     name: 'DTCODEVMCSMFOW',
-    servers: [
+    apps: [
       {
         id: 'DTCODEVMCSMFOW;Feedchecker-Ice',
         hostName: 'DTCODEVMCSMFOW',
@@ -228,7 +228,7 @@ export const MOCK_HOSTS: HostDetailedResponse[] = [
         tags: ['rabbitmq-backup.myengie.com:5672', 'backup'],
         latestStatus: {
           id: 'STATUS-6',
-          serverId: 'SERVER-6',
+          appId: 'APP-6',
           status: 'Up',
           recordedAt: '2025-08-20T11:57:00.000Z',
           createdAt: '2025-08-20T11:57:00.000Z',
@@ -236,7 +236,7 @@ export const MOCK_HOSTS: HostDetailedResponse[] = [
         },
         createdAt: '2025-01-25T05:00:00.000Z',
         updatedAt: '2025-08-20T11:57:00.000Z',
-      } as ServerResponse,
+      } as AppResponse,
     ],
   },
 ];

@@ -1,1 +1,0 @@
-export type AlertSeverity = "Information" | "Warning" | "Error"; 

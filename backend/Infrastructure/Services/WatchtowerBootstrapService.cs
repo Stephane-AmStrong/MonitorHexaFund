@@ -13,30 +13,30 @@ public class WatchtowerBootstrapService(IServiceProvider serviceProvider, ILogge
 
         using var scope = serviceProvider.CreateScope();
 
-        await BootstrapServerSyncAsync(scope, stoppingToken);
+        await BootstrapAppSyncAsync(scope, stoppingToken);
 
         logger.LogInformation("WatchtowerBootstrapService completed successfully.");
     }
 
-    private async Task BootstrapServerSyncAsync(IServiceScope scope, CancellationToken stoppingToken)
+    private async Task BootstrapAppSyncAsync(IServiceScope scope, CancellationToken stoppingToken)
     {
         try
         {
-            var serverEnvironmentSyncService = scope.ServiceProvider.GetRequiredService<IServerConfigurationSyncService>();
+            var appEnvironmentSyncService = scope.ServiceProvider.GetRequiredService<IAppConfigurationSyncService>();
             var hostEnvironmentSyncService = scope.ServiceProvider.GetRequiredService<IHostConfigurationSyncService>();
 
-            Task<(long updateCount, long insertCount)> serverEnvironmentSyncTask = serverEnvironmentSyncService.SyncServersFromFlatConfigAsync(stoppingToken);
+            Task<(long updateCount, long insertCount)> appEnvironmentSyncTask = appEnvironmentSyncService.SyncAppsFromFlatConfigAsync(stoppingToken);
             Task<(long updateCount, long insertCount)> hostEnvironmentSyncTask = hostEnvironmentSyncService.SyncHostsFromFlatConfigAsync(stoppingToken);
 
-            (long updateCount, long insertCount)[] result = await Task.WhenAll(serverEnvironmentSyncTask, hostEnvironmentSyncTask);
+            (long updateCount, long insertCount)[] result = await Task.WhenAll(appEnvironmentSyncTask, hostEnvironmentSyncTask);
 
             logger.LogInformation(
-                "Initial environment sync completed: {ServerUpdateCount} server(s) updated, {ServerInsertCount} server(s) inserted, {HostUpdateCount} host(s) updated, {HostInsertCount} host(s) inserted. Total changes: {TotalChanges}",
+                "Initial environment sync completed: {AppUpdateCount} app(s) updated, {AppInsertCount} app(s) inserted, {HostUpdateCount} host(s) updated, {HostInsertCount} host(s) inserted. Total changes: {TotalChanges}",
                 result[0].updateCount, result[0].insertCount, result[1].updateCount, result[1].insertCount, result.Sum(x => x.updateCount + x.insertCount));
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Failed to perform initial server sync");
+            logger.LogError(ex, "Failed to perform initial app sync");
         }
     }
 }

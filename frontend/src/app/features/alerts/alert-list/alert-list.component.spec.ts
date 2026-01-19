@@ -4,8 +4,8 @@ import { AlertListComponent } from './alert-list.component';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { BaseApiService } from '../../../core/services/base-api.service';
-import { AlertService } from '../services/alert.service';
+import { BaseApiService } from '../../../core/services/rest-api/base-api.service';
+import { AlertHttpService } from '../services/alert-http.service';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
@@ -17,7 +17,7 @@ describe('AlertListComponent', () => {
     await TestBed.configureTestingModule({
       imports: [AlertListComponent],
       providers: [
-        AlertService,
+        AlertHttpService,
         BaseApiService,
         provideHttpClient(),
         provideHttpClientTesting(),

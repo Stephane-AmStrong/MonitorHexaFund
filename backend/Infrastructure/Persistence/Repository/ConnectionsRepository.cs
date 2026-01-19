@@ -34,7 +34,7 @@ public sealed class ConnectionsRepository(IMongoDatabase database, IEventsDispat
 
     public Task TerminateAsync(Connection connection, CancellationToken cancellationToken)
     {
-        connection.Raise(new DeletedEvent<Connection>(connection));
-        return BaseDeleteAsync(connection, cancellationToken);
+        connection.Raise(new UpdatedEvent<Connection>(connection));
+        return BaseUpdateAsync(connection, cancellationToken);
     }
 }

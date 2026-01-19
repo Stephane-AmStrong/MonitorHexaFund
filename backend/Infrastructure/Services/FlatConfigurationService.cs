@@ -7,7 +7,7 @@ namespace Services;
 
 public class FlatConfigurationService(ILogger<FlatConfigurationService> logger, IJsonFileReader jsonFileReader, string filePath) : IFlatConfigurationService
 {
-    private const int ParallelServerThreshold = 50;
+    private const int ParallelAppThreshold = 50;
 
     public async Task<FlatConfiguration?> LoadEnvironmentAsync()
     {
@@ -23,31 +23,31 @@ public class FlatConfigurationService(ILogger<FlatConfigurationService> logger, 
         }
     }
 
-    public async Task<ServerConfig?> FindServerConfigByIdentifierAsync(string hostName, string alias)
+    public async Task<AppConfig?> FindAppConfigByIdentifierAsync(string hostName, string alias)
     {
-        IList<ServerConfig> serversConfig = await FindServerConfigsByIdentifiersAsync(new List<(string hostName, string alias)> { (hostName, alias) });
-        return serversConfig.FirstOrDefault();
+        IList<AppConfig> appsConfig = await FindAppConfigsByIdentifiersAsync(new List<(string hostName, string alias)> { (hostName, alias) });
+        return appsConfig.FirstOrDefault();
     }
 
-    public async Task<IList<ServerConfig>> FindServerConfigsByIdentifiersAsync(IList<(string hostName, string alias)> serverIdentifiers = default)
+    public async Task<IList<AppConfig>> FindAppConfigsByIdentifiersAsync(IList<(string hostName, string alias)> appIdentifiers = default)
     {
         FlatConfiguration? flatConfiguration = await LoadEnvironmentAsync();
-        if (flatConfiguration?.ServerConfigs == null)
+        if (flatConfiguration?.AppConfigs == null)
         {
-            return Array.Empty<ServerConfig>();
+            return Array.Empty<AppConfig>();
         }
 
-        if (serverIdentifiers is null || !serverIdentifiers.Any())
+        if (appIdentifiers is null || !appIdentifiers.Any())
         {
-            return flatConfiguration.ServerConfigs.ToList();
+            return flatConfiguration.AppConfigs.ToList();
         }
 
-        var idSet = serverIdentifiers.Select(serverIdentifier => $"{serverIdentifier.hostName}-{serverIdentifier.alias}")
+        var idSet = appIdentifiers.Select(appIdentifier => $"{appIdentifier.hostName}-{appIdentifier.alias}")
             .ToHashSet(StringComparer.OrdinalIgnoreCase);
 
-        bool useParallel = flatConfiguration.ServerConfigs.Count >= ParallelServerThreshold;
+        bool useParallel = flatConfiguration.AppConfigs.Count >= ParallelAppThreshold;
 
-        IEnumerable<ServerConfig> query = flatConfiguration.ServerConfigs.AsEnumerable();
+        IEnumerable<AppConfig> query = flatConfiguration.AppConfigs.AsEnumerable();
 
         if (useParallel)
         {
@@ -55,7 +55,7 @@ public class FlatConfigurationService(ILogger<FlatConfigurationService> logger, 
         }
 
         return query
-            .Where(server => server.Id is not null && idSet.Contains(server.Id))
+            .Where(app => app.Id is not null && idSet.Contains(app.Id))
             .ToList();
     }
 }

@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using Application.Abstractions.Services;
 using Application.UseCases.Hosts.GetByQuery;
-using Application.UseCases.Hosts.GetWithServersByQuery;
+using Application.UseCases.Hosts.GetWithAppsByQuery;
 using Domain.Abstractions.Repositories;
 using Domain.Entities;
 using Domain.Errors;
@@ -13,7 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Services;
 
-public sealed class HostsService(IHostsRepository hostsRepository, IServersRepository serversRepository, IServerStatusesRepository serverStatusesRepository, ILogger<HostsService> logger) : IHostsService
+public sealed class HostsService(IHostsRepository hostsRepository, IAppsRepository appsRepository, IAppStatusesRepository appStatusesRepository, ILogger<HostsService> logger) : IHostsService
 {
     public async Task<PagedList<HostResponse>> GetPagedListByQueryAsync(HostQuery queryParameters, CancellationToken cancellationToken)
     {
@@ -26,41 +26,41 @@ public sealed class HostsService(IHostsRepository hostsRepository, IServersRepos
         return new PagedList<HostResponse>(hostResponses, hosts.MetaData);
     }
 
-    public async Task<PagedList<HostDetailedResponse>> GetPagedListWithServersByQueryAsync(HostWithServersQuery queryWithServers, CancellationToken cancellationToken)
+    public async Task<PagedList<HostDetailedResponse>> GetPagedListWithAppsByQueryAsync(HostWithAppsQuery queryWithApps, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Retrieving hosts with query parameters: {@QueryWithServers}", queryWithServers);
-        PagedList<Host> hosts = await hostsRepository.GetPagedListByQueryAsync(queryWithServers, cancellationToken);
+        logger.LogInformation("Retrieving hosts with query parameters: {@QueryWithApps}", queryWithApps);
+        PagedList<Host> hosts = await hostsRepository.GetPagedListByQueryAsync(queryWithApps, cancellationToken);
 
         var hostNames = new HashSet<string>(hosts.Select(h => h.Name), StringComparer.OrdinalIgnoreCase);
 
-        List<Server> servers = await serversRepository.FindByConditionAsync(server => hostNames.Contains(server.HostName), cancellationToken);
-        logger.LogDebug("Found {ServerCount} servers for {HostNameCount} host names", servers.Count, hosts.Count);
+        List<App> apps = await appsRepository.FindByConditionAsync(app => hostNames.Contains(app.HostName), cancellationToken);
+        logger.LogDebug("Found {AppCount} apps for {HostNameCount} host names", apps.Count, hosts.Count);
 
 
-        var serverIds = new HashSet<string>(servers.Select(server => server.Id),  StringComparer.OrdinalIgnoreCase);
-        var serverStatuses = await serverStatusesRepository.GetLatestByServerIdsAsync(serverIds, cancellationToken);
+        var appIds = new HashSet<string>(apps.Select(app => app.Id),  StringComparer.OrdinalIgnoreCase);
+        var appStatuses = await appStatusesRepository.GetLatestByAppIdsAsync(appIds, cancellationToken);
 
-        logger.LogDebug("Found {ServerStatusCount} serverStatuses for {ServerIdCount} server IDs", serverStatuses.Count, serverIds.Count);
-        var serverStatusesByServerId = serverStatuses.Adapt<List<ServerStatusResponse>>().ToDictionary(p => p.ServerId, p => p);
+        logger.LogDebug("Found {AppStatusCount} appStatuses for {AppIdCount} app IDs", appStatuses.Count, appIds.Count);
+        var appStatusesByAppId = appStatuses.Adapt<List<AppStatusResponse>>().ToDictionary(p => p.AppId, p => p);
 
-        var serverResponsesByHostName = servers.Select(server =>
+        var appResponsesByHostName = apps.Select(app =>
             {
-                var serverResponse = server.Adapt<ServerResponse>();
-                serverStatusesByServerId.TryGetValue(server.Id, out var lastServerStatus);
+                var appResponse = app.Adapt<AppResponse>();
+                appStatusesByAppId.TryGetValue(app.Id, out var lastAppStatus);
 
-                return serverResponse with
+                return appResponse with
                 {
-                    LatestStatus = lastServerStatus
+                    LatestStatus = lastAppStatus
                 };
-            }).Adapt<List<ServerResponse>>()
-            .GroupBy(server => server.HostName)
+            }).Adapt<List<AppResponse>>()
+            .GroupBy(app => app.HostName)
             .ToDictionary(g => g.Key, g => g.ToList(), StringComparer.OrdinalIgnoreCase);
 
         var hostResponses = hosts.AsParallel().Select(host =>
         {
             var response = host.Adapt<HostDetailedResponse>() with
             {
-                Servers = serverResponsesByHostName.TryGetValue(host.Name, out var list) ? list : []
+                Apps = appResponsesByHostName.TryGetValue(host.Name, out var list) ? list : []
             };
             return response;
         }).ToList();
@@ -74,15 +74,15 @@ public sealed class HostsService(IHostsRepository hostsRepository, IServersRepos
         logger.LogInformation("Retrieving host with ID: {HostId}", id);
         var host = await hostsRepository.GetByIdAsync(id, cancellationToken) ?? throw new HostNotFoundException(id);
 
-        List<Server> servers = await serversRepository.FindByConditionAsync(server => server.HostName == host.Name, cancellationToken);
-        logger.LogDebug("Found {ServerCount} servers for host {HostId}", servers.Count, id);
+        List<App> apps = await appsRepository.FindByConditionAsync(app => app.HostName == host.Name, cancellationToken);
+        logger.LogDebug("Found {AppCount} apps for host {HostId}", apps.Count, id);
 
         var hostDetailedResponse = host.Adapt<HostDetailedResponse>();
 
-        logger.LogInformation("Successfully retrieved host {HostId} with {ServerCount} servers", id, servers.Count);
+        logger.LogInformation("Successfully retrieved host {HostId} with {AppCount} apps", id, apps.Count);
         return hostDetailedResponse with
         {
-            Servers = servers.Adapt<IList<ServerResponse>>()
+            Apps = apps.Adapt<IList<AppResponse>>()
         };
     }
 
@@ -91,15 +91,15 @@ public sealed class HostsService(IHostsRepository hostsRepository, IServersRepos
         logger.LogInformation("Retrieving host with NAME: {HostName}", name);
         var host = await hostsRepository.GetByNameAsync(name, cancellationToken) ?? throw new HostNotFoundException(name);
 
-        List<Server> servers = await serversRepository.FindByConditionAsync(server => server.HostName == host.Name, cancellationToken);
-        logger.LogDebug("Found {ServerCount} servers for host {HostName}", servers.Count, name);
+        List<App> apps = await appsRepository.FindByConditionAsync(app => app.HostName == host.Name, cancellationToken);
+        logger.LogDebug("Found {AppCount} apps for host {HostName}", apps.Count, name);
 
         var hostDetailedResponse = host.Adapt<HostDetailedResponse>();
 
-        logger.LogInformation("Successfully retrieved host {HostName} with {ServerCount} servers", name, servers.Count);
+        logger.LogInformation("Successfully retrieved host {HostName} with {AppCount} apps", name, apps.Count);
         return hostDetailedResponse with
         {
-            Servers = servers.Adapt<IList<ServerResponse>>()
+            Apps = apps.Adapt<IList<AppResponse>>()
         };
     }
 

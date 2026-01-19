@@ -10,7 +10,8 @@ using Application.UseCases.Alerts.GetByQuery;
 using Application.UseCases.Alerts.Update;
 using Application.UseCases.Clients.Create;
 using Application.UseCases.Clients.Delete;
-using Application.UseCases.Clients.GetById;
+using Application.UseCases.Clients.GetByGaia;
+using Application.UseCases.Clients.GetByLogin;
 using Application.UseCases.Clients.GetByQuery;
 using Application.UseCases.Clients.Update;
 using Application.UseCases.Connections.Establish;
@@ -22,17 +23,18 @@ using Application.UseCases.Hosts.Delete;
 using Application.UseCases.Hosts.GetById;
 using Application.UseCases.Hosts.GetByName;
 using Application.UseCases.Hosts.GetByQuery;
-using Application.UseCases.Hosts.GetServerOfHost;
-using Application.UseCases.Hosts.GetWithServersByQuery;
+using Application.UseCases.Hosts.GetAppOfHost;
+using Application.UseCases.Hosts.GetWithAppsByQuery;
 using Application.UseCases.Hosts.Update;
-using Application.UseCases.Servers.Create;
-using Application.UseCases.Servers.Delete;
-using Application.UseCases.Servers.GetById;
-using Application.UseCases.Servers.GetByQuery;
-using Application.UseCases.Servers.Update;
-using Application.UseCases.ServerStatuses.Create;
-using Application.UseCases.ServerStatuses.GetById;
-using Application.UseCases.ServerStatuses.GetByQuery;
+using Application.UseCases.Apps.Create;
+using Application.UseCases.Apps.Delete;
+using Application.UseCases.Apps.GetById;
+using Application.UseCases.Apps.GetByQuery;
+using Application.UseCases.Apps.Update;
+using Application.UseCases.AppStatuses.Create;
+using Application.UseCases.AppStatuses.Delete;
+using Application.UseCases.AppStatuses.GetById;
+using Application.UseCases.AppStatuses.GetByQuery;
 using Domain.Abstractions.Events;
 using Domain.Abstractions.Repositories;
 using Domain.Entities;
@@ -116,11 +118,12 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IValidator<EstablishConnectionCommand>, EstablishConnectionValidator>();
         services.AddScoped<IValidator<TerminateConnectionCommand>, TerminateConnectionValidator>();
 
-        services.AddScoped<IValidator<CreateServerCommand>, CreateServerValidator>();
-        services.AddScoped<IValidator<UpdateServerCommand>, UpdateServerValidator>();
-        services.AddScoped<IValidator<DeleteServerCommand>, DeleteServerValidator>();
+        services.AddScoped<IValidator<CreateAppCommand>, CreateAppValidator>();
+        services.AddScoped<IValidator<UpdateAppCommand>, UpdateAppValidator>();
+        services.AddScoped<IValidator<DeleteAppCommand>, DeleteAppValidator>();
 
-        services.AddScoped<IValidator<CreateServerStatusCommand>, CreateServerStatusValidator>();
+        services.AddScoped<IValidator<CreateAppStatusCommand>, CreateAppStatusValidator>();
+        services.AddScoped<IValidator<DeleteAppStatusCommand>, DeleteAppStatusValidator>();
     }
 
     public static void ConfigureHandlers(this IServiceCollection services)
@@ -134,7 +137,8 @@ public static class ServiceCollectionExtensions
         services.AddCommandWithValidation<DeleteAlertCommand, DeleteAlertCommandHandler, IValidator<DeleteAlertCommand>>();
 
         //Clients
-        services.AddScoped<IQueryHandler<GetClientByIdQuery, ClientDetailedResponse>, GetClientByIdQueryHandler>();
+        services.AddScoped<IQueryHandler<GetClientByGaiaQuery, ClientDetailedResponse>, GetClientByGaiaQueryHandler>();
+        services.AddScoped<IQueryHandler<GetClientByLoginQuery, ClientDetailedResponse>, GetClientByLoginQueryHandler>();
         services.AddScoped<IQueryHandler<GetClientQuery, PagedList<ClientResponse>>, GetClientQueryHandler>();
 
         services.AddCommandWithValidation<CreateClientCommand, CreateClientCommandHandler, IValidator<CreateClientCommand>, ClientResponse>();
@@ -151,27 +155,28 @@ public static class ServiceCollectionExtensions
         //Hosts
         services.AddScoped<IQueryHandler<GetHostByIdQuery, HostDetailedResponse>, GetHostByIdQueryHandler>();
         services.AddScoped<IQueryHandler<GetHostByNameQuery, HostDetailedResponse>, GetHostByNameQueryHandler>();
-        services.AddScoped<IQueryHandler<GetServerOfHostQuery, ServerDetailedResponse>, GetServerOfHostQueryHandler>();
+        services.AddScoped<IQueryHandler<GetAppOfHostQuery, AppDetailedResponse>, GetAppOfHostQueryHandler>();
         services.AddScoped<IQueryHandler<GetHostQuery, PagedList<HostResponse>>, GetHostQueryHandler>();
-        services.AddScoped<IQueryHandler<GetHostWithServersQuery, PagedList<HostDetailedResponse>>, GetHostWithServersQueryHandler>();
+        services.AddScoped<IQueryHandler<GetHostWithAppsQuery, PagedList<HostDetailedResponse>>, GetHostWithAppsQueryHandler>();
 
         services.AddCommandWithValidation<CreateHostCommand, CreateHostCommandHandler, IValidator<CreateHostCommand>, HostResponse>();
         services.AddCommandWithValidation<UpdateHostCommand, UpdateHostCommandHandler, IValidator<UpdateHostCommand>>();
         services.AddCommandWithValidation<DeleteHostCommand, DeleteHostCommandHandler, IValidator<DeleteHostCommand>>();
 
-        //ServerStatuses
-        services.AddScoped<IQueryHandler<GetServerStatusByIdQuery, ServerStatusDetailedResponse>, GetServerStatusByIdQueryHandler>();
-        services.AddScoped<IQueryHandler<GetServerStatusQuery, PagedList<ServerStatusResponse>>, GetServerStatusQueryHandler>();
+        //AppStatuses
+        services.AddScoped<IQueryHandler<GetAppStatusByIdQuery, AppStatusDetailedResponse>, GetAppStatusByIdQueryHandler>();
+        services.AddScoped<IQueryHandler<GetAppStatusQuery, PagedList<AppStatusResponse>>, GetAppStatusQueryHandler>();
 
-        services.AddCommandWithValidation<CreateServerStatusCommand, CreateServerStatusCommandHandler, IValidator<CreateServerStatusCommand>, ServerStatusResponse>();
+        services.AddCommandWithValidation<CreateAppStatusCommand, CreateAppStatusCommandHandler, IValidator<CreateAppStatusCommand>, AppStatusResponse>();
+        services.AddCommandWithValidation<DeleteAppStatusCommand, DeleteAppStatusCommandHandler, IValidator<DeleteAppStatusCommand>>();
 
-        //Servers
-        services.AddScoped<IQueryHandler<GetServerByIdQuery, ServerDetailedResponse>, GetServerByIdQueryHandler>();
-        services.AddScoped<IQueryHandler<GetServerQuery, PagedList<ServerResponse>>, GetServerQueryHandler>();
+        //Apps
+        services.AddScoped<IQueryHandler<GetAppByIdQuery, AppDetailedResponse>, GetAppByIdQueryHandler>();
+        services.AddScoped<IQueryHandler<GetAppQuery, PagedList<AppResponse>>, GetAppQueryHandler>();
 
-        services.AddCommandWithValidation<CreateServerCommand, CreateServerCommandHandler, IValidator<CreateServerCommand>, ServerResponse>();
-        services.AddCommandWithValidation<UpdateServerCommand, UpdateServerCommandHandler, IValidator<UpdateServerCommand>>();
-        services.AddCommandWithValidation<DeleteServerCommand, DeleteServerCommandHandler, IValidator<DeleteServerCommand>>();
+        services.AddCommandWithValidation<CreateAppCommand, CreateAppCommandHandler, IValidator<CreateAppCommand>, AppResponse>();
+        services.AddCommandWithValidation<UpdateAppCommand, UpdateAppCommandHandler, IValidator<UpdateAppCommand>>();
+        services.AddCommandWithValidation<DeleteAppCommand, DeleteAppCommandHandler, IValidator<DeleteAppCommand>>();
     }
 
     public static void ConfigureDomainEventHandlers(this IServiceCollection services)
@@ -191,11 +196,12 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IEventHandler<CreatedEvent<Connection>>, ConnectionEstablishedEventHandler>();
         services.AddScoped<IEventHandler<DeletedEvent<Connection>>, ConnectionTerminatedEventHandler>();
 
-        services.AddScoped<IEventHandler<CreatedEvent<Server>>, ServerCreatedEventHandler>();
-        services.AddScoped<IEventHandler<UpdatedEvent<Server>>, ServerUpdatedEventHandler>();
-        services.AddScoped<IEventHandler<DeletedEvent<Server>>, ServerDeletedEventHandler>();
+        services.AddScoped<IEventHandler<CreatedEvent<App>>, AppCreatedEventHandler>();
+        services.AddScoped<IEventHandler<UpdatedEvent<App>>, AppUpdatedEventHandler>();
+        services.AddScoped<IEventHandler<DeletedEvent<App>>, AppDeletedEventHandler>();
 
-        services.AddScoped<IEventHandler<CreatedEvent<ServerStatus>>, ServerStatusCreatedEventHandler>();
+        services.AddScoped<IEventHandler<CreatedEvent<AppStatus>>, AppStatusCreatedEventHandler>();
+        services.AddScoped<IEventHandler<DeletedEvent<AppStatus>>, AppStatusDeletedEventHandler>();
     }
 
     public static IServiceCollection AddEventStreaming(this IServiceCollection services)
@@ -204,8 +210,8 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IEventStreamingService<ClientResponse>, EventStreamingService<ClientResponse>>();
         services.AddSingleton<IEventStreamingService<ConnectionResponse>, EventStreamingService<ConnectionResponse>>();
         services.AddSingleton<IEventStreamingService<HostResponse>, EventStreamingService<HostResponse>>();
-        services.AddSingleton<IEventStreamingService<ServerStatusResponse>, EventStreamingService<ServerStatusResponse>>();
-        services.AddSingleton<IEventStreamingService<ServerResponse>, EventStreamingService<ServerResponse>>();
+        services.AddSingleton<IEventStreamingService<AppStatusResponse>, EventStreamingService<AppStatusResponse>>();
+        services.AddSingleton<IEventStreamingService<AppResponse>, EventStreamingService<AppResponse>>();
 
         services.AddScoped<SseStreamer>(provider => new SseStreamer(new SseStreamingOptions
         (
@@ -225,14 +231,14 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IClientsRepository, ClientsRepository>();
         services.AddScoped<IConnectionsRepository, ConnectionsRepository>();
         services.AddScoped<IHostsRepository, HostsRepository>();
-        services.AddScoped<IServerStatusesRepository, ServerStatusesRepository>();
-        services.AddScoped<IServersRepository, ServersRepository>();
+        services.AddScoped<IAppStatusesRepository, AppStatusesRepository>();
+        services.AddScoped<IAppsRepository, AppsRepository>();
     }
 
     public static void ConfigureServices(this IServiceCollection services)
     {
         services.AddSingleton<HeartbeatListenerService>();
-        services.AddSingleton<IHeartbeatNotificationService>(provider => provider.GetRequiredService<HeartbeatListenerService>());
+        services.AddSingleton<IHeartbeatListenerService>(provider => provider.GetRequiredService<HeartbeatListenerService>());
         services.AddHostedService<HeartbeatListenerService>(provider => provider.GetRequiredService<HeartbeatListenerService>());
 
         services.AddScoped<IAlertsService, AlertsService>();
@@ -242,9 +248,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IHostsService, HostsService>();
         services.AddScoped<IJsonFileReader, JsonFileReader>();
         services.AddScoped<IHostConfigurationSyncService, HostConfigurationSyncService>();
-        services.AddScoped<IServerConfigurationSyncService, ServerConfigurationSyncService>();
-        services.AddScoped<IServersService, ServersService>();
-        services.AddScoped<IServerStatusesService, ServerStatusesService>();
+        services.AddScoped<IAppConfigurationSyncService, AppConfigurationSyncService>();
+        services.AddScoped<IAppsService, AppsService>();
+        services.AddScoped<IAppStatusesService, AppStatusesService>();
 
         //HostedService
         services.AddHostedService<WatchtowerBootstrapService>();

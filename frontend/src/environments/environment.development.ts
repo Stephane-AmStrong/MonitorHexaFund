@@ -10,4 +10,6 @@ export const environment = {
   supportEmail: 'dev@watchtower.com',
 
   enableCSP: false,
+
+  environmentSuffix: '-DEV',
 };

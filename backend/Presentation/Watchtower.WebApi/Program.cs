@@ -47,11 +47,11 @@ app.UseMiddleware<EndpointLoggingMiddleware>();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.MapAlertsEndpoints();
+app.MapAppsEndpoints();
+app.MapAppStatusesEndpoints();
 app.MapClientsEndpoints();
 app.MapHostsEndpoints();
 app.MapConnectionsEndpoints();
-app.MapServerStatusesEndpoints();
-app.MapServersEndpoints();
 
 app.UseHttpsRedirection();
 app.Run();

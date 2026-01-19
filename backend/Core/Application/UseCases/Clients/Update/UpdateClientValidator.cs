@@ -6,7 +6,7 @@ namespace Application.UseCases.Clients.Update;
 
 public class UpdateClientValidator : AbstractValidator<UpdateClientCommand>
 {
-    public UpdateClientValidator(IClientsRepository clientsRepository, IServersRepository serversRepository)
+    public UpdateClientValidator(IClientsRepository clientsRepository, IAppsRepository appsRepository)
     {
         RuleFor(command => command.Payload.Gaia)
             .Cascade(CascadeMode.Stop)

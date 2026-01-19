@@ -1,1 +1,0 @@
-export type AlertType = "ApiHealthCheck" | "CPU" | "Disk" | "Latency" | "MarketConnection" | "MemoProvider" | "Memory" | "PriceDiff" | "Recorder" | "Scripts";

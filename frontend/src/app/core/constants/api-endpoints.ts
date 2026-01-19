@@ -22,18 +22,18 @@ export const API_ENDPOINTS = {
     ROOT: 'hosts',
     BY_ID: (id: string) => `${API_ENDPOINTS.HOSTS.ROOT}/by-id/${id}`,
     BY_NAME: (name: string) => `${API_ENDPOINTS.HOSTS.ROOT}/${name}`,
-    WITH_SERVERS: () => `${API_ENDPOINTS.HOSTS.ROOT}/with-servers`,
-    SERVER_APP: (hostName: string, appName: string) => `${API_ENDPOINTS.HOSTS.ROOT}/${hostName}/servers/${appName}`,
+    WITH_APPS: () => `${API_ENDPOINTS.HOSTS.ROOT}/with-apps`,
+    APP_BY_HOST: (hostName: string, appName: string) => `${API_ENDPOINTS.HOSTS.ROOT}/${hostName}/apps/${appName}`,
     LIVE: () => `${API_ENDPOINTS.HOSTS.ROOT}/live`
   },
-  SERVERS: {
-    ROOT: 'servers',
-    BY_ID: (id: string) => `${API_ENDPOINTS.SERVERS.ROOT}/${id}`,
-    LIVE: () => `${API_ENDPOINTS.SERVERS.ROOT}/live`
+  APPS: {
+    ROOT: 'apps',
+    BY_ID: (id: string) => `${API_ENDPOINTS.APPS.ROOT}/${id}`,
+    LIVE: () => `${API_ENDPOINTS.APPS.ROOT}/live`
   },
-  SERVER_STATUSES: {
-    ROOT: 'server-statuses',
-    BY_ID: (id: string) => `${API_ENDPOINTS.SERVER_STATUSES.ROOT}/${id}`,
-    LIVE: () => `${API_ENDPOINTS.SERVER_STATUSES.ROOT}/live`
+  APP_STATUSES: {
+    ROOT: 'app-statuses',
+    BY_ID: (id: string) => `${API_ENDPOINTS.APP_STATUSES.ROOT}/${id}`,
+    LIVE: () => `${API_ENDPOINTS.APP_STATUSES.ROOT}/live`
   },
 } as const;

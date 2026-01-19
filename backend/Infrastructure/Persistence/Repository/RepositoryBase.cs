@@ -10,10 +10,16 @@ using MongoDB.Driver;
 
 namespace Persistence.Repository;
 
-public class RepositoryBase<T> : IRepositoryBase<T> where T : IBaseEntity
+public class RepositoryBase<T> : IRepositoryBase<T> where T : class, IBaseEntity
 {
     protected IMongoCollection<T> Collection { get; }
     private readonly IEventsDispatcher _eventsDispatcher;
+
+    private static readonly Collation CaseInsensitiveCollation = new("en", strength: CollationStrength.Secondary);
+    private static readonly FindOptions CaseInsensitiveFindOptions = new() { Collation = CaseInsensitiveCollation };
+    private static readonly CountOptions CaseInsensitiveCountOptions = new() { Collation = CaseInsensitiveCollation };
+    private static readonly ReplaceOptions CaseInsensitiveReplaceOptions = new() { Collation = CaseInsensitiveCollation };
+    private static readonly DeleteOptions CaseInsensitiveDeleteOptions = new() { Collation = CaseInsensitiveCollation };
 
     protected RepositoryBase(IMongoDatabase database, IEventsDispatcher eventsDispatcher, string collectionName)
     {
@@ -55,9 +61,9 @@ public class RepositoryBase<T> : IRepositoryBase<T> where T : IBaseEntity
             _ => Builders<T>.Filter.And(filters)
         };
 
-        var find = Collection.Find(filter);
+        var find = Collection.Find(filter, CaseInsensitiveFindOptions);
 
-        var totalCount = await Collection.CountDocumentsAsync(filter, cancellationToken: cancellationToken);
+        var totalCount = await Collection.CountDocumentsAsync(filter, CaseInsensitiveCountOptions, cancellationToken);
 
         var sort = BuildSortDefinition(queryParameters.OrderBy);
 
@@ -107,7 +113,7 @@ public class RepositoryBase<T> : IRepositoryBase<T> where T : IBaseEntity
 
     public Task<List<T>> BaseFindByConditionAsync(Expression<Func<T, bool>> expression, CancellationToken cancellationToken)
     {
-        return Collection.Find(expression).ToListAsync(cancellationToken);
+        return Collection.Find(expression, CaseInsensitiveFindOptions).ToListAsync(cancellationToken);
     }
 
     public async Task BaseCreateAsync(T entity, CancellationToken cancellationToken)
@@ -125,15 +131,14 @@ public class RepositoryBase<T> : IRepositoryBase<T> where T : IBaseEntity
     public async Task BaseUpdateAsync(T entity, CancellationToken cancellationToken)
     {
         var filter = Builders<T>.Filter.Eq(e => e.Id, entity.Id);
-        await Collection.ReplaceOneAsync(filter, entity, cancellationToken: cancellationToken);
+        await Collection.ReplaceOneAsync(filter, entity, CaseInsensitiveReplaceOptions, cancellationToken);
         await DispatchDomainEventsAsync(entity, cancellationToken);
     }
 
     public Task BaseDeleteAsync(T entity, CancellationToken cancellationToken)
     {
         var filter = Builders<T>.Filter.Eq(e => e.Id, entity.Id);
-
-        var deleteTask = Collection.DeleteOneAsync(filter, cancellationToken);
+        var deleteTask = Collection.DeleteOneAsync(filter, CaseInsensitiveDeleteOptions, cancellationToken);
 
         _ = DispatchDomainEventsAsync(entity, cancellationToken);
 
@@ -155,8 +160,14 @@ public class RepositoryBase<T> : IRepositoryBase<T> where T : IBaseEntity
             writeModels[index++] = operation switch
             {
                 BulkOperation.Insert => new InsertOneModel<T>(entity),
-                BulkOperation.Update => new ReplaceOneModel<T>(Builders<T>.Filter.Eq(e => e.Id, entity.Id), entity),
-                BulkOperation.Delete => new DeleteOneModel<T>(Builders<T>.Filter.Eq(e => e.Id, entity.Id)),
+                BulkOperation.Update => new ReplaceOneModel<T>(Builders<T>.Filter.Eq(e => e.Id, entity.Id), entity)
+                {
+                    Collation = CaseInsensitiveCollation
+                },
+                BulkOperation.Delete => new DeleteOneModel<T>(Builders<T>.Filter.Eq(e => e.Id, entity.Id))
+                {
+                    Collation = CaseInsensitiveCollation
+                },
                 _ => throw new ArgumentException($"Unsupported operation: {operation}")
             };
         }

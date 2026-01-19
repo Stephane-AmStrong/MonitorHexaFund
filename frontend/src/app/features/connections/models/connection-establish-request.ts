@@ -1,6 +1,7 @@
 export interface ConnectionEstablishRequest {
-  clientId: string;
-  serverId: string;
+  clientGaia: string;
+  clientLogin: string;
+  appId: string;
   application: string;
   apiVersion: string;
   machine: string;

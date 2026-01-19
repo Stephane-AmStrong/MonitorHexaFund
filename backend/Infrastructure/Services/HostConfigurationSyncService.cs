@@ -32,11 +32,11 @@ public class HostConfigurationSyncService(
         }
     }
 
-    private async Task<(List<ServerConfig> configs, List<Host> hosts)> LoadDataConcurrentlyAsync(CancellationToken cancellationToken)
+    private async Task<(List<AppConfig> configs, List<Host> hosts)> LoadDataConcurrentlyAsync(CancellationToken cancellationToken)
     {
-        logger.LogDebug("Loading server configurations and existing hosts concurrently");
+        logger.LogDebug("Loading app configurations and existing hosts concurrently");
 
-        var configsTask = flatConfigurationService.FindServerConfigsByIdentifiersAsync();
+        var configsTask = flatConfigurationService.FindAppConfigsByIdentifiersAsync();
         var hostsTask = hostsRepository.FindByConditionAsync(_ => true, cancellationToken);
 
         await Task.WhenAll(configsTask, hostsTask);
@@ -44,10 +44,10 @@ public class HostConfigurationSyncService(
     }
 
     private (HashSet<Host> toUpdate, HashSet<Host> toInsert) CategorizeHostOperations(
-        IList<ServerConfig> serverConfigs,
+        IList<AppConfig> appConfigs,
         List<Host> existingHosts)
     {
-        logger.LogDebug("Categorizing {ConfigCount} server configurations for sync operations", serverConfigs.Count());
+        logger.LogDebug("Categorizing {ConfigCount} app configurations for sync operations", appConfigs.Count());
 
         // Create a dictionary for faster lookups
         var existingHostsByKey = existingHosts
@@ -64,7 +64,7 @@ public class HostConfigurationSyncService(
         var hostsToUpdate = new HashSet<Host>();
         var hostsToInsert = new HashSet<Host>();
 
-        foreach (var config in serverConfigs)
+        foreach (var config in appConfigs)
         {
             var hostCreateFromConfig = new HostCreateRequest{ Name = config.HostName };
             var hostFromConfig = hostCreateFromConfig.Adapt<Host>();
@@ -153,6 +153,6 @@ public class HostConfigurationSyncService(
     }
 
     // Optimized helper methods
-    private static bool HasValidId(ServerConfig config) => !string.IsNullOrEmpty(config.Id) && !string.IsNullOrWhiteSpace(config.HostName);
+    private static bool HasValidId(AppConfig config) => !string.IsNullOrEmpty(config.Id) && !string.IsNullOrWhiteSpace(config.HostName);
     private static bool HasValidName(Host host) => !string.IsNullOrEmpty(host.Name);
 }

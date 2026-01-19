@@ -31,7 +31,7 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 │   │   │   └── error-handler.service.ts
 │   │   ├── 📝 models/
 │   │   │   ├── base.model.ts
-│   │   │   ├── server.model.ts
+│   │   │   ├── app.model.ts
 │   │   │   └── alert.model.ts
 │   │   ├── 🛡️ interceptors/
 │   │   │   └── http.interceptor.ts
@@ -43,19 +43,19 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 │   │       └── urls.ts
 │   │   
 │   ├── ✨ features/
-│   │   ├── 🖥️ servers/
+│   │   ├── 🖥️ apps/
 │   │   │   ├── 🧩 components/
-│   │   │   │   ├── 📋 server-list/
-│   │   │   │   ├── 🔍 server-detail/
-│   │   │   │   └── 📝 server-form/
+│   │   │   │   ├── 📋 app-list/
+│   │   │   │   ├── 🔍 app-detail/
+│   │   │   │   └── 📝 app-form/
 │   │   │   ├── 📄 pages/
-│   │   │   │   ├── servers-page/
-│   │   │   │   └── server-details-page/
+│   │   │   │   ├── apps-page/
+│   │   │   │   └── app-details-page/
 │   │   │   ├── 🔧 services/
-│   │   │   │   └── server.service.ts
+│   │   │   │   └── app.service.ts
 │   │   │   ├── 🔍 resolvers/
-│   │   │   │   └── server.resolver.ts
-│   │   │   └── servers.routes.ts
+│   │   │   │   └── app.resolver.ts
+│   │   │   └── apps.routes.ts
 │   │   ├── ⚠️ alerts/
 │   │   │   ├── 🧩 components/
 │   │   │   │   ├── 📋 alert-list/
@@ -146,7 +146,7 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 ## 🚀 Development
 
-### Development server
+### Development app
 
 To start a local development server, run:
 

@@ -7,11 +7,11 @@ export const MOCK_NumericChartConfig: NumericChartConfig = {
   contentType: 'line-chart',
   seriesData: [
     {
-      name: 'Server A',
+      name: 'App A',
       data: [10, 20, 30, 40, 35, 25],
     },
     {
-      name: 'Server B',
+      name: 'App B',
       data: [15, 25, 20, 30, 45, 40],
     },
   ],

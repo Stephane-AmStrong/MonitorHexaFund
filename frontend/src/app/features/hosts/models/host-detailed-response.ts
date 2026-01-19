@@ -1,6 +1,6 @@
 import { HostResponse } from "./host-response";
-import { ServerResponse } from "../../servers/models/server-response";
+import { AppResponse } from "../../apps/models/app-response";
 
 export interface HostDetailedResponse extends HostResponse {
-    servers : ServerResponse[];
+    apps : AppResponse[];
 }

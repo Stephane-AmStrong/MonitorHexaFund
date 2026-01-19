@@ -38,6 +38,6 @@ public record ApiErrorResponse(
         => new(
             "An internal server error occurred.",
             StatusCodes.Status500InternalServerError,
-            new Dictionary<string, string[]> { ["Server"] = ["An unexpected error occurred. Please try again later."] },
+            new Dictionary<string, string[]> { ["App"] = ["An unexpected error occurred. Please try again later."] },
             traceId);
 }

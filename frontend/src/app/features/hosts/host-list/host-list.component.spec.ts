@@ -4,8 +4,8 @@ import { HostListComponent } from './host-list.component';
 import { provideZonelessChangeDetection } from '@angular/core';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { BaseApiService } from '../../../core/services/base-api.service';
-import { HostService } from '../services/host.service';
+import { BaseApiService } from '../../../core/services/rest-api/base-api.service';
+import { HostHttpService } from '../services/host-http.service';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
@@ -17,7 +17,7 @@ describe('HostListComponent', () => {
     await TestBed.configureTestingModule({
       imports: [HostListComponent],
       providers: [
-        HostService,
+        HostHttpService,
         BaseApiService,
         provideHttpClient(),
         provideHttpClientTesting(),

@@ -18,15 +18,15 @@ export const APP_ROUTES = {
     ROOT: 'hosts',
     LIST: '',
     DETAIL: ':hostName',
-    SERVERS_REDIRECT: ':hostName/servers',
-    SERVER_BY_HOST: ':hostName/servers/:serverName',
+    APPS_REDIRECT: ':hostName/apps',
+    APP_BY_HOST: ':hostName/apps/:appName',
   },
-  SERVERS: {
-    ROOT: 'servers',
+  APPS: {
+    ROOT: 'apps',
     LIST: '',
   },
-  SERVERS_STATUS: {
-    ROOT: 'server-statuses',
+  APPS_STATUS: {
+    ROOT: 'app-statuses',
     LIST: '',
     DETAIL: ':id',
   },

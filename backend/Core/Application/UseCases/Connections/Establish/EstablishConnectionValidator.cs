@@ -7,7 +7,7 @@ namespace Application.UseCases.Connections.Establish;
 
 public class EstablishConnectionValidator : AbstractValidator<EstablishConnectionCommand>
 {
-    public EstablishConnectionValidator(IConnectionsRepository connectionsRepository, IClientsRepository clientsRepository, IServersRepository serversRepository)
+    public EstablishConnectionValidator(IConnectionsRepository connectionsRepository, IClientsRepository clientsRepository, IAppsRepository appsRepository)
     {
         RuleFor(command => command.Request.ProcessId)
             .NotEmpty()
@@ -18,39 +18,23 @@ public class EstablishConnectionValidator : AbstractValidator<EstablishConnectio
             .NotEmpty()
             .WithMessage(Validation.Messages.FieldRequired);
 
-        RuleFor(command => command.Request.ClientId)
-            .Cascade(CascadeMode.Stop)
+        RuleFor(command => command.Request.AppId)
             .NotEmpty()
-            .OverridePropertyName(nameof(EstablishConnectionCommand.Request.ClientId))
             .WithMessage(Validation.Messages.FieldRequired)
-            .MustAsync(async (clientId, cancellationToken) =>
+            .MustAsync(async(appId, cancellationToken) =>
             {
-                var client = await clientsRepository.GetByIdAsync(clientId, cancellationToken);
-                return client != null;
+                var app = await appsRepository.GetByIdAsync(appId, cancellationToken);
+                return app != null;
             })
-            .WithMessage(string.Format(Validation.Messages.EntityNotFound, Validation.Entities.Client));
-
-        RuleFor(command => command.Request.ServerId)
-            .Cascade(CascadeMode.Stop)
-            .NotEmpty()
-            .OverridePropertyName(nameof(EstablishConnectionCommand.Request.ServerId))
-            .WithMessage(Validation.Messages.FieldRequired)
-            .MustAsync(async (serverId, cancellationToken) =>
+            .WithMessage(string.Format(Validation.Messages.EntityNotFound, Validation.Entities.App))
+            .MustAsync(async(command, appId, cancellationToken) =>
             {
-                var server = await serversRepository.GetByIdAsync(serverId, cancellationToken);
-                return server != null;
-            })
-            .WithMessage(string.Format(Validation.Messages.EntityNotFound, Validation.Entities.Server));
+                string connectionId = IdBuilder.ConnectionIdFromAppIdAndClientGaia(appId, command.Request.ClientGaia);
 
-        RuleFor(command => command)
-            .MustAsync(async (command, cancellationToken) =>
-            {
-                var generatedId = IdBuilder.ConnectionIdFromServerIdAndClientId(command.Request.ServerId, command.Request.ClientId);
-
-                var existingConnection = await connectionsRepository.GetByIdAsync(generatedId, cancellationToken);
+                var existingConnection = await connectionsRepository.GetByIdAsync(connectionId, cancellationToken);
                 return existingConnection == null;
             })
-            .WithMessage(command => string.Format(Validation.Messages.RelationshipAlreadyExists, Validation.Entities.Connection, Validation.Entities.Client, command.Request.ClientId, Validation.Entities.Server, command.Request.ServerId))
-            .When(command => !string.IsNullOrEmpty(command.Request.ClientId) && !string.IsNullOrEmpty(command.Request.ServerId));
+            .WithMessage(command => string.Format(Validation.Messages.RelationshipAlreadyExists, Validation.Entities.Connection, Validation.Entities.Client, command.Request.ClientGaia, Validation.Entities.App, command.Request.AppId))
+            .When(command => !string.IsNullOrEmpty(command.Request.AppId) && !string.IsNullOrEmpty(command.Request.ClientGaia));
     }
 }

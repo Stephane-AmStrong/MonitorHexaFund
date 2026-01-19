@@ -1,0 +1,179 @@
+@if (isLoading()) {
+<mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+} @else if (appDetail(); as app) {
+<toolbar />
+
+<main>
+    <!-- Header -->
+    <header>
+        <mat-icon>dns</mat-icon>
+        <h1>{{ app.hostName }}-{{ app.appName }}</h1>
+        <app-status-indicator [status]="this.appStatuses()[0]?.status" />
+    </header>
+
+    <mat-grid-list cols="4" rowHeight="10rem" gutterSize="1rem">
+        <!-- Latest Status -->
+        <mat-grid-tile rowspan="1" colspan="1">
+            <detail-card>
+                <div class="header-label" slot=card-header>
+                    <mat-icon>info</mat-icon>
+                    <mat-card-title>Latest Status</mat-card-title>
+                </div>
+                <mat-list slot="card-content">
+                    @if (this.appStatuses().length > 0) {
+                    <mat-list-item>
+                        <app-status-indicator matListItemIcon [status]="this.appStatuses()[0]?.status" />
+                        <span matListItemTitle>{{ this.appStatuses()[0]?.status }}</span>
+                    </mat-list-item>
+                    <mat-divider></mat-divider>
+                    <mat-list-item>
+                        <mat-icon matListItemIcon>access_time</mat-icon>
+                        <span matListItemTitle>Recorded At</span>
+                        <time matListItemLine>{{ this.appStatuses()[0]?.recordedAt | date:'medium' }}</time>
+                    </mat-list-item>
+                    } @else {
+                    <p>No heartbeat received yet.</p>
+                    }
+                </mat-list>
+            </detail-card>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <detail-card>
+                <div class="header-label" slot=card-header>
+                    <mat-icon>label</mat-icon>
+                    <mat-card-title>Version</mat-card-title>
+                </div>
+                @if (app.version) {
+                <prefix-pictogram slot="card-content" [icon]="'tag'" [iconColor]="app.version | hashColor"
+                    [label]="app.version" />
+                }@else {
+                <p slot="card-content">No version assigned.</p>
+                }
+            </detail-card>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <detail-card>
+                <div class="header-label" slot=card-header>
+                    <mat-icon>settings_ethernet</mat-icon>
+                    <mat-card-title>Port</mat-card-title>
+                </div>
+                @if (app.port) {
+                <p slot="card-content">{{ app.port }}</p>
+                }@else {
+                <p slot="card-content">No port assigned.</p>
+                }
+            </detail-card>
+        </mat-grid-tile>
+
+        <mat-grid-tile>
+            <detail-card>
+                <div class="header-label" slot=card-header>
+                    <mat-icon>category</mat-icon>
+                    <mat-card-title>Type</mat-card-title>
+                </div>
+                @if (app.type) {
+                <p slot="card-content">{{ app.type }}</p>
+                }@else {
+                <p slot="card-content">No type assigned.</p>
+                }
+            </detail-card>
+        </mat-grid-tile>
+
+        <!-- Cron Schedule -->
+        <mat-grid-tile rowspan="1" colspan="2">
+            <detail-card>
+                <div class="header-label" slot=card-header>
+                    <mat-icon>schedule</mat-icon>
+                    <mat-card-title>Cron Schedule</mat-card-title>
+                </div>
+                <mat-list slot="card-content">
+                    @if (app.cronStartTime) {
+                    <mat-list-item>
+                        <mat-icon matListItemIcon>play_arrow</mat-icon>
+                        <span matListItemTitle>Start</span>
+                        <time matListItemLine>{{ app.cronStartTime | cronDescription }}</time>
+                    </mat-list-item>
+                    }@else {
+                    <p slot="card-content">No start time assigned.</p>
+                    }
+                    <mat-divider></mat-divider>
+                    @if (app.cronStopTime) {
+                    <mat-list-item>
+                        <mat-icon matListItemIcon>stop</mat-icon>
+                        <span matListItemTitle>Stop</span>
+                        <time matListItemLine>{{ app.cronStopTime | cronDescription }}</time>
+                    </mat-list-item>
+                    }@else {
+                    <p slot="card-content">No stop time assigned.</p>
+                    }
+                </mat-list>
+            </detail-card>
+        </mat-grid-tile>
+
+        <!-- Tags -->
+        <mat-grid-tile rowspan="1" colspan="2">
+            <detail-card>
+                <div class="header-label" slot=card-header>
+                    <mat-icon>local_offer</mat-icon>
+                    <mat-card-title>Tags</mat-card-title>
+                </div>
+                @if (tags() && tags().length > 0) {
+                <mat-chip-set slot="card-content">
+                    @for (tag of tags(); track tag) {
+                    <mat-chip>{{ tag }}</mat-chip>
+                    }
+                </mat-chip-set>
+                }@else {
+                <p slot="card-content">No tags assigned.</p>
+                }
+            </detail-card>
+        </mat-grid-tile>
+
+        <!-- Tabs -->
+        <mat-grid-tile rowspan="5" colspan="4">
+            <detail-card>
+                <mat-tab-group slot="card-content">
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <span class="header-label">
+                                <mat-icon>warning</mat-icon>
+                                <span>Alerts</span>
+                            </span>
+                        </ng-template>
+                        <alert-table [alerts]="alerts()" />
+                    </mat-tab>
+
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <span class="header-label">
+                                <mat-icon>link</mat-icon>
+                                <span>Active Connections</span>
+                            </span>
+                        </ng-template>
+                        <connection-table [connections]="connections()" />
+                    </mat-tab>
+
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <span class="header-label">
+                                <mat-icon>history</mat-icon>
+                                <span>Recent Statuses</span>
+                            </span>
+                        </ng-template>
+                        <app-status-table [appStatuses]="appStatuses()"
+                            [appStatusColumns]="appStatusColumns" />
+                    </mat-tab>
+                </mat-tab-group>
+            </detail-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+</main>
+} @else {
+<article>
+    <mat-icon>error_outline</mat-icon>
+    <h1>Application not found</h1>
+    <p>The requested application could not be found.</p>
+</article>
+}

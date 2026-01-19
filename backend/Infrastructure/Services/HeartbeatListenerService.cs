@@ -12,12 +12,12 @@ namespace Services;
 
 public sealed class HeartbeatListenerService(
     IServiceScopeFactory scopeFactory,
-    ILogger<HeartbeatListenerService> logger) : BackgroundService, IHeartbeatNotificationService
+    ILogger<HeartbeatListenerService> logger) : BackgroundService, IHeartbeatListenerService
 {
-    private const int HeartbeatTimeoutSeconds = 60;
+    private const int HeartbeatTimeoutSeconds = 35;
     private const int MonitoringInterval = 1;
 
-    private readonly ConcurrentDictionary<string, ServerTimeoutMonitor> _monitoringTasks = new();
+    private readonly ConcurrentDictionary<string, AppTimeoutMonitor> _monitoringTasks = new();
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
@@ -28,7 +28,6 @@ public sealed class HeartbeatListenerService(
             using var scope = scopeFactory.CreateScope();
             var services = new RequiredServices(scope);
 
-            await InitializeServerMonitoringAsync(services, stoppingToken);
             await RunMonitoringLoopAsync(services, stoppingToken);
         }
         catch (OperationCanceledException)
@@ -46,76 +45,29 @@ public sealed class HeartbeatListenerService(
         }
     }
 
-    public void OnServerCreatedOrUpdated(string serverId)
+    public void OnAppStatusReceived(string appId, AppStatus status)
     {
-        if (string.IsNullOrWhiteSpace(serverId))
+        if (status != AppStatus.Up)
         {
-            logger.LogWarning("Received server creation/update notification with null or empty serverId");
+            logger.LogDebug("Ignoring heartbeat for app {AppId} with status {Status} - only Up status triggers timeout reset", appId, status);
             return;
         }
 
-        if (_monitoringTasks.ContainsKey(serverId))
+        if (string.IsNullOrWhiteSpace(appId))
         {
-            logger.LogDebug("Server {ServerId} already being monitored - ignoring creation/update notification", serverId);
+            logger.LogWarning("Received heartbeat with null or empty appId");
             return;
         }
 
-        logger.LogDebug("Server {ServerId} created or updated - starting monitoring", serverId);
+        logger.LogDebug("Heartbeat received for app {AppId} - resetting timeout", appId);
 
         try
         {
-            ResetServerTimeout(serverId);
+            ResetAppTimeout(appId);
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Failed to start monitoring for server {ServerId}", serverId);
-        }
-    }
-
-    public void OnServerStatusReceived(string serverId, ServerStatus status)
-    {
-        if (status != ServerStatus.Up)
-        {
-            logger.LogDebug("Ignoring heartbeat for server {ServerId} with status {Status} - only Up status triggers timeout reset", serverId, status);
-            return;
-        }
-
-        if (string.IsNullOrWhiteSpace(serverId))
-        {
-            logger.LogWarning("Received heartbeat with null or empty serverId");
-            return;
-        }
-
-        logger.LogDebug("Heartbeat received for server {ServerId} - resetting timeout", serverId);
-
-        try
-        {
-            ResetServerTimeout(serverId);
-        }
-        catch (Exception ex)
-        {
-            logger.LogError(ex, "Failed to reset timeout for server {ServerId}", serverId);
-        }
-    }
-
-    private async Task InitializeServerMonitoringAsync(RequiredServices services, CancellationToken cancellationToken)
-    {
-        try
-        {
-            var servers = await services.Servers.FindByConditionAsync(_ => true, cancellationToken);
-            logger.LogInformation("Initializing heartbeat monitoring for {ServerCount} servers", servers.Count);
-
-            var timeout = TimeSpan.FromSeconds(HeartbeatTimeoutSeconds);
-            foreach (var server in servers)
-            {
-                StartMonitoringServer(server.Id, timeout);
-            }
-
-            logger.LogDebug("Created {TaskCount} monitoring tasks", _monitoringTasks.Count);
-        }
-        catch (Exception ex)
-        {
-            logger.LogError(ex, "Failed to initialize server monitoring");
+            logger.LogError(ex, "Failed to reset timeout for app {AppId}", appId);
         }
     }
 
@@ -164,74 +116,70 @@ public sealed class HeartbeatListenerService(
         try
         {
             await completedTask; // Get the result to check for exceptions
-            await HandleServerTimeout(completedMonitor.ServerId, services);
+            await HandleAppTimeout(completedMonitor.AppId, services);
         }
         catch (OperationCanceledException)
         {
-            logger.LogTrace("Monitoring task cancelled for server {ServerId} - heartbeat received", completedMonitor.ServerId);
+            logger.LogTrace("Monitoring task cancelled for app {AppId} - heartbeat received", completedMonitor.AppId);
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Error processing timeout for server {ServerId}", completedMonitor.ServerId);
+            logger.LogError(ex, "Error processing timeout for app {AppId}", completedMonitor.AppId);
 
-            if (_monitoringTasks.TryRemove(completedMonitor.ServerId, out var failedMonitor))
+            if (_monitoringTasks.TryRemove(completedMonitor.AppId, out var failedMonitor))
             {
                 failedMonitor.Dispose();
             }
         }
     }
 
-    private async Task HandleServerTimeout(string serverId, RequiredServices services)
+    private async Task HandleAppTimeout(string appId, RequiredServices services)
     {
-        if (_monitoringTasks.TryRemove(serverId, out var monitor))
+        if (_monitoringTasks.TryRemove(appId, out var monitor))
         {
             monitor.Dispose();
 
             try
             {
-                await MarkServerAsDownAsync(serverId, services);
-                logger.LogWarning("Server {ServerId} timed out and marked as Down", serverId);
+                await MarkAppAsDownAsync(appId, services);
+                logger.LogWarning("App {AppId} timed out and marked as Down", appId);
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Failed to mark server {ServerId} as Down after timeout", serverId);
+                logger.LogError(ex, "Failed to mark app {AppId} as Down after timeout", appId);
             }
         }
         else
         {
-            logger.LogWarning("Timeout occurred for server {ServerId} but monitor not found", serverId);
+            logger.LogWarning("Timeout occurred for app {AppId} but monitor not found", appId);
         }
     }
 
-    private void StartMonitoringServer(string serverId, TimeSpan timeout)
+    private void StartMonitoringApp(string appId, TimeSpan timeout)
     {
-        if (string.IsNullOrWhiteSpace(serverId))
+        if (string.IsNullOrWhiteSpace(appId))
         {
-            logger.LogWarning("Cannot start monitoring - serverId is null or empty");
+            logger.LogWarning("Cannot start monitoring - appId is null or empty");
             return;
         }
 
         var startTime = DateTimeOffset.UtcNow;
         var expectedEndTime = startTime.Add(timeout);
 
-        var monitor = new ServerTimeoutMonitor(serverId, timeout, logger);
-        _monitoringTasks[serverId] = monitor;
-
-        logger.LogInformation("Started monitoring server {ServerId} at {StartTime} - timeout at {ExpectedEndTime}",
-            serverId, startTime, expectedEndTime);
+        var monitor = new AppTimeoutMonitor(appId, timeout, logger);
+        _monitoringTasks[appId] = monitor;
     }
 
-    private void ResetServerTimeout(string serverId)
+    private void ResetAppTimeout(string appId)
     {
         var resetTime = DateTimeOffset.UtcNow;
         var newTimeout = TimeSpan.FromSeconds(HeartbeatTimeoutSeconds);
         var newExpectedEndTime = resetTime.Add(newTimeout);
 
-        if (!_monitoringTasks.TryGetValue(serverId, out var existingMonitor))
+        if (!_monitoringTasks.TryGetValue(appId, out var existingMonitor))
         {
-            logger.LogInformation("Server {ServerId} came back online - starting new monitoring (timeout: {NewTimeout})",
-                serverId, newTimeout);
-            StartMonitoringServer(serverId, newTimeout);
+            logger.LogInformation("App {AppId} heartbeat received; next expected before {EndTime}.", appId, newExpectedEndTime);
+            StartMonitoringApp(appId, newTimeout);
             return;
         }
 
@@ -242,27 +190,26 @@ public sealed class HeartbeatListenerService(
         existingMonitor.Dispose();
 
         // Start new monitoring
-        StartMonitoringServer(serverId, newTimeout);
+        StartMonitoringApp(appId, newTimeout);
 
-        logger.LogInformation("Reset timeout for server {ServerId} - old end: {OldEnd}, new end: {NewEnd}",
-            serverId, oldExpectedEndTime, newExpectedEndTime);
+        logger.LogInformation("App {AppId} heartbeat received; timeout rescheduled from {OldEnd} to {NewEnd}.", appId, oldExpectedEndTime, newExpectedEndTime);
     }
 
-    private async Task MarkServerAsDownAsync(string serverId, RequiredServices services)
+    private async Task MarkAppAsDownAsync(string appId, RequiredServices services)
     {
         try
         {
-            var request = new ServerStatusCreateRequest
+            var request = new AppStatusCreateRequest
             {
-                ServerId = serverId,
-                Status = ServerStatus.Down
+                AppId = appId,
+                Status = AppStatus.Down
             };
 
-            await services.ServerStatuses.CreateAsync(request, CancellationToken.None);
+            await services.AppStatuses.CreateAsync(request, CancellationToken.None);
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "Failed to create Down status for server {ServerId}", serverId);
+            logger.LogError(ex, "Failed to create Down status for app {AppId}", appId);
         }
     }
 
@@ -279,7 +226,7 @@ public sealed class HeartbeatListenerService(
             }
             catch (Exception ex)
             {
-                logger.LogWarning(ex, "Error disposing monitor for server {ServerId}", monitor.ServerId);
+                logger.LogWarning(ex, "Error disposing monitor for app {AppId}", monitor.AppId);
             }
         }
 
@@ -289,7 +236,7 @@ public sealed class HeartbeatListenerService(
 
     private record RequiredServices(IServiceScope Scope)
     {
-        public IServersService Servers { get; } = Scope.ServiceProvider.GetRequiredService<IServersService>();
-        public IServerStatusesService ServerStatuses { get; } = Scope.ServiceProvider.GetRequiredService<IServerStatusesService>();
+        public IAppsService Apps { get; } = Scope.ServiceProvider.GetRequiredService<IAppsService>();
+        public IAppStatusesService AppStatuses { get; } = Scope.ServiceProvider.GetRequiredService<IAppStatusesService>();
     }
 }

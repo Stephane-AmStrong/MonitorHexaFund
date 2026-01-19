@@ -113,8 +113,7 @@ internal sealed class ExceptionHandlingMiddleware(ILogger<ExceptionHandlingMiddl
     private static readonly Dictionary<string, (Type EnumType, string FriendlyName)> EnumParameters =
         new(StringComparer.OrdinalIgnoreCase)
         {
-            { nameof(AlertQueryParameters.OfSeverity), (typeof(AlertSeverity), "severity") },
-            { nameof(AlertQueryParameters.OfType), (typeof(AlertType), "alert type") }
+            { nameof(AlertQueryParameters.OfSeverity), (typeof(AlertSeverity), "severity") }
         };
 
     private void LogException(Exception e)

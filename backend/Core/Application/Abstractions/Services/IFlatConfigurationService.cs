@@ -6,6 +6,6 @@ namespace Application.Abstractions.Services;
 public interface IFlatConfigurationService
 {
     Task<FlatConfiguration?> LoadEnvironmentAsync();
-    Task<ServerConfig?> FindServerConfigByIdentifierAsync(string hostName, string alias);
-    Task<IList<ServerConfig>> FindServerConfigsByIdentifiersAsync(IList<(string hostName, string alias)> serverIdentifiers = default!);
+    Task<AppConfig?> FindAppConfigByIdentifierAsync(string hostName, string alias);
+    Task<IList<AppConfig>> FindAppConfigsByIdentifiersAsync(IList<(string hostName, string alias)> appIdentifiers = default!);
 }

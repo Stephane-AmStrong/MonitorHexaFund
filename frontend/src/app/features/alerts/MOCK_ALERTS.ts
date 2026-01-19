@@ -1,32 +1,28 @@
 import { AlertDetailedResponse } from './models/alert-detailed-response';
-import { AlertType } from './models/alert-type-enum';
-import { AlertSeverity } from './models/alert-severity-enum';
-import { AlertStatus } from './models/alert-status-enum';
 
 export const MOCK_ALERTS: AlertDetailedResponse[] = [
   {
     // Alert 1
     id: 'ALERT-1',
-    serverId: 'SERVER-1',
-    type: "ApiHealthCheck",
+    appId: 'APP-1',
     message: 'Trayport Market Data service is running normally',
     severity: "Information",
     occurrence: 1,
     status: "Active",
     occurredAt: '2025-08-20T11:58:00.000Z',
-    server: {
-      id: 'SERVER-1',
+    app: {
+      id: 'APP-1',
       hostName: 'DTCODEVMCSDX04W',
       appName: 'DgxEgm',
       port: '31000',
-      type: 'mas-server',
+      type: 'mas-app',
       cronStartTime: '30 07 * * 1',
       cronStopTime: '00 22 * * 1',
       version: '1.0.0',
       tags: ['md-trayport-egm-uat.mcs.gem.myengie.com:31000'],
       latestStatus: {
         id: 'STATUS-1',
-        serverId: 'SERVER-1',
+        appId: 'APP-1',
         status: 'Up',
         recordedAt: '2025-08-20T11:58:00.000Z',
       },
@@ -35,26 +31,25 @@ export const MOCK_ALERTS: AlertDetailedResponse[] = [
   {
     // Alert 2
     id: 'ALERT-2',
-    serverId: 'SERVER-2',
-    type: "Memory",
+    appId: 'APP-2',
     message: 'PostgreSQL database memory usage is within normal limits',
     severity: "Information",
     occurrence: 1,
     status: "Active",
     occurredAt: '2025-08-20T11:59:30.000Z',
-    server: {
-      id: 'SERVER-2',
+    app: {
+      id: 'APP-2',
       hostName: 'DTCODEVMCSGT01W',
       appName: 'Gateway',
       port: '5432',
-      type: 'database-server',
+      type: 'database-app',
       cronStartTime: '00 06 * * *',
       cronStopTime: '00 23 * * *',
       version: '2.1.0',
       tags: ['postgresql-prod.db.myengie.com:5432', 'primary'],
       latestStatus: {
         id: 'STATUS-2',
-        serverId: 'SERVER-2',
+        appId: 'APP-2',
         status: 'Up',
         recordedAt: '2025-08-20T11:59:30.000Z',
       },
@@ -63,15 +58,14 @@ export const MOCK_ALERTS: AlertDetailedResponse[] = [
   {
     // Alert 3 - Critical
     id: 'ALERT-3',
-    serverId: 'SERVER-3',
-    type: "MemoProvider",
+    appId: 'APP-3',
     message: 'API Gateway is currently unavailable',
     severity: "Error",
     occurrence: 5,
     status: "Active",
     occurredAt: '2025-08-20T10:15:00.000Z',
-    server: {
-      id: 'SERVER-3',
+    app: {
+      id: 'APP-3',
       hostName: 'DTCODEVMCSHP01W',
       appName: 'Horsepower-Orders',
       port: '80',
@@ -82,7 +76,7 @@ export const MOCK_ALERTS: AlertDetailedResponse[] = [
       tags: ['api-gateway.myengie.com:80', 'api-gateway.myengie.com:443'],
       latestStatus: {
         id: 'STATUS-3',
-        serverId: 'SERVER-3',
+        appId: 'APP-3',
         status: 'Down',
         recordedAt: '2025-08-20T10:15:00.000Z',
       },
@@ -91,26 +85,25 @@ export const MOCK_ALERTS: AlertDetailedResponse[] = [
   {
     // Alert 4
     id: 'ALERT-4',
-    serverId: 'SERVER-4',
-    type: "Memory",
+    appId: 'APP-4',
     message: 'Redis Cache CPU usage is elevated',
     severity: "Warning",
     occurrence: 3,
     status: "Active",
     occurredAt: '2025-08-20T11:59:45.000Z',
-    server: {
-      id: 'SERVER-4',
+    app: {
+      id: 'APP-4',
       hostName: 'Redis Cache Cluster',
       appName: 'Horsepower-Trades',
       port: '6379',
-      type: 'cache-server',
+      type: 'cache-app',
       cronStartTime: '00 00 * * *',
       cronStopTime: '23 59 * * *',
       version: '7.2.0',
       tags: ['redis-cache.myengie.com:6379', 'node-1'],
       latestStatus: {
         id: 'STATUS-4',
-        serverId: 'SERVER-4',
+        appId: 'APP-4',
         status: 'Up',
         recordedAt: '2025-08-20T11:59:45.000Z',
       },
@@ -119,15 +112,14 @@ export const MOCK_ALERTS: AlertDetailedResponse[] = [
   {
     // Alert 5
     id: 'ALERT-5',
-    serverId: 'SERVER-5',
-    type: "MarketConnection",
+    appId: 'APP-5',
     message: 'RabbitMQ message queue is responding normally',
     severity: "Information",
     occurrence: 1,
     status: "Resolved",
     occurredAt: '2025-08-20T11:57:00.000Z',
-    server: {
-      id: 'SERVER-5',
+    app: {
+      id: 'APP-5',
       hostName: 'DTCODEVMCSMELW',
       appName: 'Feedchecker-TGE',
       port: '5672',
@@ -138,7 +130,7 @@ export const MOCK_ALERTS: AlertDetailedResponse[] = [
       tags: ['rabbitmq.myengie.com:5672', 'rabbitmq-mgmt.myengie.com:15672'],
       latestStatus: {
         id: 'STATUS-5',
-        serverId: 'SERVER-5',
+        appId: 'APP-5',
         status: 'Up',
         recordedAt: '2025-08-20T11:57:00.000Z',
       },

@@ -13,7 +13,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Services;
 
-public sealed class AlertsService(IAlertsRepository alertsRepository, ILogger<AlertsService> logger, IServersRepository serversRepository) : IAlertsService
+public sealed class AlertsService(IAlertsRepository alertsRepository, ILogger<AlertsService> logger, IAppsRepository appsRepository) : IAlertsService
 {
     public async Task<PagedList<AlertResponse>> GetPagedListByQueryAsync(AlertQuery query, CancellationToken cancellationToken)
     {
@@ -31,22 +31,21 @@ public sealed class AlertsService(IAlertsRepository alertsRepository, ILogger<Al
         logger.LogInformation("Retrieving alert with ID: {AlertId}", id);
         Alert alert = await alertsRepository.GetByIdAsync(id, cancellationToken) ?? throw new AlertNotFoundException(id);
 
-        Server? server = await serversRepository.GetByIdAsync(alert.ServerId, cancellationToken);
+        App? app = await appsRepository.GetByIdAsync(alert.AppId, cancellationToken);
 
-        if (server is null) logger.LogWarning("Alert {AlertId} refers to a missing server (ServerId: {ServerId})", id, alert.ServerId);
+        if (app is null) logger.LogWarning("Alert {AlertId} refers to a missing app (AppId: {AppId})", id, alert.AppId);
 
         logger.LogInformation("Alert {AlertId} retrieved.", id);
 
         return alert.Adapt<AlertDetailedResponse>() with
         {
-            Server = server?.Adapt<ServerResponse>()
+            App = app?.Adapt<AppResponse>()
         };
     }
 
     public async Task<AlertResponse> CreateOrIncrementAsync(AlertCreateOrIncrementRequest alertRequest, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Processing alert creation for ServerId={ServerId} and Type={AlertType}",
-            alertRequest.ServerId, alertRequest.Type);
+        logger.LogInformation("Processing alert creation for AppId={AppId}", alertRequest.AppId);
 
         var existingAlert = await FindExistingActiveAlert(alertRequest, cancellationToken);
 
@@ -62,7 +61,7 @@ public sealed class AlertsService(IAlertsRepository alertsRepository, ILogger<Al
 
         alertRequest.Adapt(alert);
 
-        logger.LogDebug("Applying updates to alert {AlertId}: Type={NewType}, Severity={NewSeverity}", id, alertRequest.Type, alertRequest.Severity);
+        logger.LogDebug("Applying updates to alert {AlertId}: Severity={NewSeverity}", id, alertRequest.Severity);
         await alertsRepository.UpdateAsync(alert, cancellationToken);
 
         logger.LogInformation("Successfully updated alert with ID: {AlertId}", id);
@@ -81,13 +80,12 @@ public sealed class AlertsService(IAlertsRepository alertsRepository, ILogger<Al
 
     private async Task<Alert?> FindExistingActiveAlert(AlertCreateOrIncrementRequest alertRequest, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Checking for existing alert with ServerId={ServerId} and Type={AlertType}", alertRequest.ServerId, alertRequest.Type);
+        logger.LogInformation("Checking for existing alert with AppId={AppId}", alertRequest.AppId);
 
         string[] activeStatuses = [nameof(AlertStatus.Active), nameof(AlertStatus.Muted)];
 
         List<Alert> alerts = await alertsRepository.FindByConditionAsync(alert =>
-            alert.ServerId == alertRequest.ServerId &&
-            alert.Type == alertRequest.Type.ToString() &&
+            alert.AppId == alertRequest.AppId &&
             activeStatuses.Contains(alert.Status),
             cancellationToken);
 
@@ -115,7 +113,7 @@ public sealed class AlertsService(IAlertsRepository alertsRepository, ILogger<Al
 
     private async Task<AlertResponse> CreateNewAlert(AlertCreateOrIncrementRequest alertRequest, CancellationToken cancellationToken)
     {
-        logger.LogInformation("Creating new alert of type: {AlertType} for serverId: {ServerId}", alertRequest.Type, alertRequest.ServerId);
+        logger.LogInformation("Creating new alert for appId: {AppId}", alertRequest.AppId);
 
         var alert = alertRequest.Adapt<Alert>() with
         {

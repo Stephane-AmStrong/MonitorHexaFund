@@ -50,7 +50,7 @@ export class MainLayoutComponent implements OnDestroy {
     orderBy: 'name'
   };
 
-  serverQueryParams = {
+  appQueryParams = {
     page: 1,
     pageSize: 10,
     orderBy: 'appName'

@@ -1,6 +1,6 @@
 import { AlertResponse } from "./alert-response";
-import { ServerResponse } from "../../servers/models/server-response";
+import { AppResponse } from "../../apps/models/app-response";
 
 export interface AlertDetailedResponse extends AlertResponse {
-  server: ServerResponse;
+  app: AppResponse;
 }

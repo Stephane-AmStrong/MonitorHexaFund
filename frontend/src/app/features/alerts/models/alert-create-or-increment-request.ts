@@ -1,9 +1,7 @@
 import { AlertSeverity } from "./alert-severity-enum";
-import { AlertType } from "./alert-type-enum";
 
 export interface AlertCreateOrIncrementRequest {
-  serverId?: string;
-  type?: AlertType;
+  appId?: string;
   message?: string;
   severity?: AlertSeverity;
 }

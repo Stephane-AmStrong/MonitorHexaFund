@@ -6,28 +6,30 @@ namespace Application.UseCases.Clients.Create;
 
 public class CreateClientValidator : AbstractValidator<CreateClientCommand>
 {
-    public CreateClientValidator(IClientsRepository clientsRepository, IServersRepository serversRepository)
+    public CreateClientValidator(IClientsRepository clientsRepository, IAppsRepository appsRepository)
     {
         RuleFor(command => command.Payload.Gaia)
-            .NotEmpty()
-            .OverridePropertyName(nameof(CreateClientCommand.Payload.Gaia))
-            .WithMessage(Validation.Messages.FieldRequired);
-
-        RuleFor(command => command.Payload.Login)
-            .NotEmpty()
-            .OverridePropertyName(nameof(CreateClientCommand.Payload.Login))
-            .WithMessage(Validation.Messages.FieldRequired);
-
-        RuleFor(command => command.Payload.Id)
             .Cascade(CascadeMode.Stop)
             .NotEmpty()
             .WithMessage(Validation.Messages.FieldRequired)
-            .OverridePropertyName(nameof(CreateClientCommand.Payload.Id))
-            .MustAsync(async (clientId, cancellationToken) =>
+            .OverridePropertyName(nameof(CreateClientCommand.Payload.Gaia))
+            .MustAsync(async (clientGaia, cancellationToken) =>
             {
-                var client = await clientsRepository.GetByIdAsync(clientId, cancellationToken);
-                return client is null;
+                var existingClients = await clientsRepository.FindByConditionAsync(c => c.Gaia == clientGaia, cancellationToken);
+                return existingClients.Count == 0;
             })
-            .WithMessage(string.Format(Validation.Messages.IdAlreadyInUse, Validation.Entities.Client));
+            .WithMessage(string.Format(Validation.Messages.FieldAlreadyInUseByAnother, nameof(CreateClientCommand.Payload.Gaia), Validation.Entities.Client));
+
+        RuleFor(command => command.Payload.Login)
+            .Cascade(CascadeMode.Stop)
+            .NotEmpty()
+            .WithMessage(Validation.Messages.FieldRequired)
+            .OverridePropertyName(nameof(CreateClientCommand.Payload.Login))
+            .MustAsync(async (clientLogin, cancellationToken) =>
+            {
+                var existingClients = await clientsRepository.FindByConditionAsync(c => c.Login == clientLogin, cancellationToken);
+                return existingClients.Count == 0;
+            })
+            .WithMessage(string.Format(Validation.Messages.FieldAlreadyInUseByAnother, nameof(CreateClientCommand.Payload.Login), Validation.Entities.Client));
     }
 }

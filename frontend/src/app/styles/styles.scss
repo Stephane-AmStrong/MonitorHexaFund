@@ -4,40 +4,44 @@
 
 html {
   color-scheme: light dark;
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
 
-  @include mat.theme((
-    color: (
-      theme-type: light,
-      primary: wt-theme.$primary-palette,
-      tertiary: wt-theme.$tertiary-palette,
-      neutral: wt-theme.$neutral-palette,
-      neutral-variant: wt-theme.$neutral-variant-palette,
-      error: wt-theme.$error-palette,
-    ),
-    typography: (
-      plain-family: Roboto,
-      brand-family: Open Sans,
-      bold-weight: 900,
-      medium-weight: 500,
-      regular-weight: 300,
-    ),
-    density: 0,
-  ));
-
-  // Dark theme
-  @media (prefers-color-scheme: dark) {
-    @include mat.theme((
-      color: (
-        theme-type: dark,
+  @include mat.theme((color: (theme-type: light,
         primary: wt-theme.$primary-palette,
-        secondary: wt-theme.$secondary-palette,
         tertiary: wt-theme.$tertiary-palette,
         neutral: wt-theme.$neutral-palette,
         neutral-variant: wt-theme.$neutral-variant-palette,
         error: wt-theme.$error-palette,
       ),
+      typography: (
+        plain-family: Roboto,
+        brand-family: Open Sans,
+        bold-weight: 900,
+        medium-weight: 500,
+        regular-weight: 300,
+      ),
       density: 0,
     ));
+
+  // Dark theme
+  @media (prefers-color-scheme: dark) {
+    @include mat.theme((color: (theme-type: dark,
+          primary: wt-theme.$primary-palette,
+          secondary: wt-theme.$secondary-palette,
+          tertiary: wt-theme.$tertiary-palette,
+          neutral: wt-theme.$neutral-palette,
+          neutral-variant: wt-theme.$neutral-variant-palette,
+          error: wt-theme.$error-palette,
+        ),
+        typography: (
+          plain-family: Roboto,
+          brand-family: Open Sans,
+          bold-weight: 900,
+          medium-weight: 500,
+          regular-weight: 300,
+        ),
+        density: 0,
+      ));
   }
 
   // High contrast support
@@ -61,5 +65,10 @@ html {
     --ag-header-font-weight: 500;
     --ag-spacing: 0.5rem;
     --ag-wrapper-border-radius: 0.75rem;
+  }
 }
+
+h1, h2, h3, h4, h5, h6, p, button, caption {
+  font-family: 'Poppins', 'Inter', 'Helvetica Neue', Arial, sans-serif !important;
+  font-weight: inherit;
 }
