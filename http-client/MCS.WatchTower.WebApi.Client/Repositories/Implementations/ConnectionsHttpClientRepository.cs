@@ -3,7 +3,6 @@ using MCS.WatchTower.WebApi.DataTransferObjects.Paging;
 using MCS.WatchTower.WebApi.DataTransferObjects.QueryParameters;
 using MCS.WatchTower.WebApi.DataTransferObjects.Requests;
 using MCS.WatchTower.WebApi.DataTransferObjects.Responses;
-using MCS.WatchTower.WebApi.DataTransferObjects.Utilities;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 

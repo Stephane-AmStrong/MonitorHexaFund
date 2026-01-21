@@ -38,7 +38,7 @@ public static class ConnectionsEndpoints
         group.MapGet("/live", async (
                 HttpContext ctx,
                 IEventStreamingService<ConnectionResponse> service,
-                SseStreamer streamer,
+                SseStreamer<ConnectionResponse> streamer,
                 CancellationToken cancellationToken) =>
             {
                 await streamer.StreamEventsAsync(ctx, service, cancellationToken);

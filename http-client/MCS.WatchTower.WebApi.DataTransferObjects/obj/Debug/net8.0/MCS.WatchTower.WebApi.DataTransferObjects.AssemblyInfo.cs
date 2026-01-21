@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MCS.WatchTower.WebApi.DataTransferObjects")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+34f4921adef9a936825cf22a17673283cbe21a50")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+515987a979c6590531236822aefbb7120a27f2cb")]
 [assembly: System.Reflection.AssemblyProductAttribute("MCS.WatchTower.WebApi.DataTransferObjects")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MCS.WatchTower.WebApi.DataTransferObjects")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

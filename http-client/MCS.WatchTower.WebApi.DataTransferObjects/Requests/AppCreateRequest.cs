@@ -7,4 +7,5 @@ public record AppCreateRequest
     public string Port { get; init; }
     public string Type { get; init; }
     public string Version { get; init; }
+    public ISet<string> Tags { get; init; }
 }

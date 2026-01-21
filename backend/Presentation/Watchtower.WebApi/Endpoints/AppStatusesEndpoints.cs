@@ -39,7 +39,7 @@ public static class AppStatusesEndpoints
         group.MapGet("/live", async (
                 HttpContext ctx,
                 IEventStreamingService<AppStatusResponse> service,
-                SseStreamer streamer,
+                SseStreamer<AppStatusResponse> streamer,
                 CancellationToken cancellationToken) =>
             {
                 await streamer.StreamEventsAsync(ctx, service, cancellationToken);

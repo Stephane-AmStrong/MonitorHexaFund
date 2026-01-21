@@ -1,6 +1,5 @@
 using MCS.WatchTower.WebApi.Client.Repositories.Contracts;
 using MCS.WatchTower.WebApi.DataTransferObjects.Configurations;
-using MCS.WatchTower.WebApi.DataTransferObjects.QueryParameters;
 using MCS.WatchTower.WebApi.DataTransferObjects.Requests;
 using MCS.WatchTower.WebApi.DataTransferObjects.Responses;
 using Microsoft.Extensions.Hosting;
@@ -76,16 +75,9 @@ public class HeartbeatBackgroundService(
     {
         logger.LogInformation("Ensure app with ID {AppId} exists", monitoringConfig.AppId);
 
-        var appQueryParameters = new AppQueryParameters
-        {
-            WithHostName = monitoringConfig.MonitoredApp.HostName,
-            WithAppName = monitoringConfig.MonitoredApp.AppName,
-            PageSize = 1
-        };
+        AppResponse retrievedApp = await appsRepository.TryGetAppAsync(monitoringConfig.MonitoredApp.HostName, monitoringConfig.MonitoredApp.AppName, cancellationToken);
 
-        AppResponse existingApp = (await appsRepository.GetPagedListAsync(appQueryParameters, cancellationToken)).Data.FirstOrDefault();
-
-        if (existingApp is not null)
+        if (retrievedApp is not null)
         {
             logger.LogDebug("App with ID {AppId} already exists", monitoringConfig.AppId);
 
@@ -95,7 +87,12 @@ public class HeartbeatBackgroundService(
                 AppName = monitoringConfig.MonitoredApp.AppName,
                 Port = monitoringConfig.MonitoredApp.Port,
                 Type = monitoringConfig.MonitoredApp.Type,
-                Version = monitoringConfig.MonitoredApp.Version
+                Version = monitoringConfig.MonitoredApp.Version,
+                CronStartTime =  retrievedApp.CronStartTime,
+                CronStopTime =   retrievedApp.CronStopTime,
+                Tags = new HashSet<string>(retrievedApp.Tags ?? Enumerable.Empty<string>())
+                    .Union(monitoringConfig.MonitoredApp.Tags ?? Enumerable.Empty<string>())
+                    .ToHashSet(),
             };
 
             await appsRepository.UpdateAsync(monitoringConfig.AppId, updateRequest, cancellationToken);

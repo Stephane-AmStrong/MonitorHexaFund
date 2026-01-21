@@ -4,35 +4,36 @@ import { ConnectionDetailedResponse } from './models/connection-detailed-respons
 export const MOCK_CONNECTIONS: ConnectionDetailedResponse[] = [
  {
     // Connection 1
-    id: 'CONN-1',
-    clientGaia: 'CLIENT-1',
-    clientLogin: 'john.doe@engie.com',
-    appId: 'APP-1',
-    apiVersion: '1.0.0',
-    machine: 'WORKSTATION-001',
-    processId: '4532',
+    id: "conn-001",
+    clientGaia: "gaia-12345",
+    clientLogin: "john.doe",
+    appId: "app-001",
+    apiVersion: "v2.0",
+    machine: "SERVER-01",
+    processId: "5432",
+    establishedAt: "2026-01-20T10:30:00Z",
     client: {
-      id: 'CLIENT-1',
-      login: 'john.doe@engie.com',
-      gaia: 'GAIA-12345',
+      id: "client-001",
+      login: "john.doe",
+      gaia: "gaia-12345"
     },
     app: {
-      id: 'APP-1',
-      hostName: 'DTCODEVMCSDX04W',
-      appName: 'DgxEgm',
-      port: '31000',
-      type: 'mas-app',
-      cronStartTime: '30 07 * * 1',
-      cronStopTime: '00 22 * * 1',
-      version: '1.0.0',
-      tags: ['md-trayport-egm-uat.mcs.gem.myengie.com:31000'],
+      id: "app-001",
+      hostName: "prod-host-01",
+      appName: "AuthService",
+      port: "8443",
+      type: "microservice",
       latestStatus: {
-        id: 'STATUS-1',
-        appId: 'APP-1',
+        id: 'STATUS-2',
+        appId: 'APP-2',
         status: 'Up',
-        recordedAt: '2025-08-20T11:58:00.000Z',
+        recordedAt: '2025-08-20T11:59:30.000Z',
       },
-    },
+      cronStartTime: "09:00",
+      cronStopTime: "22:00",
+      version: "2.5.1",
+      tags: ["auth", "critical"]
+    }
   },
   {
     // Connection 2
@@ -43,6 +44,7 @@ export const MOCK_CONNECTIONS: ConnectionDetailedResponse[] = [
     apiVersion: '2.1.0',
     machine: 'WORKSTATION-002',
     processId: '5891',
+    establishedAt: "2026-01-20T10:30:00Z",
     client: {
       id: 'CLIENT-2',
       login: 'marie.smith@engie.com',
@@ -75,6 +77,7 @@ export const MOCK_CONNECTIONS: ConnectionDetailedResponse[] = [
     apiVersion: '3.0.1',
     machine: 'WORKSTATION-003',
     processId: '7234',
+    establishedAt: "2026-01-20T10:30:00Z",
     client: {
       id: 'CLIENT-3',
       login: 'pierre.martin@engie.com',

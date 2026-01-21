@@ -98,17 +98,13 @@
           "lib/net7.0/Mapster.Core.dll": {}
         }
       },
-      "MCS.WatchTower.WebApi.DataTransferObjects/1.2.0.3632": {
+      "MCS.WatchTower.WebApi.DataTransferObjects/1.2.0.3640": {
         "type": "package",
         "compile": {
-          "lib/net8.0/MCS.WatchTower.WebApi.DataTransferObjects.dll": {
-            "related": ".pdb"
-          }
+          "lib/net8.0/MCS.WatchTower.WebApi.DataTransferObjects.dll": {}
         },
         "runtime": {
-          "lib/net8.0/MCS.WatchTower.WebApi.DataTransferObjects.dll": {
-            "related": ".pdb"
-          }
+          "lib/net8.0/MCS.WatchTower.WebApi.DataTransferObjects.dll": {}
         }
       },
       "Microsoft.AspNetCore.OpenApi/9.0.8": {
@@ -825,7 +821,7 @@
           "Domain": "1.0.0",
           "FluentValidation": "12.0.0",
           "FluentValidation.DependencyInjectionExtensions": "12.0.0",
-          "MCS.WatchTower.WebApi.DataTransferObjects": "[1.2.0.3632]",
+          "MCS.WatchTower.WebApi.DataTransferObjects": "[1.2.0.3640]",
           "Mapster": "7.4.0",
           "Microsoft.Extensions.Logging.Abstractions": "9.0.8"
         },
@@ -1014,17 +1010,15 @@
         "mapster.core.nuspec"
       ]
     },
-    "MCS.WatchTower.WebApi.DataTransferObjects/1.2.0.3632": {
-      "sha512": "4vPiExvzZzGl/MvYFICitEvaDpT6Xz3xcYOZks9ZVCwi/bXKVl4pw7I+yVOIkNWXvU2R9KIGdun5Nns5sLum4A==",
+    "MCS.WatchTower.WebApi.DataTransferObjects/1.2.0.3640": {
+      "sha512": "Xh6+2WH50uNrIveNLWLF98D5bi8gYxb0dAto0EUYK0yB0CPcICFjT6g+iPsN8pZHz8K2uuuqKvwm2DGFiidaog==",
       "type": "package",
-      "path": "mcs.watchtower.webapi.datatransferobjects/1.2.0.3632",
+      "path": "mcs.watchtower.webapi.datatransferobjects/1.2.0.3640",
       "files": [
         ".nupkg.metadata",
         "lib/net6.0/MCS.WatchTower.WebApi.DataTransferObjects.dll",
-        "lib/net6.0/MCS.WatchTower.WebApi.DataTransferObjects.pdb",
         "lib/net8.0/MCS.WatchTower.WebApi.DataTransferObjects.dll",
-        "lib/net8.0/MCS.WatchTower.WebApi.DataTransferObjects.pdb",
-        "mcs.watchtower.webapi.datatransferobjects.1.2.0.3632.nupkg.sha512",
+        "mcs.watchtower.webapi.datatransferobjects.1.2.0.3640.nupkg.sha512",
         "mcs.watchtower.webapi.datatransferobjects.nuspec"
       ]
     },

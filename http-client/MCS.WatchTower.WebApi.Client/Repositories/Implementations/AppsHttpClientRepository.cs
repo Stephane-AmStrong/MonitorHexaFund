@@ -23,7 +23,7 @@ internal class AppsHttpClientRepository(HttpClient httpClient, ILogger<AppsHttpC
         return BaseGetByIdAsync<AppDetailedResponse>(appId, cancellationToken);
     }
 
-    public async Task<bool> AppExistsAsync(string hostName, string appName, CancellationToken cancellationToken)
+    public async Task<AppResponse> TryGetAppAsync(string hostName, string appName, CancellationToken cancellationToken)
     {
         var appQueryParameters = new AppQueryParameters
         {
@@ -34,7 +34,7 @@ internal class AppsHttpClientRepository(HttpClient httpClient, ILogger<AppsHttpC
 
         var matchingApps = await GetPagedListAsync(appQueryParameters, cancellationToken);
 
-        return matchingApps.Data.Count > 0;
+        return matchingApps.Data.FirstOrDefault();
     }
 
     public Task<AppResponse> CreateAsync(AppCreateRequest createRequest, CancellationToken cancellationToken)

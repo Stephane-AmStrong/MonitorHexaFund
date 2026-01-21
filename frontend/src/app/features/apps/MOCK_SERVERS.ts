@@ -30,6 +30,7 @@ export const MOCK_APPS: AppDetailedResponse[] = [
         apiVersion: '1.0.0',
         machine: 'trayport-machine-1',
         processId: '1234',
+        establishedAt: '2025-08-20T11:58:00.000Z',
       } as ConnectionResponse,
     ],
     statuses: [
@@ -70,6 +71,7 @@ export const MOCK_APPS: AppDetailedResponse[] = [
         apiVersion: '2.1.0',
         machine: 'db-machine-1',
         processId: '5678',
+        establishedAt: '2025-08-20T11:59:30.000Z',
       } as ConnectionResponse,
       {
         id: 'CONNECTION-2B',
@@ -80,6 +82,7 @@ export const MOCK_APPS: AppDetailedResponse[] = [
         apiVersion: '2.1.0',
         machine: 'db-machine-2',
         processId: '5679',
+        establishedAt: '2025-08-20T11:59:30.000Z',
       } as ConnectionResponse,
     ],
     statuses: [
@@ -119,6 +122,7 @@ export const MOCK_APPS: AppDetailedResponse[] = [
         apiVersion: '3.0.1',
         machine: 'gateway-1',
         processId: '9999',
+        establishedAt: '2026-01-20T10:30:00Z',
       } as ConnectionResponse,
     ],
     statuses: [
@@ -159,6 +163,7 @@ export const MOCK_APPS: AppDetailedResponse[] = [
         apiVersion: '7.2.0',
         machine: 'cache-machine-1',
         processId: '7777',
+        establishedAt: '2025-08-20T11:59:45.000Z',
       } as ConnectionResponse,
       {
         id: 'CONNECTION-4B',
@@ -169,6 +174,7 @@ export const MOCK_APPS: AppDetailedResponse[] = [
         apiVersion: '7.2.0',
         machine: 'cache-machine-2',
         processId: '7778',
+        establishedAt: '2025-08-20T11:59:45.000Z',
       } as ConnectionResponse,
       {
         id: 'CONNECTION-4C',
@@ -179,6 +185,7 @@ export const MOCK_APPS: AppDetailedResponse[] = [
         apiVersion: '7.2.0',
         machine: 'cache-machine-3',
         processId: '7779',
+        establishedAt: '2025-08-20T11:59:45.000Z',
       } as ConnectionResponse,
     ],
     statuses: [
@@ -220,6 +227,7 @@ export const MOCK_APPS: AppDetailedResponse[] = [
         apiVersion: '3.12.0',
         machine: 'queue-machine-1',
         processId: '8888',
+        establishedAt: '2025-08-20T11:57:00.000Z',
       } as ConnectionResponse,
     ],
     statuses: [
@@ -268,6 +276,7 @@ export const MOCK_APPS: AppDetailedResponse[] = [
         apiVersion: '3.12.0',
         machine: 'queue-machine-1',
         processId: '8888',
+        establishedAt: '2025-08-20T11:57:00.000Z',
       } as ConnectionResponse,
     ],
     statuses: [

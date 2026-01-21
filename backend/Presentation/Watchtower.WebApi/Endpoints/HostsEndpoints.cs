@@ -61,7 +61,7 @@ public static class HostsEndpoints
         group.MapGet("/live", async (
                 HttpContext ctx,
                 IEventStreamingService<HostResponse> service,
-                SseStreamer streamer,
+                SseStreamer<HostResponse> streamer,
                 CancellationToken cancellationToken) =>
             {
                 await streamer.StreamEventsAsync(ctx, service, cancellationToken);

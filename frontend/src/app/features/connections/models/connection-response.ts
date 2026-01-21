@@ -7,4 +7,6 @@ export interface ConnectionResponse extends BaseModel {
   apiVersion: string;
   machine: string;
   processId: string;
+  establishedAt: string;
+  terminatedAt?: string;
 }

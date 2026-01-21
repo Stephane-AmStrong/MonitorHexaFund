@@ -1,16 +1,7 @@
-export interface AppUpdateRequest {
-  name: string;
-  version: string;
-  base: string;
-  appName: string;
-  baseChain: string[];
-  type: string;
+import { AppCreateRequest } from '../../apps/models/app-create-request';
+
+export interface AppUpdateRequest extends AppCreateRequest {
+  runMode: string;
   cronStartTime: string;
   cronStopTime: string;
-  configs: string[];
-  dictionaries: string[];
-  runMode: string;
-  configPaths: string[];
-  dictionaryPaths: string[];
-  tags: string[];
 }

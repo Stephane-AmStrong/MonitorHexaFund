@@ -1,0 +1,284 @@
+[2026-01-20 16:55:44.631 +01:00 INF] Services.HeartbeatListenerService: HeartbeatListenerService starting with 35s timeout
+[2026-01-20 16:55:45.121 +01:00 INF] Services.WatchtowerBootstrapService: WatchtowerBootstrapService is starting.
+[2026-01-20 16:55:45.129 +01:00 INF] Services.AppConfigurationSyncService: Starting app synchronization from flat configuration
+[2026-01-20 16:55:45.152 +01:00 INF] Services.JsonFileReader: Reading file from //D12.tes.local/AFS/MCS/DEV/env/config/environment-flat.json
+[2026-01-20 16:55:45.703 +01:00 INF] Services.HostConfigurationSyncService: Starting host synchronization from flat configuration
+[2026-01-20 16:55:45.707 +01:00 INF] Services.JsonFileReader: Reading file from //D12.tes.local/AFS/MCS/DEV/env/config/environment-flat.json
+[2026-01-20 16:55:46.126 +01:00 WRN] Microsoft.AspNetCore.Server.Kestrel: Overriding address(es) 'https://localhost:9443, http://localhost:9090'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+[2026-01-20 16:55:46.166 +01:00 ERR] Microsoft.Extensions.Hosting.Internal.Host: Hosting failed to start
+System.IO.IOException: Failed to bind to address http://127.0.0.1:9090: address already in use.
+ ---> Microsoft.AspNetCore.Connections.AddressInUseException: Only one usage of each socket address (protocol/network address/port) is normally permitted.
+ ---> System.Net.Sockets.SocketException (10048): Only one usage of each socket address (protocol/network address/port) is normally permitted.
+   at System.Net.Sockets.Socket.UpdateStatusAfterSocketErrorAndThrowException(SocketError error, Boolean disconnectOnFailure, String callerName)
+   at System.Net.Sockets.Socket.DoBind(EndPoint endPointSnapshot, SocketAddress socketAddress)
+   at System.Net.Sockets.Socket.Bind(EndPoint localEP)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportOptions.CreateDefaultBoundListenSocket(EndPoint endpoint)
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketConnectionListener.Bind()
+   at Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets.SocketTransportFactory.BindAsync(EndPoint endpoint, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.TransportManager.BindAsync(EndPoint endPoint, ConnectionDelegate connectionDelegate, EndpointConfig endpointConfig, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.<>c__DisplayClass28_0`1.<<StartAsync>g__OnBind|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.BindEndpointAsync(ListenOptions endpoint, AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.LocalhostListenOptions.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.AddressBinder.EndpointsStrategy.BindAsync(AddressBindContext context, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.BindAsync(CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerImpl.StartAsync[TContext](IHttpApplication`1 application, CancellationToken cancellationToken)
+   at Microsoft.AspNetCore.Hosting.GenericWebHostService.StartAsync(CancellationToken cancellationToken)
+   at Microsoft.Extensions.Hosting.Internal.Host.<StartAsync>b__14_1(IHostedService service, CancellationToken token)
+   at Microsoft.Extensions.Hosting.Internal.Host.ForeachService[T](IEnumerable`1 services, CancellationToken token, Boolean concurrent, Boolean abortOnFirstException, List`1 exceptions, Func`3 operation)
+[2026-01-20 16:55:46.566 +01:00 INF] Services.HeartbeatListenerService: HeartbeatListenerService stopped
+[2026-01-20 16:56:19.849 +01:00 INF] Services.HeartbeatListenerService: HeartbeatListenerService starting with 35s timeout
+[2026-01-20 16:56:20.359 +01:00 INF] Services.WatchtowerBootstrapService: WatchtowerBootstrapService is starting.
+[2026-01-20 16:56:20.367 +01:00 INF] Services.AppConfigurationSyncService: Starting app synchronization from flat configuration
+[2026-01-20 16:56:20.390 +01:00 INF] Services.JsonFileReader: Reading file from //D12.tes.local/AFS/MCS/DEV/env/config/environment-flat.json
+[2026-01-20 16:56:20.829 +01:00 INF] Services.HostConfigurationSyncService: Starting host synchronization from flat configuration
+[2026-01-20 16:56:20.835 +01:00 INF] Services.JsonFileReader: Reading file from //D12.tes.local/AFS/MCS/DEV/env/config/environment-flat.json
+[2026-01-20 16:56:21.274 +01:00 WRN] Microsoft.AspNetCore.Server.Kestrel: Overriding address(es) 'https://localhost:9443, http://localhost:9090'. Binding to endpoints defined via IConfiguration and/or UseKestrel() instead.
+[2026-01-20 16:56:21.402 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: http://localhost:9090
+[2026-01-20 16:56:21.406 +01:00 INF] Microsoft.Hosting.Lifetime: Now listening on: https://localhost:9443
+[2026-01-20 16:56:21.422 +01:00 INF] Microsoft.Hosting.Lifetime: Application started. Press Ctrl+C to shut down.
+[2026-01-20 16:56:21.431 +01:00 INF] Microsoft.Hosting.Lifetime: Hosting environment: Development
+[2026-01-20 16:56:21.445 +01:00 INF] Microsoft.Hosting.Lifetime: Content root path: C:\Users\BS6655\source\Frontalys\API\Watchtower-WebApi\Presentation\Watchtower.WebApi
+[2026-01-20 16:56:21.715 +01:00 INF] Services.HostConfigurationSyncService: Hosts to update: 15, hosts to insert: 0
+[2026-01-20 16:56:21.750 +01:00 INF] Services.AppConfigurationSyncService: Apps to update: 21, apps to insert: 0
+[2026-01-20 16:56:22.004 +01:00 INF] Services.HostConfigurationSyncService: Successfully updated 15 existing hosts
+[2026-01-20 16:56:22.015 +01:00 INF] Services.AppConfigurationSyncService: Successfully updated 21 existing apps
+[2026-01-20 16:56:22.016 +01:00 INF] Services.HostConfigurationSyncService: Host synchronization completed: 15 updated, 0 inserted, 15 total processed
+[2026-01-20 16:56:22.023 +01:00 INF] Services.AppConfigurationSyncService: App synchronization completed: 21 updated, 0 inserted, 21 total processed
+[2026-01-20 16:56:22.041 +01:00 INF] Services.WatchtowerBootstrapService: Initial environment sync completed: 21 app(s) updated, 0 app(s) inserted, 15 host(s) updated, 0 host(s) inserted. Total changes: 36
+[2026-01-20 16:56:22.048 +01:00 INF] Services.WatchtowerBootstrapService: WatchtowerBootstrapService completed successfully.
+[2026-01-20 16:56:22.074 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /WatchtowerWebApi/openapi/v1.json => HTTP: GET /WatchtowerWebApi/openapi/v1.json
+[2026-01-20 16:56:41.681 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/alerts => HTTP: POST /api/alerts/ => CreateOrIncrementAlert
+[2026-01-20 16:56:41.861 +01:00 INF] Services.AlertsService: Processing alert creation for AppId=DTCODEVMCSHP01W@Test;Horsepower-trades
+[2026-01-20 16:56:41.863 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/alerts => HTTP: POST /api/alerts/ => CreateOrIncrementAlert
+[2026-01-20 16:56:41.868 +01:00 INF] Services.AlertsService: Checking for existing alert with AppId=DTCODEVMCSHP01W@Test;Horsepower-trades
+[2026-01-20 16:56:41.894 +01:00 INF] Services.AlertsService: Processing alert creation for AppId=DTCODEVMCSHP01W@Test;Horsepower-trades
+[2026-01-20 16:56:41.897 +01:00 INF] Services.AlertsService: Checking for existing alert with AppId=DTCODEVMCSHP01W@Test;Horsepower-trades
+[2026-01-20 16:56:42.011 +01:00 INF] Services.AlertsService: Existing alert found with Id=695ced2e332b23be42d0ded3, current occurrence count: 71
+[2026-01-20 16:56:42.011 +01:00 INF] Services.AlertsService: Existing alert found with Id=695ced2e332b23be42d0ded3, current occurrence count: 71
+[2026-01-20 16:56:42.098 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/apps => HTTP: GET /api/apps/ => GetByQueryParameters
+[2026-01-20 16:56:42.126 +01:00 INF] Services.AlertsService: Incremented occurrence count for alert 695ced2e332b23be42d0ded3 to 72
+[2026-01-20 16:56:42.126 +01:00 INF] Services.AlertsService: Incremented occurrence count for alert 695ced2e332b23be42d0ded3 to 72
+[2026-01-20 16:56:42.131 +01:00 INF] Services.AppsService: Getting apps with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":1,"$type":"AppQuery"}
+[2026-01-20 16:56:42.346 +01:00 INF] Services.AppsService: Retrieved 1 apps (1 with appStatus, 0 without appStatus). Meta data: {"CurrentPage":1,"PageSize":1,"TotalCount":1,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 16:56:42.473 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP PUT /api/apps/DTCODEVMCSHP01W@Test;Horsepower-trades => HTTP: PUT /api/apps/{id} => UpdateApp
+[2026-01-20 16:56:42.552 +01:00 INF] Services.AppsService: Updating app with ID: DTCODEVMCSHP01W@Test;Horsepower-trades
+[2026-01-20 16:56:42.608 +01:00 INF] Services.AppsService: Successfully updated app with ID: DTCODEVMCSHP01W@Test;Horsepower-trades
+[2026-01-20 16:56:42.638 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/app-statuses => HTTP: POST /api/app-statuses/ => CreateAppStatus
+[2026-01-20 16:56:42.709 +01:00 INF] Services.HeartbeatListenerService: App DTCODEVMCSHP01W@Test;Horsepower-trades heartbeat received; next expected before "2026-01-20T15:57:17.7093209+00:00".
+[2026-01-20 16:56:56.524 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/clients => HTTP: GET /api/clients/ => GetByQueryParameters
+[2026-01-20 16:56:56.686 +01:00 INF] Services.ClientsService: Retrieving clients with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":1,"$type":"ClientQuery"}
+[2026-01-20 16:56:56.864 +01:00 INF] Services.ClientsService: Retrieved clients with meta data: {"CurrentPage":1,"PageSize":1,"TotalCount":1,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 16:56:56.962 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/connections => HTTP: POST /api/connections/ => EstablishConnection
+[2026-01-20 16:56:57.294 +01:00 INF] Services.ConnectionsService: Establishing new connection with appId: DTCODEVMCSHP01W@Test;Horsepower-trades and clientId: UNAUTHENTICATED
+[2026-01-20 16:56:57.377 +01:00 INF] Services.ConnectionsService: Successfully established connection with ID: 696fa5c93b7adc51f48f5fcd
+[2026-01-20 16:56:57.388 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/apps => HTTP: GET /api/apps/ => GetByQueryParameters
+[2026-01-20 16:56:57.394 +01:00 INF] Services.AppsService: Getting apps with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":1,"$type":"AppQuery"}
+[2026-01-20 16:56:57.460 +01:00 INF] Services.AppsService: Retrieved 1 apps (1 with appStatus, 0 without appStatus). Meta data: {"CurrentPage":1,"PageSize":1,"TotalCount":1,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 16:56:57.685 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP PUT /api/apps/DTCODEVMCSHP01W@Test;Orchestrator-main => HTTP: PUT /api/apps/{id} => UpdateApp
+[2026-01-20 16:56:57.742 +01:00 INF] Services.AppsService: Updating app with ID: DTCODEVMCSHP01W@Test;Orchestrator-main
+[2026-01-20 16:56:57.802 +01:00 INF] Services.AppsService: Successfully updated app with ID: DTCODEVMCSHP01W@Test;Orchestrator-main
+[2026-01-20 16:56:57.863 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/app-statuses => HTTP: POST /api/app-statuses/ => CreateAppStatus
+[2026-01-20 16:56:57.907 +01:00 INF] Services.HeartbeatListenerService: App DTCODEVMCSHP01W@Test;Orchestrator-main heartbeat received; next expected before "2026-01-20T15:57:32.9073386+00:00".
+[2026-01-20 16:57:12.737 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/app-statuses => HTTP: POST /api/app-statuses/ => CreateAppStatus
+[2026-01-20 16:57:12.779 +01:00 INF] Services.HeartbeatListenerService: App DTCODEVMCSHP01W@Test;Horsepower-trades heartbeat received; timeout rescheduled from "2026-01-20T15:57:17.7143295+00:00" to "2026-01-20T15:57:47.7772842+00:00".
+[2026-01-20 16:57:15.785 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /WatchtowerWebApi/openapi/v1.json => HTTP: GET /WatchtowerWebApi/openapi/v1.json
+[2026-01-20 16:57:27.961 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/app-statuses => HTTP: POST /api/app-statuses/ => CreateAppStatus
+[2026-01-20 16:57:28.004 +01:00 INF] Services.HeartbeatListenerService: App DTCODEVMCSHP01W@Test;Orchestrator-main heartbeat received; timeout rescheduled from "2026-01-20T15:57:32.9118080+00:00" to "2026-01-20T15:58:03.0039778+00:00".
+[2026-01-20 16:57:43.067 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/app-statuses => HTTP: POST /api/app-statuses/ => CreateAppStatus
+[2026-01-20 16:57:43.111 +01:00 INF] Services.HeartbeatListenerService: App DTCODEVMCSHP01W@Test;Horsepower-trades heartbeat received; timeout rescheduled from "2026-01-20T15:57:47.7788250+00:00" to "2026-01-20T15:58:18.1117501+00:00".
+[2026-01-20 16:57:58.177 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/app-statuses => HTTP: POST /api/app-statuses/ => CreateAppStatus
+[2026-01-20 16:57:58.227 +01:00 INF] Services.HeartbeatListenerService: App DTCODEVMCSHP01W@Test;Orchestrator-main heartbeat received; timeout rescheduled from "2026-01-20T15:58:03.0039989+00:00" to "2026-01-20T15:58:33.2272302+00:00".
+[2026-01-20 16:58:02.895 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/apps => HTTP: GET /api/apps/ => GetByQueryParameters
+[2026-01-20 16:58:02.895 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/app-statuses => HTTP: GET /api/app-statuses/ => GetByQueryParameters
+[2026-01-20 16:58:02.902 +01:00 INF] Services.AppsService: Getting apps with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"AppQuery"}
+[2026-01-20 16:58:02.909 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/apps => HTTP: GET /api/apps/ => GetByQueryParameters
+[2026-01-20 16:58:02.920 +01:00 INF] Services.AppsService: Getting apps with query parameters: {"Page":1,"OrderBy":"appName","SearchTerm":null,"PageSize":10,"$type":"AppQuery"}
+[2026-01-20 16:58:02.921 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/app-statuses/live => HTTP: GET /api/app-statuses/live
+[2026-01-20 16:58:02.943 +01:00 INF] Watchtower.WebApi.Utilities.SseStreamer: Starting SSE stream for client 0HNIO7HQE64FL
+[2026-01-20 16:58:02.964 +01:00 INF] Services.AppsService: Retrieved 10 apps (0 with appStatus, 10 without appStatus). Meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":25,"TotalPages":3,"HasPrevious":false,"HasNext":true,"$type":"MetaData"}
+[2026-01-20 16:58:02.982 +01:00 WRN] Microsoft.AspNetCore.Server.Kestrel: One or more of the following response headers have been removed because they are invalid for HTTP/2 and HTTP/3 responses: 'Connection', 'Transfer-Encoding', 'Keep-Alive', 'Upgrade' and 'Proxy-Connection'.
+[2026-01-20 16:58:02.989 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/apps => HTTP: GET /api/apps/ => GetByQueryParameters
+[2026-01-20 16:58:02.993 +01:00 INF] Services.AppsService: Getting apps with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"AppQuery"}
+[2026-01-20 16:58:02.993 +01:00 INF] Services.AppsService: Retrieved 10 apps (4 with appStatus, 6 without appStatus). Meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":25,"TotalPages":3,"HasPrevious":false,"HasNext":true,"$type":"MetaData"}
+[2026-01-20 16:58:03.027 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/apps => HTTP: GET /api/apps/ => GetByQueryParameters
+[2026-01-20 16:58:03.032 +01:00 INF] Services.AppsService: Getting apps with query parameters: {"Page":1,"OrderBy":"appName","SearchTerm":null,"PageSize":10,"$type":"AppQuery"}
+[2026-01-20 16:58:03.045 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/app-statuses => HTTP: GET /api/app-statuses/ => GetByQueryParameters
+[2026-01-20 16:58:03.056 +01:00 INF] Services.AppsService: Retrieved 10 apps (0 with appStatus, 10 without appStatus). Meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":25,"TotalPages":3,"HasPrevious":false,"HasNext":true,"$type":"MetaData"}
+[2026-01-20 16:58:03.096 +01:00 INF] Services.AppsService: Retrieved 10 apps (4 with appStatus, 6 without appStatus). Meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":25,"TotalPages":3,"HasPrevious":false,"HasNext":true,"$type":"MetaData"}
+[2026-01-20 16:58:13.305 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/app-statuses => HTTP: POST /api/app-statuses/ => CreateAppStatus
+[2026-01-20 16:58:13.345 +01:00 INF] Services.HeartbeatListenerService: App DTCODEVMCSHP01W@Test;Horsepower-trades heartbeat received; timeout rescheduled from "2026-01-20T15:58:18.1117698+00:00" to "2026-01-20T15:58:48.3453095+00:00".
+[2026-01-20 16:58:28.443 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/app-statuses => HTTP: POST /api/app-statuses/ => CreateAppStatus
+[2026-01-20 16:58:28.483 +01:00 INF] Services.HeartbeatListenerService: App DTCODEVMCSHP01W@Test;Orchestrator-main heartbeat received; timeout rescheduled from "2026-01-20T15:58:33.2272653+00:00" to "2026-01-20T15:59:03.4836971+00:00".
+[2026-01-20 16:58:40.499 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/clients => HTTP: GET /api/clients/ => GetByQueryParameters
+[2026-01-20 16:58:40.506 +01:00 INF] Services.ClientsService: Retrieving clients with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"ClientQuery"}
+[2026-01-20 16:58:40.514 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/clients/live => HTTP: GET /api/clients/live
+[2026-01-20 16:58:40.607 +01:00 INF] Watchtower.WebApi.Utilities.SseStreamer: SSE stream cancelled for client 0HNIO7HQE64FL - client disconnected
+[2026-01-20 16:58:40.616 +01:00 INF] Watchtower.WebApi.Utilities.SseStreamer: Starting SSE stream for client 0HNIO7HQE64FL
+[2026-01-20 16:58:40.643 +01:00 INF] Services.ClientsService: Retrieved clients with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":1,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 16:58:40.661 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/clients => HTTP: GET /api/clients/ => GetByQueryParameters
+[2026-01-20 16:58:40.666 +01:00 INF] Services.ClientsService: Retrieving clients with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"ClientQuery"}
+[2026-01-20 16:58:40.709 +01:00 INF] Services.ClientsService: Retrieved clients with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":1,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 16:58:40.725 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/clients => HTTP: GET /api/clients/ => GetByQueryParameters
+[2026-01-20 16:58:40.730 +01:00 INF] Services.ClientsService: Retrieving clients with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"ClientQuery"}
+[2026-01-20 16:58:40.776 +01:00 INF] Services.ClientsService: Retrieved clients with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":1,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 16:58:40.793 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/clients => HTTP: GET /api/clients/ => GetByQueryParameters
+[2026-01-20 16:58:40.796 +01:00 INF] Services.ClientsService: Retrieving clients with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"ClientQuery"}
+[2026-01-20 16:58:40.838 +01:00 INF] Services.ClientsService: Retrieved clients with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":1,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 16:58:43.119 +01:00 INF] Watchtower.WebApi.Utilities.SseStreamer: SSE stream cancelled for client 0HNIO7HQE64FL - client disconnected
+[2026-01-20 16:58:43.120 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/connections => HTTP: GET /api/connections/ => GetByQueryParameters
+[2026-01-20 16:58:43.120 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/connections/live => HTTP: GET /api/connections/live
+[2026-01-20 16:58:43.120 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/connections => HTTP: GET /api/connections/ => GetByQueryParameters
+[2026-01-20 16:58:43.121 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/clients/login/ANONYMOUS => HTTP: GET /api/clients/login/{login} => GetClientByLogin
+[2026-01-20 16:58:43.131 +01:00 INF] Services.ConnectionsService: Retrieving connections with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"ConnectionQuery"}
+[2026-01-20 16:58:43.123 +01:00 WRN] Microsoft.AspNetCore.Server.Kestrel: One or more of the following response headers have been removed because they are invalid for HTTP/2 and HTTP/3 responses: 'Connection', 'Transfer-Encoding', 'Keep-Alive', 'Upgrade' and 'Proxy-Connection'.
+[2026-01-20 16:58:43.133 +01:00 INF] Services.ConnectionsService: Retrieving connections with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"ConnectionQuery"}
+[2026-01-20 16:58:43.130 +01:00 INF] Watchtower.WebApi.Utilities.SseStreamer: Starting SSE stream for client 0HNIO7HQE64FL
+[2026-01-20 16:58:43.150 +01:00 INF] Services.ClientsService: Retrieving client with LOGIN: ANONYMOUS
+[2026-01-20 16:58:43.172 +01:00 WRN] Microsoft.AspNetCore.Server.Kestrel: One or more of the following response headers have been removed because they are invalid for HTTP/2 and HTTP/3 responses: 'Connection', 'Transfer-Encoding', 'Keep-Alive', 'Upgrade' and 'Proxy-Connection'.
+[2026-01-20 16:58:43.193 +01:00 INF] Services.ConnectionsService: Retrieved connections with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":4,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 16:58:43.196 +01:00 INF] Services.ConnectionsService: Retrieved connections with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":4,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 16:58:43.207 +01:00 INF] Services.ClientsService: Successfully retrieved client ANONYMOUS with 0 connections
+[2026-01-20 16:58:43.212 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/connections => HTTP: GET /api/connections/ => GetByQueryParameters
+[2026-01-20 16:58:43.223 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/connections => HTTP: GET /api/connections/ => GetByQueryParameters
+[2026-01-20 16:58:43.229 +01:00 INF] Services.ConnectionsService: Retrieving connections with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"ConnectionQuery"}
+[2026-01-20 16:58:43.232 +01:00 INF] Services.ConnectionsService: Retrieving connections with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"ConnectionQuery"}
+[2026-01-20 16:58:43.234 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/clients/login/ANONYMOUS => HTTP: GET /api/clients/login/{login} => GetClientByLogin
+[2026-01-20 16:58:43.252 +01:00 INF] Services.ClientsService: Retrieving client with LOGIN: ANONYMOUS
+[2026-01-20 16:58:43.277 +01:00 INF] Services.ConnectionsService: Retrieved connections with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":4,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 16:58:43.281 +01:00 INF] Services.ConnectionsService: Retrieved connections with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":4,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 16:58:43.289 +01:00 INF] Services.ClientsService: Successfully retrieved client ANONYMOUS with 0 connections
+[2026-01-20 16:58:43.330 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/connections => HTTP: GET /api/connections/ => GetByQueryParameters
+[2026-01-20 16:58:43.334 +01:00 INF] Services.ConnectionsService: Retrieving connections with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"ConnectionQuery"}
+[2026-01-20 16:58:43.382 +01:00 INF] Services.ConnectionsService: Retrieved connections with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":4,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 16:58:43.396 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/connections => HTTP: GET /api/connections/ => GetByQueryParameters
+[2026-01-20 16:58:43.399 +01:00 INF] Services.ConnectionsService: Retrieving connections with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"ConnectionQuery"}
+[2026-01-20 16:58:43.440 +01:00 INF] Services.ConnectionsService: Retrieved connections with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":4,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 16:58:43.526 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/app-statuses => HTTP: POST /api/app-statuses/ => CreateAppStatus
+[2026-01-20 16:58:43.563 +01:00 INF] Services.HeartbeatListenerService: App DTCODEVMCSHP01W@Test;Horsepower-trades heartbeat received; timeout rescheduled from "2026-01-20T15:58:48.3453419+00:00" to "2026-01-20T15:59:18.5630053+00:00".
+[2026-01-20 16:58:47.104 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/connections => HTTP: GET /api/connections/ => GetByQueryParameters
+[2026-01-20 16:58:47.107 +01:00 INF] Services.ConnectionsService: Retrieving connections with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"ConnectionQuery"}
+[2026-01-20 16:58:47.151 +01:00 INF] Services.ConnectionsService: Retrieved connections with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":4,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 16:58:47.167 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/connections => HTTP: GET /api/connections/ => GetByQueryParameters
+[2026-01-20 16:58:47.171 +01:00 INF] Services.ConnectionsService: Retrieving connections with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"ConnectionQuery"}
+[2026-01-20 16:58:47.211 +01:00 INF] Services.ConnectionsService: Retrieved connections with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":4,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 16:58:48.365 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/clients => HTTP: GET /api/clients/ => GetByQueryParameters
+[2026-01-20 16:58:48.367 +01:00 INF] Services.ClientsService: Retrieving clients with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"ClientQuery"}
+[2026-01-20 16:58:48.409 +01:00 INF] Services.ClientsService: Retrieved clients with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":1,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 16:58:48.421 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/clients => HTTP: GET /api/clients/ => GetByQueryParameters
+[2026-01-20 16:58:48.424 +01:00 INF] Services.ClientsService: Retrieving clients with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"ClientQuery"}
+[2026-01-20 16:58:48.462 +01:00 INF] Services.ClientsService: Retrieved clients with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":1,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 16:58:58.630 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/app-statuses => HTTP: POST /api/app-statuses/ => CreateAppStatus
+[2026-01-20 16:58:58.666 +01:00 INF] Services.HeartbeatListenerService: App DTCODEVMCSHP01W@Test;Orchestrator-main heartbeat received; timeout rescheduled from "2026-01-20T15:59:03.4837165+00:00" to "2026-01-20T15:59:33.6661894+00:00".
+[2026-01-20 16:59:13.714 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/app-statuses => HTTP: POST /api/app-statuses/ => CreateAppStatus
+[2026-01-20 16:59:13.759 +01:00 INF] Services.HeartbeatListenerService: App DTCODEVMCSHP01W@Test;Horsepower-trades heartbeat received; timeout rescheduled from "2026-01-20T15:59:18.5630269+00:00" to "2026-01-20T15:59:48.7594732+00:00".
+[2026-01-20 16:59:28.818 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/app-statuses => HTTP: POST /api/app-statuses/ => CreateAppStatus
+[2026-01-20 16:59:28.859 +01:00 INF] Services.HeartbeatListenerService: App DTCODEVMCSHP01W@Test;Orchestrator-main heartbeat received; timeout rescheduled from "2026-01-20T15:59:33.6662078+00:00" to "2026-01-20T16:00:03.8590163+00:00".
+[2026-01-20 16:59:43.880 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/app-statuses => HTTP: POST /api/app-statuses/ => CreateAppStatus
+[2026-01-20 16:59:43.923 +01:00 INF] Services.HeartbeatListenerService: App DTCODEVMCSHP01W@Test;Horsepower-trades heartbeat received; timeout rescheduled from "2026-01-20T15:59:48.7594988+00:00" to "2026-01-20T16:00:18.9237786+00:00".
+[2026-01-20 16:59:58.413 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/apps => HTTP: GET /api/apps/ => GetByQueryParameters
+[2026-01-20 16:59:58.419 +01:00 INF] Services.AppsService: Getting apps with query parameters: {"Page":1,"OrderBy":"appName","SearchTerm":null,"PageSize":10,"$type":"AppQuery"}
+[2026-01-20 16:59:58.479 +01:00 INF] Services.AppsService: Retrieved 10 apps (4 with appStatus, 6 without appStatus). Meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":25,"TotalPages":3,"HasPrevious":false,"HasNext":true,"$type":"MetaData"}
+[2026-01-20 16:59:58.499 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/apps => HTTP: GET /api/apps/ => GetByQueryParameters
+[2026-01-20 16:59:58.504 +01:00 INF] Services.AppsService: Getting apps with query parameters: {"Page":1,"OrderBy":"appName","SearchTerm":null,"PageSize":10,"$type":"AppQuery"}
+[2026-01-20 16:59:58.565 +01:00 INF] Services.AppsService: Retrieved 10 apps (4 with appStatus, 6 without appStatus). Meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":25,"TotalPages":3,"HasPrevious":false,"HasNext":true,"$type":"MetaData"}
+[2026-01-20 16:59:58.963 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/app-statuses => HTTP: POST /api/app-statuses/ => CreateAppStatus
+[2026-01-20 16:59:59.007 +01:00 INF] Services.HeartbeatListenerService: App DTCODEVMCSHP01W@Test;Orchestrator-main heartbeat received; timeout rescheduled from "2026-01-20T16:00:03.8590319+00:00" to "2026-01-20T16:00:34.0079356+00:00".
+[2026-01-20 17:00:06.179 +01:00 INF] Watchtower.WebApi.Utilities.SseStreamer: SSE stream cancelled for client 0HNIO7HQE64FL - client disconnected
+[2026-01-20 17:00:06.194 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/alerts/live => HTTP: GET /api/alerts/live
+[2026-01-20 17:00:06.181 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/alerts => HTTP: GET /api/alerts/ => GetByQueryParameters
+[2026-01-20 17:00:06.210 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/app-statuses => HTTP: GET /api/app-statuses/ => GetByQueryParameters
+[2026-01-20 17:00:06.180 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/hosts/DTCODEVMCSHP01W@Test/apps/Orchestrator-main => HTTP: GET /api/hosts/{hostName}/apps/{appName} => GetAppOfHostQuery
+[2026-01-20 17:00:06.211 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/connections => HTTP: GET /api/connections/ => GetByQueryParameters
+[2026-01-20 17:00:06.259 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/alerts => HTTP: GET /api/alerts/ => GetByQueryParameters
+[2026-01-20 17:00:06.274 +01:00 INF] Watchtower.WebApi.Utilities.SseStreamer: Starting SSE stream for client 0HNIO7HQE64FL
+[2026-01-20 17:00:06.285 +01:00 INF] Services.AlertsService: Getting alerts with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"AlertQuery"}
+[2026-01-20 17:00:06.291 +01:00 INF] Services.AppsService: Retrieving detailed app information for ID: DTCODEVMCSHP01W@Test;Orchestrator-main
+[2026-01-20 17:00:06.289 +01:00 INF] Services.ConnectionsService: Retrieving connections with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"ConnectionQuery"}
+[2026-01-20 17:00:06.293 +01:00 INF] Services.AlertsService: Getting alerts with query parameters: {"Page":1,"OrderBy":"occurredAt desc","SearchTerm":null,"PageSize":10,"$type":"AlertQuery"}
+[2026-01-20 17:00:06.302 +01:00 WRN] Microsoft.AspNetCore.Server.Kestrel: One or more of the following response headers have been removed because they are invalid for HTTP/2 and HTTP/3 responses: 'Connection', 'Transfer-Encoding', 'Keep-Alive', 'Upgrade' and 'Proxy-Connection'.
+[2026-01-20 17:00:06.319 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/app-statuses => HTTP: GET /api/app-statuses/ => GetByQueryParameters
+[2026-01-20 17:00:06.376 +01:00 INF] Services.ConnectionsService: Retrieved connections with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":4,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 17:00:06.382 +01:00 INF] Services.AlertsService: Retrieved alerts with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":4,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 17:00:06.401 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/connections => HTTP: GET /api/connections/ => GetByQueryParameters
+[2026-01-20 17:00:06.418 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/alerts => HTTP: GET /api/alerts/ => GetByQueryParameters
+[2026-01-20 17:00:06.419 +01:00 INF] Services.ConnectionsService: Retrieving connections with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"ConnectionQuery"}
+[2026-01-20 17:00:06.425 +01:00 INF] Services.AlertsService: Getting alerts with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"AlertQuery"}
+[2026-01-20 17:00:06.467 +01:00 INF] Services.ConnectionsService: Retrieved connections with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":4,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 17:00:06.477 +01:00 INF] Services.AppsService: Successfully retrieved detailed app DTCODEVMCSHP01W@Test;Orchestrator-main with 0 connections and 10 recent appStatuses
+[2026-01-20 17:00:06.479 +01:00 INF] Services.AlertsService: Retrieved alerts with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":4,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 17:00:06.489 +01:00 INF] Services.AlertsService: Retrieved alerts with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":4,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 17:00:06.514 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/hosts/DTCODEVMCSHP01W@Test/apps/Orchestrator-main => HTTP: GET /api/hosts/{hostName}/apps/{appName} => GetAppOfHostQuery
+[2026-01-20 17:00:06.543 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/alerts => HTTP: GET /api/alerts/ => GetByQueryParameters
+[2026-01-20 17:00:06.546 +01:00 INF] Services.AppsService: Retrieving detailed app information for ID: DTCODEVMCSHP01W@Test;Orchestrator-main
+[2026-01-20 17:00:06.549 +01:00 INF] Services.AlertsService: Getting alerts with query parameters: {"Page":1,"OrderBy":"occurredAt desc","SearchTerm":null,"PageSize":10,"$type":"AlertQuery"}
+[2026-01-20 17:00:06.600 +01:00 INF] Services.AlertsService: Retrieved alerts with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":4,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 17:00:06.614 +01:00 INF] Services.AppsService: Successfully retrieved detailed app DTCODEVMCSHP01W@Test;Orchestrator-main with 0 connections and 10 recent appStatuses
+[2026-01-20 17:00:06.657 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/connections => HTTP: GET /api/connections/ => GetByQueryParameters
+[2026-01-20 17:00:06.657 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/app-statuses => HTTP: GET /api/app-statuses/ => GetByQueryParameters
+[2026-01-20 17:00:06.660 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/alerts => HTTP: GET /api/alerts/ => GetByQueryParameters
+[2026-01-20 17:00:06.663 +01:00 INF] Services.ConnectionsService: Retrieving connections with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"ConnectionQuery"}
+[2026-01-20 17:00:06.671 +01:00 INF] Services.AlertsService: Getting alerts with query parameters: {"Page":1,"OrderBy":"occurredAt desc","SearchTerm":null,"PageSize":10,"$type":"AlertQuery"}
+[2026-01-20 17:00:06.711 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/app-statuses => HTTP: GET /api/app-statuses/ => GetByQueryParameters
+[2026-01-20 17:00:06.715 +01:00 INF] Services.ConnectionsService: Retrieved connections with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":0,"TotalPages":0,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 17:00:06.733 +01:00 INF] Services.AlertsService: Retrieved alerts with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":0,"TotalPages":0,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 17:00:06.739 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/connections => HTTP: GET /api/connections/ => GetByQueryParameters
+[2026-01-20 17:00:06.764 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/alerts => HTTP: GET /api/alerts/ => GetByQueryParameters
+[2026-01-20 17:00:06.766 +01:00 INF] Services.ConnectionsService: Retrieving connections with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"ConnectionQuery"}
+[2026-01-20 17:00:06.772 +01:00 INF] Services.AlertsService: Getting alerts with query parameters: {"Page":1,"OrderBy":"occurredAt desc","SearchTerm":null,"PageSize":10,"$type":"AlertQuery"}
+[2026-01-20 17:00:06.823 +01:00 INF] Services.ConnectionsService: Retrieved connections with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":0,"TotalPages":0,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 17:00:06.838 +01:00 INF] Services.AlertsService: Retrieved alerts with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":0,"TotalPages":0,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 17:00:14.101 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/app-statuses => HTTP: POST /api/app-statuses/ => CreateAppStatus
+[2026-01-20 17:00:14.150 +01:00 INF] Services.HeartbeatListenerService: App DTCODEVMCSHP01W@Test;Horsepower-trades heartbeat received; timeout rescheduled from "2026-01-20T16:00:18.9237967+00:00" to "2026-01-20T16:00:49.1506891+00:00".
+[2026-01-20 17:00:22.594 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/apps => HTTP: GET /api/apps/ => GetByQueryParameters
+[2026-01-20 17:00:22.598 +01:00 INF] Services.AppsService: Getting apps with query parameters: {"Page":1,"OrderBy":"appName","SearchTerm":null,"PageSize":10,"$type":"AppQuery"}
+[2026-01-20 17:00:22.661 +01:00 INF] Services.AppsService: Retrieved 10 apps (4 with appStatus, 6 without appStatus). Meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":25,"TotalPages":3,"HasPrevious":false,"HasNext":true,"$type":"MetaData"}
+[2026-01-20 17:00:22.682 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/apps => HTTP: GET /api/apps/ => GetByQueryParameters
+[2026-01-20 17:00:22.687 +01:00 INF] Services.AppsService: Getting apps with query parameters: {"Page":1,"OrderBy":"appName","SearchTerm":null,"PageSize":10,"$type":"AppQuery"}
+[2026-01-20 17:00:22.747 +01:00 INF] Services.AppsService: Retrieved 10 apps (4 with appStatus, 6 without appStatus). Meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":25,"TotalPages":3,"HasPrevious":false,"HasNext":true,"$type":"MetaData"}
+[2026-01-20 17:00:26.417 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/connections => HTTP: GET /api/connections/ => GetByQueryParameters
+[2026-01-20 17:00:26.417 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/hosts/DTCODEVMCSHP01W@Test/apps/Horsepower-trades => HTTP: GET /api/hosts/{hostName}/apps/{appName} => GetAppOfHostQuery
+[2026-01-20 17:00:26.417 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/app-statuses => HTTP: GET /api/app-statuses/ => GetByQueryParameters
+[2026-01-20 17:00:26.418 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/alerts => HTTP: GET /api/alerts/ => GetByQueryParameters
+[2026-01-20 17:00:26.422 +01:00 INF] Services.ConnectionsService: Retrieving connections with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"ConnectionQuery"}
+[2026-01-20 17:00:26.427 +01:00 INF] Services.AppsService: Retrieving detailed app information for ID: DTCODEVMCSHP01W@Test;Horsepower-trades
+[2026-01-20 17:00:26.433 +01:00 INF] Services.AlertsService: Getting alerts with query parameters: {"Page":1,"OrderBy":"occurredAt desc","SearchTerm":null,"PageSize":10,"$type":"AlertQuery"}
+[2026-01-20 17:00:26.466 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/app-statuses => HTTP: GET /api/app-statuses/ => GetByQueryParameters
+[2026-01-20 17:00:26.476 +01:00 INF] Services.ConnectionsService: Retrieved connections with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":4,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 17:00:26.493 +01:00 INF] Services.AlertsService: Retrieved alerts with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":4,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 17:00:26.497 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/connections => HTTP: GET /api/connections/ => GetByQueryParameters
+[2026-01-20 17:00:26.513 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/alerts => HTTP: GET /api/alerts/ => GetByQueryParameters
+[2026-01-20 17:00:26.515 +01:00 INF] Services.ConnectionsService: Retrieving connections with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"ConnectionQuery"}
+[2026-01-20 17:00:26.517 +01:00 INF] Services.AppsService: Successfully retrieved detailed app DTCODEVMCSHP01W@Test;Horsepower-trades with 4 connections and 10 recent appStatuses
+[2026-01-20 17:00:26.518 +01:00 INF] Services.AlertsService: Getting alerts with query parameters: {"Page":1,"OrderBy":"occurredAt desc","SearchTerm":null,"PageSize":10,"$type":"AlertQuery"}
+[2026-01-20 17:00:26.539 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/hosts/DTCODEVMCSHP01W@Test/apps/Horsepower-trades => HTTP: GET /api/hosts/{hostName}/apps/{appName} => GetAppOfHostQuery
+[2026-01-20 17:00:26.553 +01:00 INF] Services.AppsService: Retrieving detailed app information for ID: DTCODEVMCSHP01W@Test;Horsepower-trades
+[2026-01-20 17:00:26.562 +01:00 INF] Services.ConnectionsService: Retrieved connections with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":4,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 17:00:26.582 +01:00 INF] Services.AlertsService: Retrieved alerts with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":4,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 17:00:26.614 +01:00 INF] Services.AppsService: Successfully retrieved detailed app DTCODEVMCSHP01W@Test;Horsepower-trades with 4 connections and 10 recent appStatuses
+[2026-01-20 17:00:26.636 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/app-statuses => HTTP: GET /api/app-statuses/ => GetByQueryParameters
+[2026-01-20 17:00:26.636 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/alerts => HTTP: GET /api/alerts/ => GetByQueryParameters
+[2026-01-20 17:00:26.636 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/connections => HTTP: GET /api/connections/ => GetByQueryParameters
+[2026-01-20 17:00:26.646 +01:00 INF] Services.AlertsService: Getting alerts with query parameters: {"Page":1,"OrderBy":"occurredAt desc","SearchTerm":null,"PageSize":10,"$type":"AlertQuery"}
+[2026-01-20 17:00:26.650 +01:00 INF] Services.ConnectionsService: Retrieving connections with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"ConnectionQuery"}
+[2026-01-20 17:00:26.684 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/app-statuses => HTTP: GET /api/app-statuses/ => GetByQueryParameters
+[2026-01-20 17:00:26.707 +01:00 INF] Services.AlertsService: Retrieved alerts with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":1,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 17:00:26.711 +01:00 INF] Services.ConnectionsService: Retrieved connections with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":4,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 17:00:26.729 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/alerts => HTTP: GET /api/alerts/ => GetByQueryParameters
+[2026-01-20 17:00:26.749 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP GET /api/connections => HTTP: GET /api/connections/ => GetByQueryParameters
+[2026-01-20 17:00:26.750 +01:00 INF] Services.AlertsService: Getting alerts with query parameters: {"Page":1,"OrderBy":"occurredAt desc","SearchTerm":null,"PageSize":10,"$type":"AlertQuery"}
+[2026-01-20 17:00:26.754 +01:00 INF] Services.ConnectionsService: Retrieving connections with query parameters: {"Page":1,"OrderBy":null,"SearchTerm":null,"PageSize":10,"$type":"ConnectionQuery"}
+[2026-01-20 17:00:26.815 +01:00 INF] Services.AlertsService: Retrieved alerts with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":1,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 17:00:26.825 +01:00 INF] Services.ConnectionsService: Retrieved connections with meta data: {"CurrentPage":1,"PageSize":10,"TotalCount":4,"TotalPages":1,"HasPrevious":false,"HasNext":false,"$type":"MetaData"}
+[2026-01-20 17:00:29.136 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/app-statuses => HTTP: POST /api/app-statuses/ => CreateAppStatus
+[2026-01-20 17:00:29.179 +01:00 INF] Services.HeartbeatListenerService: App DTCODEVMCSHP01W@Test;Orchestrator-main heartbeat received; timeout rescheduled from "2026-01-20T16:00:34.0079512+00:00" to "2026-01-20T16:01:04.1793472+00:00".
+[2026-01-20 17:00:44.343 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/app-statuses => HTTP: POST /api/app-statuses/ => CreateAppStatus
+[2026-01-20 17:00:44.389 +01:00 INF] Services.HeartbeatListenerService: App DTCODEVMCSHP01W@Test;Horsepower-trades heartbeat received; timeout rescheduled from "2026-01-20T16:00:49.1507138+00:00" to "2026-01-20T16:01:19.3899038+00:00".
+[2026-01-20 17:00:59.355 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/app-statuses => HTTP: POST /api/app-statuses/ => CreateAppStatus
+[2026-01-20 17:00:59.402 +01:00 INF] Services.HeartbeatListenerService: App DTCODEVMCSHP01W@Test;Orchestrator-main heartbeat received; timeout rescheduled from "2026-01-20T16:01:04.1793795+00:00" to "2026-01-20T16:01:34.4022188+00:00".
+[2026-01-20 17:01:14.576 +01:00 INF] Watchtower.WebApi.Middleware.EndpointLoggingMiddleware: HTTP POST /api/app-statuses => HTTP: POST /api/app-statuses/ => CreateAppStatus
+[2026-01-20 17:01:14.623 +01:00 INF] Services.HeartbeatListenerService: App DTCODEVMCSHP01W@Test;Horsepower-trades heartbeat received; timeout rescheduled from "2026-01-20T16:01:19.3899303+00:00" to "2026-01-20T16:01:49.6236634+00:00".

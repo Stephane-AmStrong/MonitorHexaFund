@@ -52,19 +52,6 @@ public sealed class ConnectionsService(
         };
     }
 
-    /*
-    public async Task<ConnectionResponse> EstablishAsync(ConnectionEstablishRequest connectionRequest, CancellationToken cancellationToken)
-    {
-        logger.LogInformation("Establishing new connection with appId: {AppId} and clientId: {ClientId}", connectionRequest.AppId, connectionRequest.ClientGaia);
-
-        var existingConnection = await FindExistingActiveConnection(connectionRequest, cancellationToken);
-
-        return existingConnection != null
-                ? existingConnection.Adapt<ConnectionResponse>()
-                : await CreateNewConnectionAsync(connectionRequest, cancellationToken);
-    }
-    */
-
     public async Task<ConnectionResponse> EstablishAsync(ConnectionEstablishRequest connectionRequest, CancellationToken cancellationToken)
     {
         logger.LogInformation("Establishing new connection with appId: {AppId} and clientId: {ClientId}", connectionRequest.AppId, connectionRequest.ClientGaia);
@@ -93,35 +80,5 @@ public sealed class ConnectionsService(
         await connectionsRepository.TerminateAsync(connection, cancellationToken);
 
         logger.LogInformation("Successfully terminated connection with ID: {ConnectionId}", id);
-    }
-
-    private async Task<Connection?> FindExistingActiveConnection(ConnectionEstablishRequest connectionRequest, CancellationToken cancellationToken)
-    {
-        logger.LogInformation("Checking for existing connection with AppId={AppId} ClientGaia={ClientGaia}", connectionRequest.AppId, connectionRequest.ClientGaia);
-
-        List<Connection> connections = await connectionsRepository.FindByConditionAsync
-        (
-            connection => connection.AppId == connectionRequest.AppId &&  connection.ClientGaia == connectionRequest.ClientGaia &&  connection.TerminatedAt == null,
-            cancellationToken
-        );
-
-        return connections.FirstOrDefault();
-    }
-
-    private async Task<ConnectionResponse> CreateNewConnectionAsync(ConnectionEstablishRequest connectionRequest, CancellationToken cancellationToken)
-    {
-        logger.LogInformation("Establishing new connection with appId: {AppId} and clientId: {ClientId}", connectionRequest.AppId, connectionRequest.ClientGaia);
-
-        var connection = connectionRequest.Adapt<Connection>() with
-        {
-            AppId = connectionRequest.AppId,
-            EstablishedAt = DateTime.UtcNow,
-            ClientGaia = connectionRequest.ClientGaia,
-        };
-
-        await connectionsRepository.EstablishAsync(connection, cancellationToken);
-
-        logger.LogInformation("Successfully established connection with ID: {ConnectionId}", connection.Id);
-        return connection.Adapt<ConnectionResponse>();
     }
 }

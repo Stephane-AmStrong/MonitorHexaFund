@@ -48,8 +48,6 @@ export class AppStatusListComponent {
   readonly appStatuses = this.appStatusStore.pagedList;
   readonly isLoading = this.appStatusStore.isLoading;
 
-  readonly appStatusColumns: readonly string[] = ['hostName', 'appName', 'version', 'port', 'type', 'cronStartTime', 'cronStopTime'] as const;
-
   onAppStatusClicked(appstatus: AppStatusResponse) {
     const appId = appstatus.appId;
     if (appId) {

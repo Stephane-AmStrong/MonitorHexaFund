@@ -21,16 +21,18 @@ export class RxSseService implements OnDestroy {
   private readonly RECONNECT_DELAY_MS = 1500;
   private readonly connectionStateSubject = new BehaviorSubject<SseConnectionState>('Closed');
 
-  private connectionSub?: Subscription;
+  private connections = new Map<string, Subscription>();
 
   private readonly destroy$ = new Subject<void>();
 
   connect<T extends BaseModel>(sseEndpoint: string, handlers: SseEventHandlers<T>): void {
-    this.disconnect();
-    
+    if (this.connections.has(sseEndpoint)) {
+      this.disconnect(sseEndpoint);
+    }
+
     const streamingUrl = `${environment.apiUrl}/${sseEndpoint}`;
 
-    this.connectionSub = this.createStream<T>(streamingUrl)
+    const connectionSub = this.createStream<T>(streamingUrl)
       .pipe(
         retry({
           delay: (error, retryCount) => {
@@ -54,12 +56,29 @@ export class RxSseService implements OnDestroy {
           this.connectionStateSubject.next('Error');
         },
       });
+
+    this.connections.set(sseEndpoint, connectionSub);
   }
 
-  disconnect(): void {
-    this.connectionSub?.unsubscribe();
-    this.connectionSub = undefined;
-    this.connectionStateSubject.next('Closed');
+  disconnect(sseEndpoint?: string): void {
+    if (sseEndpoint) {
+      const connection = this.connections.get(sseEndpoint);
+      if (connection) {
+        connection.unsubscribe();
+        this.connections.delete(sseEndpoint);
+        console.log(`SSE disconnected: ${sseEndpoint}`);
+      }
+    } else {
+      this.connections.forEach((connection, endpoint) => {
+        connection.unsubscribe();
+        console.log(`SSE disconnected: ${endpoint}`);
+      });
+      this.connections.clear();
+    }
+
+    if (this.connections.size === 0) {
+      this.connectionStateSubject.next('Closed');
+    }
   }
 
   private createStream<T extends BaseModel>(url: string): Observable<SseEventModel<T>> {
@@ -120,7 +139,6 @@ export class RxSseService implements OnDestroy {
     return Math.min(exponentialDelay, this.RECONNECT_DELAY_MS * 5);
   }
 
-  
   ngOnDestroy(): void {
     console.debug('RxSseService destroyed');
     this.destroy$.next();

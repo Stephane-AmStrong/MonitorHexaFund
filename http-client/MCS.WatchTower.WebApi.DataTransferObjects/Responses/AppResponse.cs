@@ -8,12 +8,11 @@ public record AppResponse : IBaseDto
     public string Port { get; init; }
 
     public string Type { get; init; }
-    public string RunMode { get; init; }
     public AppStatusResponse LatestStatus { get; init; }
 
     public string CronStartTime { get; init; }
     public string CronStopTime { get; init; }
 
     public string Version { get; init; }
-    public IList<string> Tags { get; init; }
+    public ISet<string> Tags { get; init; }
 }

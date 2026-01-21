@@ -67,7 +67,7 @@
             },
             "MCS.WatchTower.WebApi.DataTransferObjects": {
               "target": "Package",
-              "version": "[1.2.0.3632, 1.2.0.3632]"
+              "version": "[1.2.0.3640, 1.2.0.3640]"
             },
             "Mapster": {
               "target": "Package",

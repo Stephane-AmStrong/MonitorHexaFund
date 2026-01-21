@@ -14,6 +14,7 @@ export const MOCK_CLIENTS: ClientDetailedResponse[] = [
         apiVersion: '1.0.0',
         machine: 'prod-app-01',
         processId: '4521',
+        establishedAt: '2026-01-15T08:00:00Z',
       },
       {
         id: 'conn-002',
@@ -23,6 +24,7 @@ export const MOCK_CLIENTS: ClientDetailedResponse[] = [
         apiVersion: '1.0.0',
         machine: 'prod-worker-01',
         processId: '3840',
+        establishedAt: '2026-01-16T09:15:00Z',
       },
     ],
   },
@@ -39,6 +41,7 @@ export const MOCK_CLIENTS: ClientDetailedResponse[] = [
         apiVersion: '1.0.0-beta',
         machine: 'staging-app-01',
         processId: '2156',
+        establishedAt: '2026-01-18T14:45:00Z',
       },
     ],
   },
@@ -55,6 +58,7 @@ export const MOCK_CLIENTS: ClientDetailedResponse[] = [
         apiVersion: '1.1.0-dev',
         machine: 'dev-pc-01',
         processId: '5890',
+        establishedAt: '2026-01-19T11:20:00Z',
       },
       {
         id: 'conn-005',
@@ -64,6 +68,7 @@ export const MOCK_CLIENTS: ClientDetailedResponse[] = [
         apiVersion: '1.1.0-dev',
         machine: 'dev-pc-01',
         processId: '6234',
+        establishedAt: '2026-01-19T11:25:00Z',
       },
       {
         id: 'conn-006',
@@ -73,6 +78,7 @@ export const MOCK_CLIENTS: ClientDetailedResponse[] = [
         apiVersion: '1.0.5',
         machine: 'dev-service-01',
         processId: '1024',
+        establishedAt: '2026-01-19T12:00:00Z',
       },
     ],
   },
@@ -89,6 +95,7 @@ export const MOCK_CLIENTS: ClientDetailedResponse[] = [
         apiVersion: '0.9.0',
         machine: 'backup-app-01',
         processId: '7821',
+        establishedAt: '2026-01-20T02:30:00Z',
       },
     ],
   }

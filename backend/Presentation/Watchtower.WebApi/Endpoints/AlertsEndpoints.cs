@@ -46,7 +46,7 @@ public static class AlertsEndpoints
         group.MapGet("/live", async (
                 HttpContext ctx,
                 IEventStreamingService<AlertResponse> service,
-                SseStreamer streamer,
+                SseStreamer<AlertResponse> streamer,
                 CancellationToken cancellationToken) =>
             {
                 await streamer.StreamEventsAsync(ctx, service, cancellationToken);

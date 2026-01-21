@@ -49,7 +49,7 @@ public static class ClientsEndpoints
         group.MapGet("/live", async (
                 HttpContext ctx,
                 IEventStreamingService<ClientResponse> service,
-                SseStreamer streamer,
+                SseStreamer<ClientResponse> streamer,
                 CancellationToken cancellationToken) =>
             {
                 await streamer.StreamEventsAsync(ctx, service, cancellationToken);

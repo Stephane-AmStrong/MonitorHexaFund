@@ -213,14 +213,20 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<IEventStreamingService<AppStatusResponse>, EventStreamingService<AppStatusResponse>>();
         services.AddSingleton<IEventStreamingService<AppResponse>, EventStreamingService<AppResponse>>();
 
-        services.AddScoped<SseStreamer>(provider => new SseStreamer(new SseStreamingOptions
-        (
+        SseStreamingOptions sseOptions = new(
             JsonOptions: new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
             }
-        ), provider.GetRequiredService<ILogger<SseStreamer>>()));
+        );
+
+        services.AddSingleton(provider => new SseStreamer<AlertResponse>(sseOptions, provider.GetRequiredService<ILogger<SseStreamer<AlertResponse>>>()));
+        services.AddSingleton(provider => new SseStreamer<ClientResponse>(sseOptions, provider.GetRequiredService<ILogger<SseStreamer<ClientResponse>>>()));
+        services.AddSingleton(provider => new SseStreamer<ConnectionResponse>(sseOptions, provider.GetRequiredService<ILogger<SseStreamer<ConnectionResponse>>>()));
+        services.AddSingleton(provider => new SseStreamer<HostResponse>(sseOptions, provider.GetRequiredService<ILogger<SseStreamer<HostResponse>>>()));
+        services.AddSingleton(provider => new SseStreamer<AppStatusResponse>(sseOptions, provider.GetRequiredService<ILogger<SseStreamer<AppStatusResponse>>>()));
+        services.AddSingleton(provider => new SseStreamer<AppResponse>(sseOptions, provider.GetRequiredService<ILogger<SseStreamer<AppResponse>>>()));
 
         return services;
     }

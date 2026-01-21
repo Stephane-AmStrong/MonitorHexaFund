@@ -1,5 +1,10 @@
-import { AppUpdateRequest } from '../../app-statuses/models/app-update-request';
+export interface AppCreateRequest {
+  hostName: string;
+  appName: string;
+  port: string;
 
-export interface AppCreateRequest extends AppUpdateRequest {
-  id: string;
+  type: string;
+
+  version: string;
+  tags: Set<string>;
 }

@@ -7,17 +7,17 @@ using Microsoft.Net.Http.Headers;
 
 namespace Watchtower.WebApi.Utilities;
 
-public class SseStreamer(SseStreamingOptions options, ILogger<SseStreamer> logger)
+public class SseStreamer<TDto>(SseStreamingOptions options, ILogger<SseStreamer<TDto>> logger) where TDto : IBaseDto
 {
-    private static readonly ConcurrentDictionary<string, HttpContext> _clients = new();
+    private readonly ConcurrentDictionary<string, HttpContext> _clients = new();
 
-    public async Task StreamEventsAsync<TDto>(
+    public async Task StreamEventsAsync(
         HttpContext httpContext,
         IEventStreamingService<TDto> service,
-        CancellationToken cancellationToken) where TDto : IBaseDto
+        CancellationToken cancellationToken)
     {
         var clientId = httpContext.Connection.Id;
-        logger.LogInformation("Starting SSE stream for client {ClientId}", clientId);
+        logger.LogInformation("Starting SSE stream for client {ClientId} on type {DtoType}", clientId, typeof(TDto).Name);
 
         _clients.TryAdd(clientId, httpContext);
 
@@ -29,7 +29,7 @@ public class SseStreamer(SseStreamingOptions options, ILogger<SseStreamer> logge
             {
                 var broadcastMessage = await service.Events.ReadAsync(cancellationToken);
 
-                logger.LogDebug("Broadcasting event {EventType} to all clients", broadcastMessage.MessageType);
+                logger.LogDebug("Broadcasting event {EventType} to {ClientCount} clients", broadcastMessage.MessageType, _clients.Count);
 
                 var eventData = new
                 {
