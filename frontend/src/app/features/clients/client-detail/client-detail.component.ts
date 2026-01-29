@@ -45,10 +45,9 @@ export class ClientDetailComponent {
   private readonly selectedLogin = computed<string>(() => this.routeResource()?.['login']);
   private readonly connectionQueryParams = computed<ConnectionQueryParameters>(() => ({ withClientGaia: this.clientDetail()?.id}));
 
-  readonly isLoading = this.clientStore.isLoading;
+  readonly selectedIsLoading = this.clientStore.selectedIsLoading;
   readonly clientDetail = this.clientStore.selected;
   readonly connections = this.connectionStore.pagedList;
-
 
   constructor() {
     effect(() => this.clientStore.selectedLogin.set(this.selectedLogin()));

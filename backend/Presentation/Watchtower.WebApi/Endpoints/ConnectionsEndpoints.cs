@@ -9,6 +9,8 @@ using Domain.Shared.Common;
 using MCS.WatchTower.WebApi.DataTransferObjects.QueryParameters;
 using MCS.WatchTower.WebApi.DataTransferObjects.Requests;
 using MCS.WatchTower.WebApi.DataTransferObjects.Responses;
+using Microsoft.AspNetCore.Http.Json;
+using Microsoft.Extensions.Options;
 using Watchtower.WebApi.Models;
 using Watchtower.WebApi.Utilities;
 
@@ -48,11 +50,11 @@ public static class ConnectionsEndpoints
     }
 
     // GET /api/connections
-    private static  async Task<IResult> GetByQueryParameters(IQueryHandler<GetConnectionQuery, PagedList<ConnectionResponse>> handler, [AsParameters] ConnectionQueryParameters queryParameters, HttpResponse response, CancellationToken cancellationToken)
+    private static  async Task<IResult> GetByQueryParameters(IQueryHandler<GetConnectionQuery, PagedList<ConnectionResponse>> handler, [AsParameters] ConnectionQueryParameters queryParameters, HttpResponse response, IOptions<JsonOptions> jsonOptions, CancellationToken cancellationToken)
     {
         var connectionsResponse = await handler.HandleAsync(new GetConnectionQuery(queryParameters), cancellationToken);
 
-        response.Headers.Append("X-Pagination", JsonSerializer.Serialize(connectionsResponse.MetaData));
+        response.Headers.Append("X-Pagination", JsonSerializer.Serialize(connectionsResponse.MetaData, jsonOptions.Value.SerializerOptions));
 
         return Results.Ok(connectionsResponse);
     }

@@ -4,10 +4,12 @@ import { Router } from '@angular/router';
 import { MatTable, MatTableModule } from '@angular/material/table';
 import { AppStatusIndicatorComponent } from "../../apps/app-status-indicator/app-status-indicator.component";
 import { AppStatusStore } from '../services/app-status.store';
+import { DatePipe } from '@angular/common';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-status-table',
-  imports: [MatTableModule, AppStatusIndicatorComponent],
+  imports: [MatTableModule, AppStatusIndicatorComponent, DatePipe, MatSortModule],
   templateUrl: './app-status-table.component.html',
   styleUrl: './app-status-table.component.scss'
 })
@@ -16,7 +18,8 @@ export class AppStatusTableComponent {
   private readonly appStatusStore = inject(AppStatusStore);
   appStatuses = model.required<AppStatusResponse[]>();
 
-  table = viewChild.required<MatTable<AppStatusResponse>>(MatTable);
+  readonly table = viewChild.required<MatTable<AppStatusResponse>>(MatTable);
+  readonly sort = viewChild.required<MatSort>(MatSort);
 
   constructor() {
     effect(() => {
@@ -44,7 +47,7 @@ export class AppStatusTableComponent {
     });
   }
 
-  readonly appStatusColumns = input<string[]>(['app', 'recordedAt']);
+  readonly appStatusColumns = input<string[]>(['appId', 'recordedAt']);
 
   onAppStatusClicked(appStatus: AppStatusResponse) {
     const splitedAppId = appStatus?.appId?.split(';');
@@ -54,6 +57,17 @@ export class AppStatusTableComponent {
 
     if (hostName && appName) {
       this.router.navigate(['/hosts', hostName, 'apps', appName]);
+    }
+  }
+
+  onSortChange($event: Sort) {
+     if ($event.active && $event.direction) {
+      this.router.navigate([], {
+        queryParams: {
+          orderBy: `${$event.active} ${$event.direction}`,
+        },
+        queryParamsHandling: 'merge',
+      });
     }
   }
 }

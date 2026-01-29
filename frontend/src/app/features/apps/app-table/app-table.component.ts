@@ -3,7 +3,7 @@ import { AppResponse } from '../models/app-response';
 import { Router } from '@angular/router';
 import { MatTable, MatTableModule } from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatSortModule} from '@angular/material/sort';
+import {MatSort, MatSortModule, Sort} from '@angular/material/sort';
 import { PrefixPictogramComponent } from '../../../shared/components/prefix-pictogram/prefix-pictogram.component';
 import { AppStatusIndicatorComponent } from '../app-status-indicator/app-status-indicator.component';
 import { CronDescriptionPipe } from "../../../shared/pipes/cron-description.pipe";
@@ -22,7 +22,9 @@ export class AppTableComponent {
   private readonly appStore = inject(AppStore);
   private readonly appStatusStore = inject(AppStatusStore);
   apps = model.required<AppResponse[]>();
-  table = viewChild.required<MatTable<AppResponse>>(MatTable);
+
+  readonly table = viewChild.required<MatTable<AppResponse>>(MatTable);
+  readonly sort = viewChild.required<MatSort>(MatSort);
 
   appColumns = input<string[]>(['hostName', 'appName', 'version', 'port', 'type', 'cronStartTime', 'cronStopTime'])
 
@@ -31,7 +33,7 @@ export class AppTableComponent {
       const createdApp = this.appStore.created();
       if (!createdApp) return;
 
-      this.apps.update(apps => [...apps, createdApp]);
+      this.apps.update(apps => [createdApp, ...apps]);
       this.table().renderRows();
     });
 
@@ -65,6 +67,17 @@ export class AppTableComponent {
     const appName = app.appName;
     if (hostName && appName) {
       this.router.navigate(['/hosts', hostName, 'apps', appName]);
+    }
+  }
+
+  onSortChange($event: Sort) {
+     if ($event.active && $event.direction) {
+      this.router.navigate([], {
+        queryParams: {
+          orderBy: `${$event.active} ${$event.direction}`,
+        },
+        queryParamsHandling: 'merge',
+      });
     }
   }
 }

@@ -4,7 +4,9 @@ export interface ConnectionQueryParameters extends QueryParameters {
   withClientGaia?: string;
   withAppId?: string;
   establishedBefore?: string;
+  establishedAt?: string;
   establishedAfter?: string;
   terminatedBefore?: string;
+  terminatedAt?: string;
   terminatedAfter?: string;
 }

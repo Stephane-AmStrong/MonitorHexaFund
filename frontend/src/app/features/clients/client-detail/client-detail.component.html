@@ -1,4 +1,4 @@
-@if (isLoading()) {
+@if (selectedIsLoading()) {
   <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
 } @else if (clientDetail(); as client) {
   <toolbar [searchConfig]="{ showSearch: false }" />

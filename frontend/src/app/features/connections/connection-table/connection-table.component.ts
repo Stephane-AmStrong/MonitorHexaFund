@@ -5,10 +5,12 @@ import { MatTable, MatTableModule } from '@angular/material/table';
 import { PrefixPictogramComponent } from "../../../shared/components/prefix-pictogram/prefix-pictogram.component";
 import { HashColorPipe } from "../../../shared/pipes/hash-color.pipe";
 import { ConnectionStore } from '../services/connection.store';
+import { DatePipe } from '@angular/common';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'connection-table',
-  imports: [MatTableModule, PrefixPictogramComponent, HashColorPipe],
+  imports: [MatTableModule, PrefixPictogramComponent, HashColorPipe, DatePipe, MatSortModule],
   templateUrl: './connection-table.component.html',
   styleUrl: './connection-table.component.scss'
 })
@@ -17,7 +19,8 @@ export class ConnectionTableComponent {
   private readonly connectionStore = inject(ConnectionStore);
   connections = model.required<ConnectionResponse[]>();
 
-  table = viewChild.required<MatTable<ConnectionResponse>>(MatTable);
+  readonly table = viewChild.required<MatTable<ConnectionResponse>>(MatTable);
+  readonly sort = viewChild.required<MatSort>(MatSort);
 
   constructor() {
     effect(() => {
@@ -45,13 +48,23 @@ export class ConnectionTableComponent {
     });
   }
 
-
-  readonly connectionColumns: readonly string[] = ['clientGaia', 'appId', 'apiVersion', 'machine', 'processId'] as const;
+  readonly connectionColumns: readonly string[] = ['clientGaia', 'appId', 'apiVersion', 'machine', 'processId', 'establishedAt', 'terminatedAt'] as const;
 
   onConnectionClicked(connection: ConnectionResponse) {
     const connectionId = connection.id;
     if (connectionId) {
       this.router.navigate(['/connections', connectionId]);
+    }
+  }
+
+  onSortChange($event: Sort) {
+     if ($event.active && $event.direction) {
+      this.router.navigate([], {
+        queryParams: {
+          orderBy: `${$event.active} ${$event.direction}`,
+        },
+        queryParamsHandling: 'merge',
+      });
     }
   }
 }

@@ -4,8 +4,10 @@ namespace MCS.WatchTower.WebApi.DataTransferObjects.QueryParameters;
 public record ConnectionQueryParameters(
     string? WithClientGaia = null,
     string? WithAppId = null,
+    DateTime? EstablishedAt = null,
     DateTime? EstablishedBefore = null,
     DateTime? EstablishedAfter = null,
+    DateTime? TerminatedAt = null,
     DateTime? TerminatedBefore = null,
     DateTime? TerminatedAfter = null,
     string? SearchTerm = null,

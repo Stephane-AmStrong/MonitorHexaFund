@@ -3,10 +3,11 @@ import { ClientResponse } from '../models/client-response';
 import { Router } from '@angular/router';
 import { MatTable, MatTableModule } from '@angular/material/table';
 import { ClientStore } from '../services/client.store';
+import {MatSort, MatSortModule, Sort} from '@angular/material/sort';
 
 @Component({
   selector: 'client-table',
-  imports: [MatTableModule],
+  imports: [MatTableModule, MatSortModule],
   templateUrl: './client-table.component.html',
   styleUrl: './client-table.component.scss'
 })
@@ -14,7 +15,9 @@ export class ClientTableComponent {
   private readonly router = inject(Router);
   private readonly clientStore = inject(ClientStore);
   clients = model.required<ClientResponse[]>();
-  table = viewChild.required<MatTable<ClientResponse>>(MatTable);
+  readonly table = viewChild.required<MatTable<ClientResponse>>(MatTable);
+  readonly sort = viewChild.required<MatSort>(MatSort);
+
   readonly clientColumns: readonly string[] = ['gaia', 'login'] as const;
 
 
@@ -44,11 +47,21 @@ export class ClientTableComponent {
     });
   }
 
-
   onClientClicked(client: ClientResponse) {
     const clientLogin = client.login;
     if (clientLogin) {
       this.router.navigate(['/clients', 'login', clientLogin]);
+    }
+  }
+
+  onSortChange($event: Sort) {
+     if ($event.active && $event.direction) {
+      this.router.navigate([], {
+        queryParams: {
+          orderBy: `${$event.active} ${$event.direction}`,
+        },
+        queryParamsHandling: 'merge',
+      });
     }
   }
 

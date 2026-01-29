@@ -6,7 +6,6 @@ export const MOCK_CONNECTIONS: ConnectionDetailedResponse[] = [
     // Connection 1
     id: "conn-001",
     clientGaia: "gaia-12345",
-    clientLogin: "john.doe",
     appId: "app-001",
     apiVersion: "v2.0",
     machine: "SERVER-01",
@@ -39,7 +38,6 @@ export const MOCK_CONNECTIONS: ConnectionDetailedResponse[] = [
     // Connection 2
     id: 'CONN-2',
     clientGaia: 'CLIENT-2',
-    clientLogin: 'marie.smith@engie.com',
     appId: 'APP-2',
     apiVersion: '2.1.0',
     machine: 'WORKSTATION-002',
@@ -72,7 +70,6 @@ export const MOCK_CONNECTIONS: ConnectionDetailedResponse[] = [
     // Connection 3
     id: 'CONN-3',
     clientGaia: 'CLIENT-3',
-    clientLogin: 'pierre.martin@engie.com',
     appId: 'APP-3',
     apiVersion: '3.0.1',
     machine: 'WORKSTATION-003',

@@ -72,7 +72,7 @@ export class AppDetailComponent {
   ]);
 
   readonly appDetail = this.appStore.selected;
-  readonly isLoading = this.appStore.isLoading;
+  readonly selectedIsLoading = this.appStore.selectedIsLoading;
 
   readonly tags = computed<string[]>(() => this.appDetail()?.tags || []);
 
@@ -90,7 +90,11 @@ export class AppDetailComponent {
     orderBy: 'recordedAt desc',
   }));
 
-  private readonly connectionQueryParams = computed<ConnectionQueryParameters>(() => ({ withAppId: this.appDetail()?.id}));
+  private readonly connectionQueryParams = computed<ConnectionQueryParameters>(() => ({
+    withAppId: this.appDetail()?.id,
+    orderBy: 'establishedAt desc',
+    pageSize: 10,
+  }));
 
   readonly appStatusColumns: string[] = ['status', 'recordedAt'];
 

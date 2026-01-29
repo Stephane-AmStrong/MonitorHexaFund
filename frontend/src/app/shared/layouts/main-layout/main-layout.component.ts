@@ -44,18 +44,6 @@ export class MainLayoutComponent implements OnDestroy {
     });
   }
 
-  hostQueryParams = {
-    page: 1,
-    pageSize: 10,
-    orderBy: 'name'
-  };
-
-  appQueryParams = {
-    page: 1,
-    pageSize: 10,
-    orderBy: 'appName'
-  };
-
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map((result) => result.matches),
     shareReplay()

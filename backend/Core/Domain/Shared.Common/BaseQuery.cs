@@ -7,7 +7,7 @@ public abstract record BaseQuery<T>
 {
     private Expression<Func<T, bool>>? _filterExpression;
 
-    private const int MaxPageSize = 50;
+    private const int MaxPageSize = 500;
     private int? _pageSize;
     private int? _page = 1;
 
@@ -22,8 +22,8 @@ public abstract record BaseQuery<T>
 
     public int? PageSize
     {
-        get => _pageSize ?? 10;
-        private set => _pageSize = Math.Min(value ?? 10, MaxPageSize);
+        get => _pageSize ?? 50;
+        private set => _pageSize = Math.Min(value ?? 50, MaxPageSize);
     }
 
     // protected BaseQuery() { }

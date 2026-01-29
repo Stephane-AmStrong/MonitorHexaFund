@@ -42,6 +42,10 @@ internal sealed class ExceptionHandlingMiddleware(ILogger<ExceptionHandlingMiddl
     {
         return exception switch
         {
+            OperationCanceledException => (
+                StatusCodes.Status408RequestTimeout,
+                ApiErrorResponse.RequestTimeout(traceId)
+            ),
             BadRequestException validationEx => (
                 StatusCodes.Status400BadRequest,
                 ApiErrorResponse.ValidationError(
@@ -118,7 +122,11 @@ internal sealed class ExceptionHandlingMiddleware(ILogger<ExceptionHandlingMiddl
 
     private void LogException(Exception e)
     {
-        if (e is BadRequestException validationEx && validationEx.Errors != null)
+        if (e is OperationCanceledException)
+        {
+            logger.LogDebug("Request canceled or timed out");
+        }
+        else if (e is BadRequestException validationEx && validationEx.Errors != null)
         {
             logger.LogWarning("Validation error: {Errors}",
                 string.Join(", ", validationEx.Errors.SelectMany(err =>

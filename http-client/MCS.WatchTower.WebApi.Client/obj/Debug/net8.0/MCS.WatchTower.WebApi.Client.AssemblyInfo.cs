@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MCS.WatchTower.WebApi.Client")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+515987a979c6590531236822aefbb7120a27f2cb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d5f0588c117220ce3a19e9e56868884faee119c4")]
 [assembly: System.Reflection.AssemblyProductAttribute("MCS.WatchTower.WebApi.Client")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MCS.WatchTower.WebApi.Client")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

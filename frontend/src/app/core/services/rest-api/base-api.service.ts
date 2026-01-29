@@ -15,16 +15,20 @@ export class BaseApiService {
 
   private http = inject(HttpClient);
 
-   private toHttpParams(params?: Record<string, string | number | boolean | undefined | null>): HttpParams | undefined {
+  cleanQueryParams(params?: Record<string, any>): Record<string, string> {
+    if (!params) return {};
+
+    return Object.fromEntries(
+      Object.entries(params)
+        .filter(([, value]) => value !== undefined && value !== null && value !== '')
+        .map(([key, value]) => [key, String(value)])
+    );
+  }
+
+  private toHttpParams(params?: Record<string, string | number | boolean | undefined | null>): HttpParams | undefined {
     if (!params) return undefined;
 
-    const cleanParams: Record<string, string> = {};
-
-    Object.entries(params).forEach(([key, value]) => {
-      if (value !== undefined && value !== null && value !== '') {
-        cleanParams[key] = String(value);
-      }
-    });
+    const cleanParams = this.cleanQueryParams(params);
 
     if (Object.keys(cleanParams).length === 0) return undefined;
 

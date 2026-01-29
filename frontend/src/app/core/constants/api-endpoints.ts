@@ -22,7 +22,6 @@ export const API_ENDPOINTS = {
     ROOT: 'hosts',
     BY_ID: (id: string) => `${API_ENDPOINTS.HOSTS.ROOT}/by-id/${id}`,
     BY_NAME: (name: string) => `${API_ENDPOINTS.HOSTS.ROOT}/${name}`,
-    WITH_APPS: () => `${API_ENDPOINTS.HOSTS.ROOT}/with-apps`,
     APP_BY_HOST: (hostName: string, appName: string) => `${API_ENDPOINTS.HOSTS.ROOT}/${hostName}/apps/${appName}`,
     LIVE: () => `${API_ENDPOINTS.HOSTS.ROOT}/live`
   },

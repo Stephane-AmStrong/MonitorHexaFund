@@ -1,8 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, effect, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, viewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
-import { MatGridListModule } from '@angular/material/grid-list';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ToolbarComponent } from '../../../shared/components/toolbar/toolbar.component';
 
 import { toSignal } from '@angular/core/rxjs-interop';
@@ -10,12 +9,15 @@ import { AppQueryParameters } from '../models/app-query-parameters';
 import { MatCardModule } from '@angular/material/card';
 import { AppStore } from '../services/app.store';
 import { AppTableComponent } from '../app-table/app-table.component';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 
 @Component({
   selector: 'app-list',
   imports: [
     MatCardModule,
-    MatGridListModule,
+    MatSortModule,
+    MatPaginatorModule,
     MatButtonModule,
     ToolbarComponent,
     AppTableComponent,
@@ -26,7 +28,10 @@ import { AppTableComponent } from '../app-table/app-table.component';
 })
 export class AppListComponent {
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
   private readonly appStore = inject(AppStore);
+  readonly paginator = viewChild.required<MatPaginator>(MatPaginator);
+  readonly sort = viewChild.required<MatSort>(MatSort);
 
   private dialog = inject(MatDialog);
 
@@ -42,10 +47,21 @@ export class AppListComponent {
     withVersion: this.routeResource()?.['withVersion'],
     searchTerm: this.routeResource()?.['searchTerm'],
     orderBy: this.routeResource()?.['orderBy'],
-    page: +(this.routeResource()?.['page'] ?? 1),
-    pageSize: +(this.routeResource()?.['pageSize'] ?? 10),
+    page: +this.routeResource()?.['page'] || 1,
+    pageSize: +this.routeResource()?.['pageSize'] || 200,
   }));
 
   readonly apps = this.appStore.pagedList;
-  readonly isLoading = this.appStore.isLoading;
+  readonly pagedListIsLoading = this.appStore.pagedListIsLoading;
+  readonly pagingData = this.appStore.pagingData;
+
+  onPageEvent(event: { pageIndex: number; pageSize: number }) {
+    this.router.navigate([], {
+      queryParams: {
+        page: event.pageIndex + 1,
+        pageSize: event.pageSize,
+       },
+      queryParamsHandling: 'merge',
+    });
+  }
 }

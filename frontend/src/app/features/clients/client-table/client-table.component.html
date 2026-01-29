@@ -1,14 +1,14 @@
-<table mat-table [dataSource]="clients()">
+<table mat-table [dataSource]="clients()" matSort (matSortChange)="onSortChange($event)" matSortActive="gaia" matSortDirection="asc">
 
     <!-- Gaia Column -->
     <ng-container matColumnDef="gaia">
-        <th mat-header-cell *matHeaderCellDef>Gaia</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Gaia</th>
         <td mat-cell *matCellDef="let client">{{client.gaia}}</td>
     </ng-container>
 
     <!-- Login Column -->
     <ng-container matColumnDef="login">
-        <th mat-header-cell *matHeaderCellDef>Login</th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Login</th>
         <td mat-cell *matCellDef="let client">{{client.login}}</td>
     </ng-container>
 

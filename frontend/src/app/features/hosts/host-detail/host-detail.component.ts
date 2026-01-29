@@ -44,7 +44,7 @@ export class HostDetailComponent {
     withHostName: this.hostDetail()?.name,
   }));
 
-  readonly isLoading = this.hostStore.isLoading;
+  readonly selectedIsLoading = this.hostStore.selectedIsLoading;
   readonly hostDetail = this.hostStore.selected;
   readonly apps = this.appStore.pagedList;
 

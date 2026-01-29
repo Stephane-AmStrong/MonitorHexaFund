@@ -10,6 +10,8 @@ using Domain.Shared.Common;
 using MCS.WatchTower.WebApi.DataTransferObjects.QueryParameters;
 using MCS.WatchTower.WebApi.DataTransferObjects.Requests;
 using MCS.WatchTower.WebApi.DataTransferObjects.Responses;
+using Microsoft.AspNetCore.Http.Json;
+using Microsoft.Extensions.Options;
 using Watchtower.WebApi.Models;
 using Watchtower.WebApi.Utilities;
 
@@ -56,11 +58,11 @@ public static class AlertsEndpoints
     }
 
     // GET /api/alerts
-    private static  async Task<IResult> GetByQueryParameters(IQueryHandler<GetAlertQuery, PagedList<AlertResponse>> handler, [AsParameters] AlertQueryParameters queryParameters, HttpResponse response, CancellationToken cancellationToken)
+    private static  async Task<IResult> GetByQueryParameters(IQueryHandler<GetAlertQuery, PagedList<AlertResponse>> handler, [AsParameters] AlertQueryParameters queryParameters, HttpResponse response, IOptions<JsonOptions> jsonOptions, CancellationToken cancellationToken)
     {
         var alertsResponse = await handler.HandleAsync(new GetAlertQuery(queryParameters), cancellationToken);
 
-        response.Headers.Append("X-Pagination", JsonSerializer.Serialize(alertsResponse.MetaData));
+        response.Headers.Append("X-Pagination", JsonSerializer.Serialize(alertsResponse.MetaData, jsonOptions.Value.SerializerOptions));
 
         return Results.Ok(alertsResponse);
     }

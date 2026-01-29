@@ -9,9 +9,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Application.UseCases.Connections.Terminate;
 
-public class ConnectionTerminatedEventHandler(IEventStreamingService<ConnectionResponse> eventStreaming, ILogger<ConnectionTerminatedEventHandler> logger) : IEventHandler<DeletedEvent<Connection>>
+public class ConnectionTerminatedEventHandler(IEventStreamingService<ConnectionResponse> eventStreaming, ILogger<ConnectionTerminatedEventHandler> logger) : IEventHandler<UpdatedEvent<Connection>>
 {
-    public Task Handle(DeletedEvent<Connection> terminatedEvent, CancellationToken cancellationToken)
+    public Task Handle(UpdatedEvent<Connection> terminatedEvent, CancellationToken cancellationToken)
     {
         eventStreaming.BroadcastAsync(new BroadcastMessage<ConnectionResponse>(terminatedEvent.Record.Adapt<ConnectionResponse>(), terminatedEvent.GetBroadcastMessageType()), cancellationToken);
 

@@ -89,7 +89,7 @@
           }
         }
       },
-      "MCS.WatchTower.WebApi.DataTransferObjects/1.2.0.3640": {
+      "MCS.WatchTower.WebApi.DataTransferObjects/1.2.0.3646": {
         "runtime": {
           "lib/net8.0/MCS.WatchTower.WebApi.DataTransferObjects.dll": {
             "assemblyVersion": "1.0.0.0",
@@ -482,7 +482,7 @@
           "Domain": "1.0.0",
           "FluentValidation": "12.0.0",
           "FluentValidation.DependencyInjectionExtensions": "12.0.0",
-          "MCS.WatchTower.WebApi.DataTransferObjects": "1.2.0.3640",
+          "MCS.WatchTower.WebApi.DataTransferObjects": "1.2.0.3646",
           "Mapster": "7.4.0",
           "Microsoft.Extensions.Logging.Abstractions": "9.0.8"
         },
@@ -585,12 +585,12 @@
       "path": "mapster.core/1.2.1",
       "hashPath": "mapster.core.1.2.1.nupkg.sha512"
     },
-    "MCS.WatchTower.WebApi.DataTransferObjects/1.2.0.3640": {
+    "MCS.WatchTower.WebApi.DataTransferObjects/1.2.0.3646": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Xh6+2WH50uNrIveNLWLF98D5bi8gYxb0dAto0EUYK0yB0CPcICFjT6g+iPsN8pZHz8K2uuuqKvwm2DGFiidaog==",
-      "path": "mcs.watchtower.webapi.datatransferobjects/1.2.0.3640",
-      "hashPath": "mcs.watchtower.webapi.datatransferobjects.1.2.0.3640.nupkg.sha512"
+      "sha512": "sha512-xRuMfhTf1GSwTul4Y0J5xZDJJGpxNih+IWEfroOPm5GZV97LJw7O6FWuo0CdfedWih7WrJ9VPbvQQD+mkNmulA==",
+      "path": "mcs.watchtower.webapi.datatransferobjects/1.2.0.3646",
+      "hashPath": "mcs.watchtower.webapi.datatransferobjects.1.2.0.3646.nupkg.sha512"
     },
     "Microsoft.AspNetCore.OpenApi/9.0.8": {
       "type": "package",

@@ -1,8 +1,8 @@
-<table mat-table [dataSource]="dataSource()">
+<table mat-table [dataSource]="dataSource()" matSort (matSortChange)="onSortChange($event)" matSortActive="name" matSortDirection="asc">
 
     <!-- HostName Column -->
-    <ng-container matColumnDef="hostName">
-        <th mat-header-cell *matHeaderCellDef>Host Name</th>
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Host Name</th>
         <th mat-header-cell *matCellDef="let element" [attr.rowspan]="element.isFirstApp ? element.hostRowSpan : null"
             [style.display]="element.isFirstApp ? 'table-cell' : 'none'" class="host-cell"
             (click)="onHostClicked(element, $event)">

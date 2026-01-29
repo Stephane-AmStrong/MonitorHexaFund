@@ -65,8 +65,9 @@ public static class ServiceCollectionExtensions
             {
                 //builder.WithOrigins(allowedOrigins)
                 builder.AllowAnyOrigin()
-                .AllowAnyHeader()
-                .AllowAnyMethod();
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .WithExposedHeaders("X-Pagination");
             });
 
         });
@@ -194,7 +195,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IEventHandler<DeletedEvent<Host>>, HostDeletedEventHandler>();
 
         services.AddScoped<IEventHandler<CreatedEvent<Connection>>, ConnectionEstablishedEventHandler>();
-        services.AddScoped<IEventHandler<DeletedEvent<Connection>>, ConnectionTerminatedEventHandler>();
+        services.AddScoped<IEventHandler<UpdatedEvent<Connection>>, ConnectionTerminatedEventHandler>();
 
         services.AddScoped<IEventHandler<CreatedEvent<App>>, AppCreatedEventHandler>();
         services.AddScoped<IEventHandler<UpdatedEvent<App>>, AppUpdatedEventHandler>();
@@ -284,6 +285,8 @@ public static class ServiceCollectionExtensions
     {
         services.Configure<JsonOptions>(options =>
         {
+            options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+            options.JsonSerializerOptions.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
             options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
         });
     }

@@ -53,7 +53,7 @@
           "lib/net7.0/Mapster.Core.dll": {}
         }
       },
-      "MCS.WatchTower.WebApi.DataTransferObjects/1.2.0.3640": {
+      "MCS.WatchTower.WebApi.DataTransferObjects/1.2.0.3646": {
         "type": "package",
         "compile": {
           "lib/net8.0/MCS.WatchTower.WebApi.DataTransferObjects.dll": {}
@@ -221,7 +221,7 @@
           "Domain": "1.0.0",
           "FluentValidation": "12.0.0",
           "FluentValidation.DependencyInjectionExtensions": "12.0.0",
-          "MCS.WatchTower.WebApi.DataTransferObjects": "[1.2.0.3640]",
+          "MCS.WatchTower.WebApi.DataTransferObjects": "[1.2.0.3646]",
           "Mapster": "7.4.0",
           "Microsoft.Extensions.Logging.Abstractions": "9.0.8"
         },
@@ -303,15 +303,15 @@
         "mapster.core.nuspec"
       ]
     },
-    "MCS.WatchTower.WebApi.DataTransferObjects/1.2.0.3640": {
-      "sha512": "Xh6+2WH50uNrIveNLWLF98D5bi8gYxb0dAto0EUYK0yB0CPcICFjT6g+iPsN8pZHz8K2uuuqKvwm2DGFiidaog==",
+    "MCS.WatchTower.WebApi.DataTransferObjects/1.2.0.3646": {
+      "sha512": "xRuMfhTf1GSwTul4Y0J5xZDJJGpxNih+IWEfroOPm5GZV97LJw7O6FWuo0CdfedWih7WrJ9VPbvQQD+mkNmulA==",
       "type": "package",
-      "path": "mcs.watchtower.webapi.datatransferobjects/1.2.0.3640",
+      "path": "mcs.watchtower.webapi.datatransferobjects/1.2.0.3646",
       "files": [
         ".nupkg.metadata",
         "lib/net6.0/MCS.WatchTower.WebApi.DataTransferObjects.dll",
         "lib/net8.0/MCS.WatchTower.WebApi.DataTransferObjects.dll",
-        "mcs.watchtower.webapi.datatransferobjects.1.2.0.3640.nupkg.sha512",
+        "mcs.watchtower.webapi.datatransferobjects.1.2.0.3646.nupkg.sha512",
         "mcs.watchtower.webapi.datatransferobjects.nuspec"
       ]
     },
@@ -707,7 +707,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.309/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

@@ -1,4 +1,4 @@
-@if (isLoading()) {
+@if (selectedIsLoading()) {
 <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
 } @else if (appDetail(); as app) {
 <toolbar />
@@ -29,7 +29,7 @@
                     <mat-list-item>
                         <mat-icon matListItemIcon>access_time</mat-icon>
                         <span matListItemTitle>Recorded At</span>
-                        <time matListItemLine>{{ this.appStatuses()[0]?.recordedAt | date:'medium' }}</time>
+                        <time matListItemLine>{{ this.appStatuses()[0]?.recordedAt | date:'short' }}</time>
                     </mat-list-item>
                     } @else {
                     <p>No heartbeat received yet.</p>
@@ -149,7 +149,7 @@
                         <ng-template mat-tab-label>
                             <span class="header-label">
                                 <mat-icon>link</mat-icon>
-                                <span>Active Connections</span>
+                                <span>Latest Connections</span>
                             </span>
                         </ng-template>
                         <connection-table [connections]="connections()" />

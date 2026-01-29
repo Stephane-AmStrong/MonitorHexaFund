@@ -3,10 +3,12 @@ import { AlertResponse } from '../models/alert-response';
 import { Router } from '@angular/router';
 import { MatTable, MatTableModule } from '@angular/material/table';
 import { AlertStore } from '../services/alert.store';
+import { DatePipe } from '@angular/common';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'alert-table',
-  imports: [MatTableModule],
+  imports: [MatTableModule, DatePipe, MatSortModule],
   templateUrl: './alert-table.component.html',
   styleUrl: './alert-table.component.scss'
 })
@@ -15,8 +17,9 @@ export class AlertTableComponent {
   private readonly alertStore = inject(AlertStore);
   alerts = model.required<AlertResponse[]>();
 
-  table = viewChild.required<MatTable<AlertResponse>>(MatTable);
-
+  readonly table = viewChild.required<MatTable<AlertResponse>>(MatTable);
+  readonly sort = viewChild.required<MatSort>(MatSort);
+  
   constructor() {
     effect(() => {
       const createdAlert = this.alertStore.created();
@@ -49,6 +52,17 @@ export class AlertTableComponent {
     const alertId = alert.id;
     if (alertId) {
       this.router.navigate(['/alerts', alertId]);
+    }
+  }
+
+  onSortChange($event: Sort) {
+     if ($event.active && $event.direction) {
+      this.router.navigate([], {
+        queryParams: {
+          orderBy: `${$event.active} ${$event.direction}`,
+        },
+        queryParamsHandling: 'merge',
+      });
     }
   }
 }

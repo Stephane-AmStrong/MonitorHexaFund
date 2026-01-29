@@ -11,6 +11,8 @@ using Domain.Shared.Common;
 using MCS.WatchTower.WebApi.DataTransferObjects.QueryParameters;
 using MCS.WatchTower.WebApi.DataTransferObjects.Requests;
 using MCS.WatchTower.WebApi.DataTransferObjects.Responses;
+using Microsoft.AspNetCore.Http.Json;
+using Microsoft.Extensions.Options;
 using Watchtower.WebApi.Models;
 using Watchtower.WebApi.Utilities;
 
@@ -59,11 +61,11 @@ public static class ClientsEndpoints
     }
 
     // GET /api/clients
-    private static  async Task<IResult> GetByQueryParameters(IQueryHandler<GetClientQuery, PagedList<ClientResponse>> handler, [AsParameters] ClientQueryParameters queryParameters, HttpResponse response, CancellationToken cancellationToken)
+    private static  async Task<IResult> GetByQueryParameters(IQueryHandler<GetClientQuery, PagedList<ClientResponse>> handler, [AsParameters] ClientQueryParameters queryParameters, HttpResponse response, IOptions<JsonOptions> jsonOptions, CancellationToken cancellationToken)
     {
         var clientsResponse = await handler.HandleAsync(new GetClientQuery(queryParameters), cancellationToken);
 
-        response.Headers.Append("X-Pagination", JsonSerializer.Serialize(clientsResponse.MetaData));
+        response.Headers.Append("X-Pagination", JsonSerializer.Serialize(clientsResponse.MetaData, jsonOptions.Value.SerializerOptions));
 
         return Results.Ok(clientsResponse);
     }

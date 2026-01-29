@@ -40,4 +40,11 @@ public record ApiErrorResponse(
             StatusCodes.Status500InternalServerError,
             new Dictionary<string, string[]> { ["App"] = ["An unexpected error occurred. Please try again later."] },
             traceId);
+
+    public static ApiErrorResponse RequestTimeout(string traceId)
+        => new(
+            "The request timed out.",
+            StatusCodes.Status408RequestTimeout,
+            new Dictionary<string, string[]> { ["Request"] = ["The operation was canceled or timed out."] },
+            traceId);
 }

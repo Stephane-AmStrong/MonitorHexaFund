@@ -1,11 +1,12 @@
-import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, startWith, switchMap, tap } from 'rxjs';
+import { computed, inject, Injectable, Signal } from '@angular/core';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { ConnectionResponse } from '../models/connection-response';
 import { BaseApiService } from '../../../core/services/rest-api/base-api.service';
 import { API_ENDPOINTS } from '../../../core/constants/api-endpoints';
 import { ConnectionQueryParameters } from '../models/connection-query-parameters';
 import { ConnectionDetailedResponse } from '../models/connection-detailed-response';
 import { ConnectionEstablishRequest } from '../models/connection-establish-request';
+import { httpResource } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -14,24 +15,26 @@ export class ConnectionHttpService {
   private http = inject(BaseApiService);
   private refreshTrigger = new BehaviorSubject<void>(undefined);
 
-  getPagedListByQueryAsync(queryParams: ConnectionQueryParameters): Observable<ConnectionResponse[]> {
-    return this.refreshTrigger.pipe(
-      startWith(undefined),
-      switchMap(() =>
-        this.http.handleRequest<ConnectionResponse[]>('GET', API_ENDPOINTS.CONNECTIONS.ROOT, { params: queryParams })
-      )
-    );
+  getPagedListResource(queryParams: Signal<ConnectionQueryParameters | undefined>) {
+    return httpResource<ConnectionResponse[]>(() => {
+      if (!queryParams()) return undefined;
+
+      return {
+        url: API_ENDPOINTS.CONNECTIONS.ROOT,
+        params: computed(() => this.http.cleanQueryParams(queryParams()))(),
+        defaultValue: [],
+      };
+    });
   }
 
-  getById(id: string): Observable<ConnectionDetailedResponse> {
-    return this.refreshTrigger.pipe(
-      startWith(undefined),
-      switchMap(() =>
-        this.http.handleRequest<ConnectionDetailedResponse>(
-          'GET', API_ENDPOINTS.CONNECTIONS.BY_ID(id)
-        )
-      )
-    );
+  getById(id: Signal<string>) {
+    return httpResource<ConnectionDetailedResponse>(() => {
+      if (!id()) return undefined;
+
+      return {
+        url: API_ENDPOINTS.CONNECTIONS.BY_ID(id()),
+      };
+    });
   }
 
   create(

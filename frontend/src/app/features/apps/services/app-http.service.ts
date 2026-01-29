@@ -1,11 +1,11 @@
-import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, startWith, switchMap, tap } from 'rxjs';
+import { computed, inject, Injectable, Signal } from '@angular/core';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { AppResponse } from '../models/app-response';
 import { BaseApiService } from '../../../core/services/rest-api/base-api.service';
 import { AppCreateRequest } from '../models/app-create-request';
 import { API_ENDPOINTS } from '../../../core/constants/api-endpoints';
 import { AppQueryParameters } from '../models/app-query-parameters';
-import { AppDetailedResponse } from '../models/app-detailed-response';
+import { httpResource } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -14,24 +14,26 @@ export class AppHttpService {
   private http = inject(BaseApiService);
   private refreshTrigger = new BehaviorSubject<void>(undefined);
 
-  getPagedListByQueryAsync(queryParams: AppQueryParameters): Observable<AppResponse[]> {
-    return this.refreshTrigger.pipe(
-      startWith(undefined),
-      switchMap(() =>
-        this.http.handleRequest<AppResponse[]>('GET', API_ENDPOINTS.APPS.ROOT, { params: queryParams })
-      )
-    );
+  getPagedListResource(queryParams: Signal<AppQueryParameters | undefined>) {
+    return httpResource<AppResponse[]>(() => {
+      if (!queryParams()) return undefined;
+
+      return {
+        url: API_ENDPOINTS.APPS.ROOT,
+        params: computed(() => this.http.cleanQueryParams(queryParams()))(),
+        defaultValue: [],
+      };
+    });
   }
 
-  getById(id: string): Observable<AppDetailedResponse> {
-    return this.refreshTrigger.pipe(
-      startWith(undefined),
-      switchMap(() =>
-        this.http.handleRequest<AppDetailedResponse>(
-          'GET', API_ENDPOINTS.APPS.BY_ID(id)
-        )
-      )
-    );
+  getById(id: Signal<string>) {
+    return httpResource<AppResponse[]>(() => {
+      if (!id()) return undefined;
+
+      return {
+        url: API_ENDPOINTS.APPS.BY_ID(id()),
+      };
+    });
   }
 
   create(

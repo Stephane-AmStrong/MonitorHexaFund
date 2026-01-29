@@ -5,7 +5,6 @@ using Application.UseCases.Hosts.Create;
 using Application.UseCases.Hosts.Delete;
 using Application.UseCases.Hosts.GetById;
 using Application.UseCases.Hosts.GetByName;
-using Application.UseCases.Hosts.GetByQuery;
 using Application.UseCases.Hosts.GetAppOfHost;
 using Application.UseCases.Hosts.GetWithAppsByQuery;
 using Application.UseCases.Hosts.Update;
@@ -14,8 +13,10 @@ using MCS.WatchTower.WebApi.DataTransferObjects.QueryParameters;
 using MCS.WatchTower.WebApi.DataTransferObjects.Requests;
 using MCS.WatchTower.WebApi.DataTransferObjects.Responses;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Watchtower.WebApi.Models;
 using Watchtower.WebApi.Utilities;
+using JsonOptions = Microsoft.AspNetCore.Http.Json.JsonOptions;
 
 namespace Watchtower.WebApi.Endpoints;
 public static class HostsEndpoints
@@ -25,10 +26,7 @@ public static class HostsEndpoints
         var group = app.MapGroup("/api/hosts")
             .WithTags("Hosts");
 
-        group.MapGet("/", GetByQuery)
-            .Produces<IList<HostResponse>>(StatusCodes.Status200OK);
-
-        group.MapGet("/with-apps", GetWithAppsByQuery)
+        group.MapGet("/", GetByQueryParameters)
             .Produces<IList<HostResponse>>(StatusCodes.Status200OK);
 
         group.MapGet("/id/{id}", GetHostById)
@@ -70,22 +68,12 @@ public static class HostsEndpoints
             .WithSummary("Stream host events");
     }
 
-    // GET /api/hosts
-    private static  async Task<IResult> GetByQuery(IQueryHandler<GetHostQuery, PagedList<HostResponse>> handler, [AsParameters] HostQueryParameters queryParameters, HttpResponse response, CancellationToken cancellationToken)
-    {
-        var hostsResponse = await handler.HandleAsync(new GetHostQuery(queryParameters), cancellationToken);
-
-        response.Headers.Append("X-Pagination", JsonSerializer.Serialize(hostsResponse.MetaData));
-
-        return Results.Ok(hostsResponse);
-    }
-
     // GET /api/hosts/with-apps
-    private static  async Task<IResult> GetWithAppsByQuery(IQueryHandler<GetHostWithAppsQuery, PagedList<HostDetailedResponse>> handler, [AsParameters] HostQueryParameters queryParameters, HttpResponse response, CancellationToken cancellationToken)
+    private static  async Task<IResult> GetByQueryParameters(IQueryHandler<GetHostWithAppsQuery, PagedList<HostDetailedResponse>> handler, [AsParameters] HostQueryParameters queryParameters, HttpResponse response, IOptions<JsonOptions> jsonOptions, CancellationToken cancellationToken)
     {
         var hostsResponse = await handler.HandleAsync(new GetHostWithAppsQuery(queryParameters), cancellationToken);
 
-        response.Headers.Append("X-Pagination", JsonSerializer.Serialize(hostsResponse.MetaData));
+        response.Headers.Append("X-Pagination", JsonSerializer.Serialize(hostsResponse.MetaData, jsonOptions.Value.SerializerOptions));
 
         return Results.Ok(hostsResponse);
     }

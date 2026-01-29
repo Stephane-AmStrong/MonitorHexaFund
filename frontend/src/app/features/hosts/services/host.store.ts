@@ -1,6 +1,5 @@
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { HostHttpService } from './host-http.service';
-import { rxResource } from '@angular/core/rxjs-interop';
 import { HostQueryParameters } from '../models/host-query-parameters';
 import { HostSseService } from './host-sse.service';
 import { HostDetailedResponse } from '../models/host-detailed-response';
@@ -12,35 +11,24 @@ export class HostStore {
   private readonly hostHttpService = inject(HostHttpService);
   private readonly hostSseService = inject(HostSseService);
 
-  queryParameters = signal<HostQueryParameters | undefined>({
-    page: 1,
-    pageSize: 10,
-  });
-
-  selectedName = signal<string | undefined>(undefined);
+  queryParameters = signal<HostQueryParameters | undefined>(undefined);
+  selectedName = signal<string>('');
 
   created = signal<HostDetailedResponse | null>(null);
   updated = signal<HostDetailedResponse | null>(null);
   deleted = signal<HostDetailedResponse | null>(null);
 
-  private pagedListResource = rxResource({
-    params: () => this.queryParameters(),
-    stream: ({ params }) => this.hostHttpService.getPagedListByQueryAsync(params),
-    defaultValue: [],
-  });
+  private pagedListResource = this.hostHttpService.getPagedListResource(this.queryParameters);
 
-  private selectedResource = rxResource({
-    params: () => this.selectedName(),
-    stream: ({ params }) => this.hostHttpService.getByName(params),
-    defaultValue: undefined,
-  });
+  private selectedResource = this.hostHttpService.getByName(this.selectedName);
 
   selected = this.selectedResource.value;
-  pagedList = this.pagedListResource.value;
-  isLoading = computed(
-    () => this.pagedListResource.isLoading() || this.selectedResource.isLoading()
-  );
-  error = computed(() => this.pagedListResource.error() || this.selectedResource.error());
+  pagedListIsLoading = this.pagedListResource.isLoading;
+  selectedIsLoading = this.selectedResource.isLoading;
+  pagedListError = this.pagedListResource.error;
+  selectedError = this.selectedResource.error;
+  pagedList = computed(() => this.pagedListResource.value() ?? []);
+  pagingData = computed(() => JSON.parse(this.pagedListResource.headers()?.get('x-pagination') || '{}'));
 
   constructor() {
     this.hostSseService.connect({

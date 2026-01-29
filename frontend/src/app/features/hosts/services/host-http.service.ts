@@ -1,5 +1,5 @@
-import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, startWith, switchMap, tap } from 'rxjs';
+import { computed, inject, Injectable, Signal } from '@angular/core';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { HostResponse } from '../models/host-response';
 import { BaseApiService } from '../../../core/services/rest-api/base-api.service';
 import { HostCreateRequest } from '../models/host-create-request';
@@ -7,6 +7,7 @@ import { API_ENDPOINTS } from '../../../core/constants/api-endpoints';
 import { HostDetailedResponse } from '../models/host-detailed-response';
 import { HostQueryParameters } from '../models/host-query-parameters';
 import { AppDetailedResponse } from '../../apps/models/app-detailed-response';
+import { httpResource } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -15,35 +16,36 @@ export class HostHttpService {
   private http = inject(BaseApiService);
   private refreshTrigger = new BehaviorSubject<void>(undefined);
 
-  getPagedListByQueryAsync(queryParams: HostQueryParameters): Observable<HostDetailedResponse[]> {
-    return this.refreshTrigger.pipe(
-      startWith(undefined),
-      switchMap(() =>
-        this.http.handleRequest<HostDetailedResponse[]>('GET', API_ENDPOINTS.HOSTS.WITH_APPS(), { params: queryParams })
-      )
-    );
+  getPagedListResource(queryParams: Signal<HostQueryParameters | undefined>) {
+    return httpResource<HostDetailedResponse[]>(() => {
+      if (!queryParams()) return undefined;
+
+      return {
+        url: API_ENDPOINTS.HOSTS.ROOT,
+        params: computed(() => this.http.cleanQueryParams(queryParams()))(),
+        defaultValue: [],
+      };
+    });
   }
 
-  getByName(name: string): Observable<HostDetailedResponse> {
-    return this.refreshTrigger.pipe(
-      startWith(undefined),
-      switchMap(() =>
-        this.http.handleRequest<HostDetailedResponse>(
-          'GET',API_ENDPOINTS.HOSTS.BY_NAME(name)
-        )
-      )
-    );
+  getByName(name: Signal<string>) {
+    return httpResource<HostDetailedResponse>(() => {
+      if (!name()) return undefined;
+
+      return {
+        url: API_ENDPOINTS.HOSTS.BY_NAME(name()),
+      };
+    });
   }
 
-  getAppByHostAndApp(hostName: string, appName: string): Observable<AppDetailedResponse> {
-    return this.refreshTrigger.pipe(
-      startWith(undefined),
-      switchMap(() =>
-        this.http.handleRequest<AppDetailedResponse>(
-          'GET', API_ENDPOINTS.HOSTS.APP_BY_HOST(hostName, appName)
-        )
-      )
-    );
+  getAppByHostAndApp(hostName: Signal<string>, appName: Signal<string>) {
+    return httpResource<AppDetailedResponse>(() => {
+      if (!hostName() || !appName()) return undefined;
+
+      return {
+        url: API_ENDPOINTS.HOSTS.APP_BY_HOST(hostName(), appName()),
+      };
+    });
   }
 
   create(

@@ -1,4 +1,4 @@
-import { inject, Injectable } from '@angular/core';
+import { computed, inject, Injectable, Signal } from '@angular/core';
 import { BehaviorSubject, Observable, startWith, switchMap, tap } from 'rxjs';
 import { ClientResponse } from '../models/client-response';
 import { BaseApiService } from '../../../core/services/rest-api/base-api.service';
@@ -6,6 +6,7 @@ import { ClientCreateRequest } from '../models/client-create-request';
 import { API_ENDPOINTS } from '../../../core/constants/api-endpoints';
 import { ClientQueryParameters } from '../models/client-query-parameters';
 import { ClientDetailedResponse } from '../models/client-detailed-response';
+import { httpResource } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -14,24 +15,26 @@ export class ClientHttpService {
   private http = inject(BaseApiService);
   private refreshTrigger = new BehaviorSubject<void>(undefined);
 
-  getPagedListByQueryAsync(queryParams: ClientQueryParameters): Observable<ClientResponse[]> {
-    return this.refreshTrigger.pipe(
-      startWith(undefined),
-      switchMap(() =>
-        this.http.handleRequest<ClientResponse[]>('GET', API_ENDPOINTS.CLIENTS.ROOT, { params: queryParams })
-      )
-    );
+  getPagedListResource(queryParams: Signal<ClientQueryParameters | undefined>) {
+    return httpResource<ClientResponse[]>(() => {
+      if (!queryParams()) return undefined;
+
+      return {
+        url: API_ENDPOINTS.CLIENTS.ROOT,
+        params: computed(() => this.http.cleanQueryParams(queryParams()))(),
+        defaultValue: [],
+      };
+    });    
   }
 
-  getByLogin(login: string): Observable<ClientDetailedResponse> {
-    return this.refreshTrigger.pipe(
-      startWith(undefined),
-      switchMap(() =>
-        this.http.handleRequest<ClientDetailedResponse>(
-          'GET', API_ENDPOINTS.CLIENTS.BY_LOGIN(login)
-        )
-      )
-    );
+  getByLogin(login: Signal<string>) {
+    return httpResource<ClientDetailedResponse>(() => {
+      if (!login()) return undefined;
+
+      return {
+        url: API_ENDPOINTS.CLIENTS.BY_LOGIN(login()),
+      };
+    });
   }
 
   create(

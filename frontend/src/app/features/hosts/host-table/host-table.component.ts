@@ -9,10 +9,11 @@ import { CronDescriptionPipe } from '../../../shared/pipes/cron-description.pipe
 import { HashColorPipe } from "../../../shared/pipes/hash-color.pipe";
 import { HostStore } from '../services/host.store';
 import { AppStatusStore } from '../../app-statuses/services/app-status.store';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'host-table',
-  imports: [MatTableModule, AppStatusIndicatorComponent, PrefixPictogramComponent, CronDescriptionPipe, HashColorPipe],
+  imports: [MatTableModule, AppStatusIndicatorComponent, PrefixPictogramComponent, CronDescriptionPipe, HashColorPipe, MatSortModule],
   templateUrl: './host-table.component.html',
   styleUrl: './host-table.component.scss',
 })
@@ -22,10 +23,11 @@ export class HostTableComponent {
   private readonly appStatusStore = inject(AppStatusStore);
   hosts = model.required<HostDetailedResponse[]>();
   readonly dataSource = computed<HostAppRow[]>(() => this.flattenHosts(this.hosts()));
-  table = viewChild.required<MatTable<HostAppRow>>(MatTable);
 
+  readonly table = viewChild.required<MatTable<HostAppRow>>(MatTable);
+  readonly sort = viewChild.required<MatSort>(MatSort);
 
-  readonly appColumns: readonly string[] = ['hostName', 'appName', 'version', 'port', 'type', 'cronStartTime', 'cronStopTime'] as const;
+  readonly appColumns: readonly string[] = ['name', 'appName', 'version', 'port', 'type', 'cronStartTime', 'cronStopTime'] as const;
 
   constructor() {
     effect(() => {
@@ -86,5 +88,16 @@ export class HostTableComponent {
         isFirstApp: index === 0,
       }))
     );
+  }
+
+  onSortChange($event: Sort) {
+     if ($event.active && $event.direction) {
+      this.router.navigate([], {
+        queryParams: {
+          orderBy: `${$event.active} ${$event.direction}`,
+        },
+        queryParamsHandling: 'merge',
+      });
+    }
   }
 }
