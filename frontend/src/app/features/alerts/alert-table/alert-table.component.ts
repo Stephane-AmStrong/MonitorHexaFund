@@ -1,4 +1,4 @@
-import { Component, effect, inject, model, viewChild } from '@angular/core';
+import { Component, effect, inject, model, signal, viewChild } from '@angular/core';
 import { AlertResponse } from '../models/alert-response';
 import { Router } from '@angular/router';
 import { MatTable, MatTableModule } from '@angular/material/table';
@@ -16,16 +16,20 @@ export class AlertTableComponent {
   private readonly router = inject(Router);
   private readonly alertStore = inject(AlertStore);
   alerts = model.required<AlertResponse[]>();
+  highlightedItemId = signal<string | null>(null);
+  deletedItemId = signal<string | null>(null);
 
   readonly table = viewChild.required<MatTable<AlertResponse>>(MatTable);
   readonly sort = viewChild.required<MatSort>(MatSort);
-  
+
   constructor() {
     effect(() => {
       const createdAlert = this.alertStore.created();
       if (!createdAlert) return;
 
-      this.alerts.update(alerts => [...alerts, createdAlert]);
+      this.alerts.update(alerts => [createdAlert, ...alerts]);
+      this.highlightedItemId.set(createdAlert.id);
+      setTimeout(() => this.highlightedItemId.set(null), 800);
       this.table().renderRows();
     });
 
@@ -33,7 +37,12 @@ export class AlertTableComponent {
       const updatedAlert = this.alertStore.updated();
       if (!updatedAlert) return;
 
-      this.alerts.update(alerts => alerts.map(alert => alert.id === updatedAlert.id ? updatedAlert : alert));
+      this.alerts.update(alerts => {
+        const filtered = alerts.filter(alert => alert.id !== updatedAlert.id);
+        return [updatedAlert, ...filtered];
+      });
+      this.highlightedItemId.set(updatedAlert.id);
+      setTimeout(() => this.highlightedItemId.set(null), 800);
       this.table().renderRows();
     });
 
@@ -41,8 +50,15 @@ export class AlertTableComponent {
       const deletedAlert = this.alertStore.deleted();
       if (!deletedAlert) return;
 
-      this.alerts.update(alerts => alerts.filter(alert => alert.id !== deletedAlert.id));
+      this.alerts.update(alerts => [deletedAlert, ...alerts.filter(alert => alert.id !== deletedAlert.id)]);
+      this.deletedItemId.set(deletedAlert.id);
       this.table().renderRows();
+
+      setTimeout(() => {
+        this.alerts.update(alerts => alerts.filter(alert => alert.id !== deletedAlert.id));
+        this.deletedItemId.set(null);
+        this.table().renderRows();
+      }, 3000);
     });
   }
 

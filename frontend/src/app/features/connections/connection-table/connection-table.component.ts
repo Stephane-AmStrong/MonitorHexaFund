@@ -1,4 +1,4 @@
-import { Component, effect, inject, model, viewChild } from '@angular/core';
+import { Component, effect, inject, model, signal, viewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConnectionResponse } from '../models/connection-response';
 import { MatTable, MatTableModule } from '@angular/material/table';
@@ -18,6 +18,8 @@ export class ConnectionTableComponent {
   private readonly router = inject(Router);
   private readonly connectionStore = inject(ConnectionStore);
   connections = model.required<ConnectionResponse[]>();
+  highlightedItemId = signal<string | null>(null);
+  deletedItemId = signal<string | null>(null);
 
   readonly table = viewChild.required<MatTable<ConnectionResponse>>(MatTable);
   readonly sort = viewChild.required<MatSort>(MatSort);
@@ -27,7 +29,9 @@ export class ConnectionTableComponent {
       const createdConnection = this.connectionStore.created();
       if (!createdConnection) return;
 
-      this.connections.update(connections => [...connections, createdConnection]);
+      this.connections.update(connections => [createdConnection, ...connections]);
+      this.highlightedItemId.set(createdConnection.id);
+      setTimeout(() => this.highlightedItemId.set(null), 800);
       this.table().renderRows();
     });
 
@@ -35,7 +39,12 @@ export class ConnectionTableComponent {
       const updatedConnection = this.connectionStore.updated();
       if (!updatedConnection) return;
 
-      this.connections.update(connections => connections.map(connection => connection.id === updatedConnection.id ? updatedConnection : connection));
+      this.connections.update(connections => {
+        const filtered = connections.filter(connection => connection.id !== updatedConnection.id);
+        return [updatedConnection, ...filtered];
+      });
+      this.highlightedItemId.set(updatedConnection.id);
+      setTimeout(() => this.highlightedItemId.set(null), 800);
       this.table().renderRows();
     });
 
@@ -43,8 +52,15 @@ export class ConnectionTableComponent {
       const deletedConnection = this.connectionStore.deleted();
       if (!deletedConnection) return;
 
-      this.connections.update(connections => connections.filter(connection => connection.id !== deletedConnection.id));
+      this.connections.update(connections => [deletedConnection, ...connections.filter(connection => connection.id !== deletedConnection.id)]);
+      this.deletedItemId.set(deletedConnection.id);
       this.table().renderRows();
+
+      setTimeout(() => {
+        this.connections.update(connections => connections.filter(connection => connection.id !== deletedConnection.id));
+        this.deletedItemId.set(null);
+        this.table().renderRows();
+      }, 3000);
     });
   }
 

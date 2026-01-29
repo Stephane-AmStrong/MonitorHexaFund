@@ -1,12 +1,12 @@
-<table mat-table [dataSource]="dataSource()" matSort (matSortChange)="onSortChange($event)" matSortActive="name" matSortDirection="asc">
+<table mat-table [dataSource]="dataSource()" matSort (matSortChange)="onSortChange($event)" matSortActive="hostName" matSortDirection="asc">
 
     <!-- HostName Column -->
-    <ng-container matColumnDef="name">
+    <ng-container matColumnDef="hostName">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Host Name</th>
         <th mat-header-cell *matCellDef="let element" [attr.rowspan]="element.isFirstApp ? element.hostRowSpan : null"
             [style.display]="element.isFirstApp ? 'table-cell' : 'none'" class="host-cell"
             (click)="onHostClicked(element, $event)">
-            {{element.host.name}}
+            {{element.app.hostName}}
         </th>
     </ng-container>
 
@@ -61,5 +61,5 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="appColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: appColumns;" (click)="onAppClicked(row)"></tr>
+    <tr mat-row *matRowDef="let row; columns: appColumns;" [class.wt-blink]="highlightedItemId() === row.app.id" [class.wt-strike-through]="deletedItemId() === row.app.id" (click)="onAppClicked(row)"></tr>
 </table>

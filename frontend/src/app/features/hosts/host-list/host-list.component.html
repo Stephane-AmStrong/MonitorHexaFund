@@ -5,8 +5,8 @@
 
   <mat-card class="grid-container mat-elevation-z8" appearance="outlined">
     <mat-card-content>
-      <host-table [hosts]="hosts()"/>
+      <host-table [apps]="apps()"/>
     </mat-card-content>
   </mat-card>
-  <mat-paginator [length]="pagingData().totalCount" [pageSize]="pagingData().pageSize" [pageIndex]="pagingData().currentPage - 1" [showFirstLastButtons]="true" [pageSizeOptions]="[50, 100, 200, 500]"(page)="onPageEvent($event)"></mat-paginator>
+  <mat-paginator [length]="pagingData().totalCount" [pageSize]="pagingData().pageSize" [pageIndex]="pagingData().currentPage - 1" [showFirstLastButtons]="true" [pageSizeOptions]="[50, 100, 200, 500]" (page)="onPageEvent($event)"></mat-paginator>
 </main>

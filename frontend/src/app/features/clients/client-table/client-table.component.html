@@ -13,5 +13,5 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="clientColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: clientColumns;" (click)="onClientClicked(row)"></tr>
+    <tr mat-row *matRowDef="let row; columns: clientColumns;" [class.wt-blink]="highlightedItemId() === row.id" [class.wt-strike-through]="deletedItemId() === row.id" (click)="onClientClicked(row)"></tr>
 </table>

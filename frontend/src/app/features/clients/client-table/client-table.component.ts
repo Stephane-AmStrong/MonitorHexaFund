@@ -1,4 +1,4 @@
-import { Component, effect, inject, model, viewChild } from '@angular/core';
+import { Component, effect, inject, model, signal, viewChild } from '@angular/core';
 import { ClientResponse } from '../models/client-response';
 import { Router } from '@angular/router';
 import { MatTable, MatTableModule } from '@angular/material/table';
@@ -15,6 +15,8 @@ export class ClientTableComponent {
   private readonly router = inject(Router);
   private readonly clientStore = inject(ClientStore);
   clients = model.required<ClientResponse[]>();
+  highlightedItemId = signal<string | null>(null);
+  deletedItemId = signal<string | null>(null);
   readonly table = viewChild.required<MatTable<ClientResponse>>(MatTable);
   readonly sort = viewChild.required<MatSort>(MatSort);
 
@@ -26,7 +28,9 @@ export class ClientTableComponent {
       const createdClient = this.clientStore.created();
       if (!createdClient) return;
 
-      this.clients.update(clients => [...clients, createdClient]);
+      this.clients.update(clients => [createdClient, ...clients]);
+      this.highlightedItemId.set(createdClient.id);
+      setTimeout(() => this.highlightedItemId.set(null), 800);
       this.table().renderRows();
     });
 
@@ -34,7 +38,12 @@ export class ClientTableComponent {
       const updatedClient = this.clientStore.updated();
       if (!updatedClient) return;
 
-      this.clients.update(clients => clients.map(client => client.id === updatedClient.id ? updatedClient : client));
+      this.clients.update(clients => {
+        const filtered = clients.filter(client => client.id !== updatedClient.id);
+        return [updatedClient, ...filtered];
+      });
+      this.highlightedItemId.set(updatedClient.id);
+      setTimeout(() => this.highlightedItemId.set(null), 800);
       this.table().renderRows();
     });
 
@@ -42,8 +51,15 @@ export class ClientTableComponent {
       const deletedClient = this.clientStore.deleted();
       if (!deletedClient) return;
 
-      this.clients.update(clients => clients.filter(client => client.id !== deletedClient.id));
+      this.clients.update(clients => [deletedClient, ...clients.filter(client => client.id !== deletedClient.id)]);
+      this.deletedItemId.set(deletedClient.id);
       this.table().renderRows();
+
+      setTimeout(() => {
+        this.clients.update(clients => clients.filter(client => client.id !== deletedClient.id));
+        this.deletedItemId.set(null);
+        this.table().renderRows();
+      }, 3000);
     });
   }
 

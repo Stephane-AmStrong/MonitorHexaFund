@@ -1,0 +1,17 @@
+@keyframes wt-blink-anim {
+  0%, 100% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: var(--mat-sys-secondary-container);
+  }
+}
+
+.wt-blink {
+  animation: wt-blink-anim 0.3s ease-in-out infinite;
+}
+
+.wt-strike-through {
+  text-decoration: line-through;
+  opacity: 0.6;
+}

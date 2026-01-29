@@ -1,4 +1,4 @@
-import { Component, effect, inject, input, model, viewChild } from '@angular/core';
+import { Component, effect, inject, input, model, signal, viewChild } from '@angular/core';
 import { AppStatusResponse } from '../models/app-status-response';
 import { Router } from '@angular/router';
 import { MatTable, MatTableModule } from '@angular/material/table';
@@ -17,6 +17,8 @@ export class AppStatusTableComponent {
   private readonly router = inject(Router);
   private readonly appStatusStore = inject(AppStatusStore);
   appStatuses = model.required<AppStatusResponse[]>();
+  highlightedItemId = signal<string | null>(null);
+  deletedItemId = signal<string | null>(null);
 
   readonly table = viewChild.required<MatTable<AppStatusResponse>>(MatTable);
   readonly sort = viewChild.required<MatSort>(MatSort);
@@ -26,7 +28,9 @@ export class AppStatusTableComponent {
       const createdAppStatus = this.appStatusStore.created();
       if (!createdAppStatus) return;
 
-      this.appStatuses.update(appStatuses => [...appStatuses, createdAppStatus]);
+      this.appStatuses.update(appStatuses => [createdAppStatus, ...appStatuses]);
+      this.highlightedItemId.set(createdAppStatus.id);
+      setTimeout(() => this.highlightedItemId.set(null), 800);
       this.table().renderRows();
     });
 
@@ -34,7 +38,12 @@ export class AppStatusTableComponent {
       const updatedAppStatus = this.appStatusStore.updated();
       if (!updatedAppStatus) return;
 
-      this.appStatuses.update(appStatuses => appStatuses.map(appStatus => appStatus.id === updatedAppStatus.id ? updatedAppStatus : appStatus));
+      this.appStatuses.update(appStatuses => {
+        const filtered = appStatuses.filter(appStatus => appStatus.id !== updatedAppStatus.id);
+        return [updatedAppStatus, ...filtered];
+      });
+      this.highlightedItemId.set(updatedAppStatus.id);
+      setTimeout(() => this.highlightedItemId.set(null), 800);
       this.table().renderRows();
     });
 
@@ -42,8 +51,15 @@ export class AppStatusTableComponent {
       const deletedAppStatus = this.appStatusStore.deleted();
       if (!deletedAppStatus) return;
 
-      this.appStatuses.update(appStatuses => appStatuses.filter(appStatus => appStatus.id !== deletedAppStatus.id));
+      this.appStatuses.update(appStatuses => [deletedAppStatus, ...appStatuses.filter(appStatus => appStatus.id !== deletedAppStatus.id)]);
+      this.deletedItemId.set(deletedAppStatus.id);
       this.table().renderRows();
+
+      setTimeout(() => {
+        this.appStatuses.update(appStatuses => appStatuses.filter(appStatus => appStatus.id !== deletedAppStatus.id));
+        this.deletedItemId.set(null);
+        this.table().renderRows();
+      }, 3000);
     });
   }
 

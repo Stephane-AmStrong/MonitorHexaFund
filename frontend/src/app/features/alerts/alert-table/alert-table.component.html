@@ -31,5 +31,5 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="alertColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: alertColumns;"></tr>
+    <tr mat-row *matRowDef="let row; columns: alertColumns;" [class.wt-blink]="highlightedItemId() === row.id" [class.wt-strike-through]="deletedItemId() === row.id"></tr>
 </table>

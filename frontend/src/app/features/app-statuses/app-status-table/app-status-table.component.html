@@ -27,5 +27,5 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="appStatusColumns(); sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: appStatusColumns();" (click)="onAppStatusClicked(row)"></tr>
+    <tr mat-row *matRowDef="let row; columns: appStatusColumns();" [class.wt-blink]="highlightedItemId() === row.id" [class.wt-strike-through]="deletedItemId() === row.id" (click)="onAppStatusClicked(row)"></tr>
 </table>
